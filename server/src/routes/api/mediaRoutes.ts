@@ -23,5 +23,8 @@ router.post('/api/media/toWatch', async (req: Request, res: Response) => {});
 // to do: build a route to allow a user to mark a toWatch item as watched and remove it from the toWatch list
 router.post('/api/media/watched', async (req: Request, res: Response) => {});
 
+// to do: build a get for friends
+router.get('/api/user/friends', async (req: Request, res: Response) => {});
+
 
 export { router as mediaRouter };
