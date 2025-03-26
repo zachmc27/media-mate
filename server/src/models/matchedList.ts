@@ -23,7 +23,7 @@ export class MatchedList
     public userTwoResponse!: boolean;
 }
 
-export function matchedListFactory(sequelize: Sequelize): typeof MatchedList {
+export function MatchedListFactory(sequelize: Sequelize): typeof MatchedList {
     MatchedList.init(
         {
             id: {
