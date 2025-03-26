@@ -26,5 +26,8 @@ router.post('/api/media/watched', async (req: Request, res: Response) => {});
 // to do: build a get for friends
 router.get('/api/user/friends', async (req: Request, res: Response) => {});
 
+// to do: build the get request 
+router.get('/api/user/friends/request', async (req: Request, res: Response) => {});
+
 
 export { router as mediaRouter };
