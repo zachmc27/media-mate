@@ -5,8 +5,10 @@ import bcrypt from 'bcrypt';
 interface UserAttributes {
   id: number;
   username: string;
+  name: string;
   email: string;
   password: string;
+  friends: number[];
 }
 
 // Define the optional attributes for creating a new User
@@ -18,6 +20,8 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public username!: string;
   public email!: string;
   public password!: string;
+  public friends!: number[];
+  public name!: string;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -42,6 +46,10 @@ export function UserFactory(sequelize: Sequelize): typeof User {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -49,6 +57,10 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      friends: {
+        type: DataTypes.ARRAY(DataTypes.INTEGER),
+        allowNull: true,
       },
     },
     {
