@@ -2,5 +2,4 @@
 DROP DATABASE IF EXISTS cinematch_db;
 
 -- CREATE DATABASE
-
 CREATE DATABASE cinematch_db;
