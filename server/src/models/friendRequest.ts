@@ -5,7 +5,7 @@ import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 interface FriendsListAttributes {
 
     id: number;
-    resquesterId: number;
+    requesterId: number;
     recieverId: number;
     status: 'Pending' | 'Accepted' | 'Rejected';
 
@@ -15,7 +15,7 @@ interface FriendsListCreationAttributes extends Optional<FriendsListAttributes, 
 
 export class FriendsList extends Model<FriendsListCreationAttributes, FriendsListAttributes> implements FriendsListAttributes {
     public id!: number;
-    public resquesterId!: number;
+    public requesterId!: number;
     public recieverId!: number;
     public status!: 'Pending' | 'Accepted' | 'Rejected';
 
@@ -29,7 +29,7 @@ export function FriendsListFactory(sequelize: Sequelize): typeof FriendsList {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            resquesterId: {
+            requesterId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },

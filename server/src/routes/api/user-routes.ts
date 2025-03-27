@@ -1,6 +1,7 @@
 import express from 'express';
 import type { Request, Response } from 'express';
 import { User } from '../../models/index.js';
+// import { FriendsList } from '../../models/index.js';
 
 const router = express.Router();
 
@@ -82,9 +83,8 @@ router.delete('/:id', async (req: Request, res: Response) => {
 });
 
 
-// // // to do: build a get for friends
+// get all firends of a user
 // router.get('/friends/:id', async (req: Request, res: Response) => {
-
 //   const {id}= req.params;
 //   try {
 //     const user = await User.findByPk(id);
@@ -99,13 +99,14 @@ router.delete('/:id', async (req: Request, res: Response) => {
   
 // router.post('/friends-request', async (req: Request, res: Response) => {
 
-//   const {requesterId, requesteeId} = req.body;
+//   const {requesterId, recieverId} = req.body;
 //   try {
 //     const requester = await User.findByPk(requesterId);
-//     const requestee = await User.findByPk(requesteeId);
+//     const requestee = await User.findByPk(recieverId);
 //     if (requester && requestee) {
 //       // sends a insert via SQL into the freindsRequest table
-//       await addFreindRequest(requesterId, requesteeId);
+//       //sequilize insert into friendsRequest table
+//       await FriendsList.create({ requesterId, recieverId });
 //       res.json({message: 'Friend request sent'});
 //     } else {
 //       res.status(404).json({ message: 'User not found' });
