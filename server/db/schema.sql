@@ -2,4 +2,4 @@
 DROP DATABASE IF EXISTS mediamate_db;
 
 -- CREATE DATABASE
-CREATE DATABASE friends_db;
+CREATE DATABASE mediamate_db;
