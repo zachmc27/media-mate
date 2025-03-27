@@ -1,5 +1,6 @@
 import "../styles/Friends.css"
 import Friendlist from "./Friendlist"
+// import { fetchFriends, sendFriendRequest, fetchPendingFriends, acceptFriendRequest, rejectFriendRequest } from "../api/friendAPI";
 
 export default function Friends() {
   return (
