@@ -1,13 +1,13 @@
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
-
-// hi
+import { User } from './user';
 
 interface FriendsListAttributes {
 
-    id: number;
+    id?: number;
     requesterId: number;
     recieverId: number;
     status: 'Pending' | 'Accepted' | 'Rejected';
+    requester?: User;
 
 }
 
@@ -18,6 +18,7 @@ export class FriendsList extends Model<FriendsListCreationAttributes, FriendsLis
     public requesterId!: number;
     public recieverId!: number;
     public status!: 'Pending' | 'Accepted' | 'Rejected';
+    public requester?: User;
 
 }
 
