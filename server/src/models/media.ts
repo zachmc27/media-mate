@@ -4,8 +4,9 @@ interface MediaAttributes {
     id: number;
     title: string;
     year: number;
-    genre: string;
+    genre: number[];
     rating: number;
+    cover: string;
     embedKey: string;
 }
 
@@ -15,8 +16,9 @@ export class Media extends Model<MediaAttributes, MediaCreationAttributes> imple
     public id!: number;
     public title!: string;
     public year!: number;
-    public genre!: string;
+    public genre!: number[];
     public rating!: number;
+    public cover!: string;
     public embedKey!: string;
 }
 
@@ -37,11 +39,15 @@ export function MediaFactory(sequelize: Sequelize): typeof Media {
             allowNull: false,
         },
         genre: {
-            type: DataTypes.STRING,
+            type: DataTypes.ARRAY(DataTypes.INTEGER),
             allowNull: false,
         },
         rating: {
             type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        cover: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
         embedKey: {
@@ -56,3 +62,34 @@ export function MediaFactory(sequelize: Sequelize): typeof Media {
     );
     return Media;
 }
+
+export interface MediaItem {
+    id: number;
+    title?: string;
+    name?: string;
+    release_date?: string;
+    first_air_date?: string;
+    genre_ids: number[];
+    vote_average: number;
+    popularity: number;
+    poster_path?: string;
+  }
+  
+  export interface TMDBResponse {
+    results: MediaItem[];
+  }
+
+  export interface KeywordMediaItem {
+    id: number;
+    title: string;
+    year: string;
+    genre: number[];
+    rating: number;
+    cover: string;
+    embedKey: string;
+  }
+
+  export interface TMDBKeywordResponse {
+    results: KeywordMediaItem[];
+  }
+

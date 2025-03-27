@@ -1,11 +1,12 @@
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
+import { FriendsList } from './friendRequest.js';
 import bcrypt from 'bcrypt';
 
 // Define the attributes for the User model
 interface UserAttributes {
   id: number;
   username: string;
-  name: string;
+  name: string | null;
   email: string;
   password: string;
   friends: number[];
@@ -21,7 +22,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public email!: string;
   public password!: string;
   public friends!: number[];
-  public name!: string;
+  public name!: string | null;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -31,6 +32,68 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     const saltRounds = 10;
     this.password = await bcrypt.hash(password, saltRounds);
   }
+
+//_________________________Friend Request Methods Start_________________________//
+  // Method to send a friend request
+  public async sendFriendRequest(receiverId: number): Promise<void> {
+    // check to make sure they aren't requesting themselves as a friend
+    if (this.id === receiverId) throw new Error("You can't send a friend request to yourself.");
+    // check to make sure they haven't already send a friend request to this person
+    const existingRequest = await FriendsList.findOne({
+      where: { requesterId: this.id, recieverId: receiverId },
+    });
+  
+    if (existingRequest) {
+      throw new Error('Friend request already sent.');
+    }
+  
+    await FriendsList.create({
+      requesterId: this.id,
+      recieverId: receiverId,
+      status: 'Pending',
+      });
+    }
+  
+    // Method to accept a friend request
+    public async acceptFriendRequest(requesterId: number): Promise<void> {
+      const friendRequest = await FriendsList.findOne({
+        where: { requesterId, recieverId: this.id, status: 'Pending' },
+      });
+  
+      if (!friendRequest) {
+        throw new Error('Friend request not found.');
+      }
+  
+      // Update the status to accepted
+      friendRequest.status = 'Accepted';
+      await friendRequest.save();
+  
+      // Add each other as friends
+      const requester = await User.findByPk(requesterId);
+      if (requester) {
+        requester.friends.push(this.id);
+        await requester.save();
+      }
+  
+      this.friends.push(requesterId);
+      await this.save();
+    }
+  
+    // Method to reject a friend request
+    public async rejectFriendRequest(requesterId: number): Promise<void> {
+      const friendRequest = await FriendsList.findOne({
+        where: { requesterId, recieverId: this.id, status: 'Pending' },
+      });
+  
+      if (!friendRequest) {
+        throw new Error('Friend request not found.');
+      }
+  
+      // Update status to rejected
+      friendRequest.status = 'Rejected';
+      await friendRequest.save();
+    }
+//_________________________Friend Request Methods End_________________________//
 }
 
 // Define the UserFactory function to initialize the User model
@@ -48,7 +111,8 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: null,
       },
       email: {
         type: DataTypes.STRING,
@@ -61,6 +125,7 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       friends: {
         type: DataTypes.ARRAY(DataTypes.INTEGER),
         allowNull: true,
+        defaultValue: [],
       },
     },
     {
