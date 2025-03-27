@@ -9,10 +9,10 @@ import * as mediaApi from '../api/mediaAPI.js';
 dotenv.config();
 const router = express.Router();
 //const API_KEY = process.env.TMDB_API;
-const BEARER_KEY = process.env.TMDB_BEARER;
+const BEARER_KEY = process.env.BearerTkn;
 
 // to do : build route to getDetails
-router.get('/:id', async (req: Request, res: Response) => {
+router.get('/details/:id', async (req: Request, res: Response) => {
     try {
         const movieId = parseInt(req.params.id, 10);
         const type = req.query.type as string | undefined; // Extract 'type' from query parameters
@@ -29,11 +29,14 @@ router.get('/:id', async (req: Request, res: Response) => {
 
 
 // route gets the search results for a keyword utilizing the mediaApi keyWordSearch function
-router.get('/keyword/:keyword', async (req: Request, res: Response) => {
+router.get('/keyword/', async (req: Request, res: Response) => {
+
+    const keyword = req.query.keyword;
     try {
-        const keyword = req.params.keyword;
-        const searchResults = await mediaApi.keyWordSearch(keyword);
-        res.json(searchResults);
+        if (typeof keyword === 'string') {
+            const searchResults = await mediaApi.keyWordSearch(keyword);
+            res.json(searchResults);
+        }
     } catch (error) {
         console.error('Error occurred while searching for media:', error);
         res.status(500).json({ error: 'An error occurred while processing your request.' });

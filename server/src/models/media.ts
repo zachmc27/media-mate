@@ -78,3 +78,18 @@ export interface MediaItem {
   export interface TMDBResponse {
     results: MediaItem[];
   }
+
+  export interface KeywordMediaItem {
+    id: number;
+    title: string;
+    year: string;
+    genre: number[];
+    rating: number;
+    cover: string;
+    embedKey: string;
+  }
+
+  export interface TMDBKeywordResponse {
+    results: KeywordMediaItem[];
+  }
+

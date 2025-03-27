@@ -1,56 +1,24 @@
 import dotenv from 'dotenv';
+import { Media, TMDBKeywordResponse } from '../../models/media.js'; 
 dotenv.config();
 
+const BEARER_KEY = process.env.BearerTkn;
 
 // hi
-interface Media {
-    id: number;
-    title: string;
-    overview: string;
-    description: string;
-    poster_path: string;
-    backdrop_path: string;
-    release_date: string;
-    vote_average: number;
-    trailerKey: string;
-}
-
-// This function is used to get the popular movies via API based on a keyword search.
-// expected return :an array of Media objects that contain the keyword
-export async function keyWordSearch(keyword: string): Promise<Media[]> {
-    // grabs the TMDB Token from the .env file
-    const BearerTkn = process.env.TMDB_Token;
-    // const api_key = process.env.TMDB_API_KEY;
-    // grabs the base URL from the .env file
-    const baseUrl = process.env.TMDB_BASE_URL;
-    // creates the URL for the search
-    const url = `${baseUrl}/search/multi?api_key=8b9dce6c0b0d9a05e530a8cef23bb51&query=${keyword}`;
-    // `${baseUrl}/search/multi?api_key=${api_key}&query=${keyword}&include_adult=false&language=en-US&page=1`;
-    
-  
-    const options = {
-        method: 'GET',
-        // sets the headers for the request
-        headers: {
-            accept: 'application/json',
-            Authorization: `Bearer ${BearerTkn}`
-        }
-    };
-
-    try {
-        const response = await fetch(url, options);
-        const searchResults = await response.json();
-        console.log(searchResults);
-        return searchResults; // Adjust this return statement based on the expected Media[] structure
-    } catch (err) {
-        console.error(err);
-        throw err;
-    }
-}
+// interface Media {
+//     id: number;
+//     title: string;
+//     overview: string;
+//     description: string;
+//     poster_path: string;
+//     backdrop_path: string;
+//     release_date: string;
+//     vote_average: number;
+//     trailerKey: string;
+// }
 
 // This function is used to get the details for a specific movie via API and also appends the getTrailerKey function to the mediaDetails object
 export async function getMediaDetails(id: number, type: string): Promise<Media[]> {
-    const BearerTkn = process.env.TMDB_TOKEN;
     const baseUrl = process.env.TMDB_BASE_URL;
     const movieUrl = `${baseUrl}/movie/${id}`;
     const tvUrl = `${baseUrl}/tv/${id}`;
@@ -58,12 +26,11 @@ export async function getMediaDetails(id: number, type: string): Promise<Media[]
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${BearerTkn}`
+            Authorization: `Bearer ${BEARER_KEY}`
         }
     };
 
     try {
-
         if(type === 'movie'){
         const response = await fetch(movieUrl, options);
         const mediaDetails = await response.json();
@@ -87,10 +54,43 @@ export async function getMediaDetails(id: number, type: string): Promise<Media[]
     return []; // Default return statement to handle all cases
 }
 
+// This function is used to get the popular movies via API based on a keyword search.
+// expected return :an array of Media objects that contain the keyword
+export async function keyWordSearch(keyword: string): Promise<Media[]> {
+    const baseUrl = process.env.TMDB_BASE_URL;
+    const url = `${baseUrl}/search/multi?query=${keyword}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${BEARER_KEY}`
+        }
+    };
+    try {
+        const response = await fetch(url, options);
+        if (!response.ok) throw new Error("TMDB API error.");
+
+        const searchResults = await response.json() as TMDBKeywordResponse;
+        
+        return searchResults.results.map((item: any) => 
+            Media.build({
+            id: item.id,
+            title: item.title || item.name,
+            year: item.release_date || item.first_air_date,
+            genre: item.genre_ids,
+            rating: item.vote_average,
+            cover: item.poster_path,
+            embedKey: item.id.toString(),
+        })); // Adjust this return statement based on the expected Media[] structure
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+}
+
 
 // This function is used to get the trailer key for a specific movie via API
 async function getTrailerKey(id: number, type: string): Promise<string> {
-    const BearerTkn = process.env.TMDB_TOKEN;
     const baseUrl = process.env.TMDB_BASE_URL;
     const movieUrl = `${baseUrl}/movie/${id}/videos`;
     const tvUrl = `${baseUrl}/tv/${id}/videos`;
@@ -98,7 +98,7 @@ async function getTrailerKey(id: number, type: string): Promise<string> {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${BearerTkn}`
+            Authorization: `Bearer ${BEARER_KEY}`
         }
     };
 
