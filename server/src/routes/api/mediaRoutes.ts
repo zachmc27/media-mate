@@ -2,6 +2,7 @@ import express from 'express';
 import fetch from "node-fetch";
 import type { Request, Response } from 'express';
 // to do : import mediaApi from '../api/mediaApi.js';
+//hi
 import dotenv from 'dotenv';
 import { Media, TMDBResponse } from '../../models/media.js'; 
 import * as mediaApi from '../api/mediaAPI.js';

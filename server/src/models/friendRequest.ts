@@ -1,5 +1,7 @@
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 
+// hi
+
 interface FriendsListAttributes {
 
     id: number;
