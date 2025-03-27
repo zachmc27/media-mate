@@ -81,4 +81,43 @@ router.delete('/:id', async (req: Request, res: Response) => {
   }
 });
 
+
+// // // to do: build a get for friends
+// router.get('/friends/:id', async (req: Request, res: Response) => {
+
+//   const {id}= req.params;
+//   try {
+//     const user = await User.findByPk(id);
+//     if (user) {
+//       res.json(user.friends);
+//     } else {
+//       res.status(404).json({ message: 'User not found' });
+//     }
+//   } catch (error: any) {
+//     res.status(500).json({ message: error.message });
+//   }
+  
+// router.post('/friends-request', async (req: Request, res: Response) => {
+
+//   const {requesterId, requesteeId} = req.body;
+//   try {
+//     const requester = await User.findByPk(requesterId);
+//     const requestee = await User.findByPk(requesteeId);
+//     if (requester && requestee) {
+//       // sends a insert via SQL into the freindsRequest table
+//       await addFreindRequest(requesterId, requesteeId);
+//       res.json({message: 'Friend request sent'});
+//     } else {
+//       res.status(404).json({ message: 'User not found' });
+//     }
+//   } catch (error: any) {
+//     res.status(500).json({ message: error.message });
+//   }
+
+// });
+
+// // to do: build the get request 
+// router.get('/api/user/friends/request', async (req: Request, res: Response) => {});
+
+
 export { router as userRouter };

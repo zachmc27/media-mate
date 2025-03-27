@@ -1,5 +1,6 @@
 -- DROP DATABASE
-DROP DATABASE IF EXISTS mediamate_db;
+DROP DATABASE IF EXISTS cinematch_db;
 
 -- CREATE DATABASE
-CREATE DATABASE mediamate_db;
+
+CREATE DATABASE cinematch_db;
