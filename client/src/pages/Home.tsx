@@ -1,16 +1,13 @@
-//import { useState, useEffect, useLayoutEffect } from "react";
-//import { retrieveUsers } from "../api/userAPI";
-//import type { UserData } from "../interfaces/UserData";
-//import ErrorPage from "./ErrorPage";
-//import UserList from '../components/Users';
-//import auth from '../utils/auth';
+import "../App.css"
+import "../styles/Home.css"
+import FeaturedCard from "../components/FeaturedCard"
+import Teases from "../components/Teases"
 
-const Home = () => {
-    return (
-        <div>
-            <p>Lorem ipsum</p>
-        </div>    
-    )
-};
-
-export default Home;
+export default function Home() {
+  return (
+    <div className="section home">
+        <FeaturedCard />
+        <Teases />
+    </div>
+  )
+}
