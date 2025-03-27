@@ -1,0 +1,32 @@
+.featured-box {
+    margin-top: 100px;
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px
+}
+
+.label-box {
+
+    width: 89%
+}
+
+.label {
+    text-decoration: underline;
+    text-align: center;
+}
+
+.info {
+
+    width: 80%;
+    text-align: center;
+}
+
+.video {
+    aspect-ratio: 16 / 9;
+    width: 90%;
+
+}

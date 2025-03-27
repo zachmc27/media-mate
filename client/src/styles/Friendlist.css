@@ -1,0 +1,26 @@
+.friendlist {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 30px;
+}
+
+.friend {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    position: relative;
+}
+
+.friend p {
+    margin: 0
+}
+
+.buttons {
+    position: absolute;
+    right: 0px;
+    display: flex;
+    gap: 10px
+}
