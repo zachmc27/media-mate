@@ -20,11 +20,11 @@ interface Media {
 export async function keyWordSearch(keyword: string): Promise<Media[]> {
     // grabs the TMDB Token from the .env file
     const BearerTkn = process.env.TMDB_Token;
-    const api_key = process.env.TMDB_API_KEY;
+    // const api_key = process.env.TMDB_API_KEY;
     // grabs the base URL from the .env file
     const baseUrl = process.env.TMDB_BASE_URL;
     // creates the URL for the search
-    const url = `${baseUrl}/search/multi?api_key=${api_key}query=${keyword}&include_adult=false&language=en-US&page=1`;
+    const url = `${baseUrl}/search/multi?api_key=8b9dce6c0b0d9a05e530a8cef23bb51&query=${keyword}`;
     // `${baseUrl}/search/multi?api_key=${api_key}&query=${keyword}&include_adult=false&language=en-US&page=1`;
     
   
