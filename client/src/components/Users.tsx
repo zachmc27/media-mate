@@ -1,5 +1,5 @@
 import React from 'react';
-
+// import { fetchFriends, sendFriendRequest, fetchPendingFriends, acceptFriendRequest, rejectFriendRequest } from "../api/friendAPI";
 import type { UserData } from "../interfaces/UserData";
 // import auth from '../utils/auth';
 
