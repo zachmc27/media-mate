@@ -41,11 +41,11 @@ export function WatchedListFactory(sequelize: Sequelize): typeof WatchedList {
                 allowNull: false,
             },
             userRating: {
-                type: DataTypes.FLOAT,
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
             officialRating: {
-                type: DataTypes.FLOAT,
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
         },
