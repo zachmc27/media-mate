@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 interface UserAttributes {
   id: number;
   username: string;
-  name: string;
+  name: string | null;
   email: string;
   password: string;
   friends: number[];
@@ -21,7 +21,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public email!: string;
   public password!: string;
   public friends!: number[];
-  public name!: string;
+  public name!: string | null;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -48,7 +48,8 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: null,
       },
       email: {
         type: DataTypes.STRING,
@@ -61,6 +62,7 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       friends: {
         type: DataTypes.ARRAY(DataTypes.INTEGER),
         allowNull: true,
+        defaultValue: [],
       },
     },
     {
