@@ -1,0 +1,49 @@
+.card {
+    transition: 0.3s;
+    border-radius: 0.25em; /* 5px rounded corners */
+    height: auto; /* Reduce height */
+    width: 15em; /* Add or adjust width to control size */
+
+  }
+  
+  
+  /* Add some padding inside the card container */
+  .card-container {
+  font: 1.25em sans-serif; /* Adjust font size if needed */
+  padding: 0.5em; /* Reduce padding inside the container */
+  height: 5.5em;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  
+  }
+
+  /* Add rounded corners to the top left and the top right corner of the image */
+  img {
+    border-radius: 0.25em 0.25em 0 0;
+    width: 100%;
+    height: auto;
+  }
+
+  .card-title{
+    line-height: 1.25;
+  }
+
+  .card-year{
+    font: 0.5em sans-serif; /* Adjust font size if needed */
+    line-height: 1.25;
+  }
+  
+  .card-summary{
+    font: 0.5em sans-serif; /* Adjust font size if needed */
+    line-height: 1;
+    padding-left: 3em;
+    padding-right: 3em;
+    align-self: center; 
+    text-align: left;
+  }
+
+  .card-container a{
+    align-self: flex-end; 
+    text-align: flex-end;
+    font: 0.5em sans-serif;
+  }

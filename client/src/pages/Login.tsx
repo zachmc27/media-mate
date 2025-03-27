@@ -1,5 +1,7 @@
 import { useState, FormEvent, ChangeEvent } from "react";
-
+import "../App.css";
+import "../styles/Form.css";
+import chicken from "../assets/strangerthings.jpg"
 import Auth from '../utils/auth';  
 import { login } from "../api/authAPI";  
 import { UserLogin } from "../interfaces/UserLogin"; 
@@ -35,35 +37,47 @@ const Login = () => {
 
   return (
     <div className='form-container'>
+      <div>
+      <img src={chicken} alt="Chicken" />
+      </div>
       <form className='form login-form' onSubmit={handleSubmit}>
-        <h1>Login</h1>
+        <h1>Log In</h1>
         {/* Username input field */}
         <div className="form-group">
-          <label>Username</label>
+          {/* <label>Username</label> */}
           <input 
             className="form-input"
             type='text'
             name='username'
             value={loginData.username || ''}
             onChange={handleChange}
+            placeholder="email"
           />
         </div>
         {/* Password input field */}
         <div className="form-group">
-          <label>Password</label>
+          {/* <label>Password</label> */}
           <input 
             className="form-input"
             type='password'
             name='password'
             value={loginData.password || ''}
             onChange={handleChange}
+            placeholder="password"
           />
         </div>
   
         <div className="form-group">
-          <button className="btn btn-primary" type='submit'>Login</button>
+          <button className="form-button " type='submit'>Log In</button>
+        </div>
+        <div >
+        <p>Don't have an account? <a href='#'>Sign up now.</a></p>
         </div>
       </form>
+
+      <div>
+      <img src={chicken} alt="Chicken" />
+      </div>
     </div>
   )
 };
