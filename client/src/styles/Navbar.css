@@ -1,0 +1,49 @@
+.navbar {
+    width: 100vw;
+    height: 80px;
+    border: 1px solid black;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    z-index: 100;
+}
+
+.logo {
+    
+    position: absolute;
+    left: 1vw;
+ 
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.tabs-box {
+    
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    right: 3vw;
+ 
+    gap: 15px;
+}
+
+.tab {
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 50%;
+}
+
+.tab p{
+   margin: 0;
+   font-size: 13px;
+}
+
+.tab:hover {
+    opacity: 100%;
+    scale: 1.01;
+    transition: opacity .3s ease-in;
+}

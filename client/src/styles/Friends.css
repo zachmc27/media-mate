@@ -1,0 +1,14 @@
+.list-box {
+    border: 1px solid black;
+    position: absolute;
+    width: 25%;
+    height: 100vh;
+    right: 0px;
+    bottom: -608px;
+    z-index: 2;
+}
+
+.add-friend {
+    border: 1px solid black;
+    margin: 30px 10px 0px 10px
+}
