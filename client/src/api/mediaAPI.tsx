@@ -1,13 +1,122 @@
+import Auth from '../utils/auth';
 
 //gets the media details for a specific media id
-// const mediaInfo = async () => {};
+export const mediaInfo = async (id: number) => {
+    const response = await fetch(`/api/media/${id}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Auth.getToken()}`
+        }
+    });
+    return response.json();
+};
+
+// discoverMedia by most popular
+export const discoverMedia = async () => {
+    const response = await fetch(`/api/media/discover`, {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Auth.getToken()}`
+        }
+    });
+    return response.json();
+};
 
 // gets a list of media based on a specific genre
-// const discoverMedia = async () => {};
+export const discoverMediaByGenre = async (genre: number) => {
+    const response = await fetch(`/api/media/discover?genre=${genre}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Auth.getToken()}`
+        }
+    });
+    return response.json();
+};
 
 // gets a list of media based on a specific genre and by TV or Movie
-// const discoverByType = async () => {};
+export const discoverByTypeAndGenre = async (type: string, genre: number) => {
+    const response = await fetch(`/api/media/discover?genre=${genre}&type=${type}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Auth.getToken()}`
+        }
+    });
+    return response.json();
+};
+
+// gets a list of media based on a specific type (TV or Movie)
+export const discoverMediaByType = async (type: string) => {
+    const response = await fetch(`/api/media/discover?type=${type}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Auth.getToken()}`
+        }
+    });
+    return response.json();
+};
 
 // gets a list of media based on a specific keyword searched (string)
-// const keywordSearch = async () => {};
+export const keywordSearch = async (keyword: string) => {
+    const response = await fetch(`/api/media/keyword?keyword=${keyword}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Auth.getToken()}`
+        }
+    });
+    return response.json();
+};
 
+// this call is meant to send add a friend request
+export const sendFreindRequest = async (userID: number, recipientUserId: number) => {
+    const response = await fetch(`/api/friends/request`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Auth.getToken()}`
+        },
+        body: JSON.stringify({ userID, recipientUserId }),
+    });
+    return response.json();
+};
+
+// this gets a list of all friends by current logged in userID
+export const getFriendsList = async (userID: number) => {
+    const response = await fetch(`/api/friends/${userID}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Auth.getToken()}`
+        }
+    });
+    return response.json();
+};
+
+// this call is meant to add a media to the toWatch list through either the matched or discovery pages
+export const addMediaToWatchList = async (userID: number, mediaID: number) => {
+    const response = await fetch(`/api/watchlist/add`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Auth.getToken()}`
+        },
+        body: JSON.stringify({ userID, mediaID }),
+    });
+    return response.json();
+};
+
+// this call is meant to remove a media from the toWatch list and added to the seenList
+export const watchedMedia = async (userID: number, mediaID: number) => {
+    const response = await fetch(`/api/watchlist/remove`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Auth.getToken()}`
+        },
+        body: JSON.stringify({ userID, mediaID }),
+    });
+    return response.json();
+};
+
+
+
+
+export default {mediaInfo, keywordSearch, discoverMedia,discoverByTypeAndGenre,discoverMediaByType ,discoverMediaByGenre, sendFreindRequest, getFriendsList, addMediaToWatchList, watchedMedia};
