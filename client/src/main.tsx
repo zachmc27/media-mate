@@ -9,6 +9,7 @@ import Home from './pages/Home.tsx';
 import Login from './pages/Login.tsx';
 import Match from './pages/Match.tsx';
 import Profile from './pages/Profile.tsx';
+import Flickpicks from './pages/Flickpicks.tsx';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,19 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />
-      }, 
+      },
+      {
+        path: '/match',
+        element: <Match />
+      },
+      {
+        path: '/profile',
+        element: <Profile />
+      },
+      {
+        path: '/flickpicks',
+        element: <Flickpicks />
+      }    
     ]
   }
 ])
