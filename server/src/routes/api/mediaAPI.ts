@@ -106,16 +106,16 @@ async function getTrailerKey(id: number, type: string): Promise<string> {
         if (type === 'movie') {
             const response = await fetch(movieUrl, options);
             const trailerData = await response.json();
-            return trailerData; // Return the key for the first trailer or an empty string
+            return trailerData.results.find((trailer: any) => trailer.type === 'Trailer' && trailer.site === 'YouTube' && trailer.official === true)?.key || ''; 
         } else if (type === 'tv') {
             const response = await fetch(tvUrl, options);
             const trailerData = await response.json();
-            return trailerData; // Return the key for the first trailer or an empty string
+            return trailerData.results.find((trailer: any) => trailer.type === 'Trailer' && trailer.site === 'YouTube' && trailer.official === true)?.key || ''; 
         }
     } catch (err) {
         console.error(err);
         throw err;
     }
-
+    // Adjust this return statement based on the expected string structure
     return ''; // Default return statement to handle all cases
 }

@@ -1,9 +1,10 @@
-import "../styles/Navbar.css"
+import { Link, useLocation } from "react-router-dom";
 
 // uncomment once implementing friendlist logic
 // import Friends from "./Friends"
 
 //visual assets
+import "../styles/Navbar.css"
 import house from "../assets/house.svg"
 import heart from "../assets/heart.svg"
 import film from "../assets/film.svg"
@@ -13,33 +14,33 @@ import users from "../assets/users.svg"
 
 const Navbar = () => {
 
-    
+  const location = useLocation();
 
   return (
 
     <div className="navbar">
       <div className="logo">Cinematch</div>
       <div className="tabs-box">
-        <div className="tab">
+        <Link to="/" className={location.pathname === '/' ? "tab selected" : "tab"}>
           <img src={house} alt="home icon" />
-          <p>Home</p>
-        </div>
-        <div className="tab">
+          <div>Home</div>
+        </Link>
+        <Link to="/flickpicks" className={location.pathname === '/flickpicks' ? "tab selected" : "tab"}>
           <img src={heart} alt="heart icon" />
-          <p>Quizzes</p>
-        </div>
-        <div className="tab">
+          <div>Flickpicks</div>
+        </Link>
+        <Link to="/discover" className={location.pathname === '/discover' ? "tab selected" : "tab"}>
           <img src={film} alt="reel icon" />
-          <p>Discover</p>
-        </div>
+          <div>Discover</div>
+        </Link>
         <div className="tab">
           <img src={users} alt="people icon" />
-          <p>Friends</p>
+          <div>Friends</div>
         </div>
-        <div className="tab">
+        <Link to="/profile" className={location.pathname === '/profile' ? "tab selected" : "tab"}>
           <img src={user} alt="person icon" />
-          <p>Profile</p>
-        </div>
+          <div>Profile</div>
+        </Link>
       </div>
     </div>
     
