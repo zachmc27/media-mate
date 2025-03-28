@@ -1,8 +1,8 @@
 import Auth from '../utils/auth';
 
 //gets the media details for a specific media id
-export const mediaInfo = async (id: number) => {
-    const response = await fetch(`/api/media/${id}`, {
+export const mediaInfo = async (id: number, type: string) => {
+    const response = await fetch(`/api/media/details/${id}?type=${type}`, {
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${Auth.getToken()}`
@@ -46,7 +46,7 @@ export const discoverByTypeAndGenre = async (type: string, genre: number) => {
 
 // gets a list of media based on a specific type (TV or Movie)
 export const discoverMediaByType = async (type: string) => {
-    const response = await fetch(`/api/media/discover?type=${type}`, {
+    const response = await fetch(`/api/media/discover/${type}`, {
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${Auth.getToken()}`
@@ -58,30 +58,6 @@ export const discoverMediaByType = async (type: string) => {
 // gets a list of media based on a specific keyword searched (string)
 export const keywordSearch = async (keyword: string) => {
     const response = await fetch(`/api/media/keyword?keyword=${keyword}`, {
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${Auth.getToken()}`
-        }
-    });
-    return response.json();
-};
-
-// this call is meant to send add a friend request
-export const sendFreindRequest = async (userID: number, recipientUserId: number) => {
-    const response = await fetch(`/api/friends/request`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${Auth.getToken()}`
-        },
-        body: JSON.stringify({ userID, recipientUserId }),
-    });
-    return response.json();
-};
-
-// this gets a list of all friends by current logged in userID
-export const getFriendsList = async (userID: number) => {
-    const response = await fetch(`/api/friends/${userID}`, {
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${Auth.getToken()}`
@@ -116,7 +92,4 @@ export const watchedMedia = async (userID: number, mediaID: number) => {
     return response.json();
 };
 
-
-
-
-export default {mediaInfo, keywordSearch, discoverMedia,discoverByTypeAndGenre,discoverMediaByType ,discoverMediaByGenre, sendFreindRequest, getFriendsList, addMediaToWatchList, watchedMedia};
+export default {mediaInfo, keywordSearch, discoverMedia,discoverByTypeAndGenre,discoverMediaByType ,discoverMediaByGenre, addMediaToWatchList, watchedMedia};

@@ -1,6 +1,13 @@
+import Auth from '../utils/auth';
+
 const fetchFriends = async (userId: number) => {
     try {
-        const response = await fetch(`/friends/${userId}`);
+        const response = await fetch(`/friends/${userId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${Auth.getToken()}`
+                }
+            });
         if (!response.ok) {
             throw new Error(`Error: ${response.statusText}`);
           }
@@ -19,6 +26,7 @@ const sendFriendRequest = async (senderId: number, receiverId: number) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${Auth.getToken()}`
         },
         body: JSON.stringify({ senderId, receiverId }),
       });
@@ -36,7 +44,12 @@ const sendFriendRequest = async (senderId: number, receiverId: number) => {
 
 const fetchPendingFriends = async (userId: number) => {
     try {
-        const response = await fetch(`/friends/pending/${userId}`);
+        const response = await fetch(`/friends/pending/${userId}`, {
+          headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${Auth.getToken()}`
+          }
+      });
         if (!response.ok) {
             throw new Error(`Error: ${response.statusText}`);
           }
@@ -55,6 +68,7 @@ const acceptFriendRequest = async (userId: number, requesterId: number) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${Auth.getToken()}`
         },
         body: JSON.stringify({ userId, requesterId }),
       });
@@ -76,6 +90,7 @@ const rejectFriendRequest = async (userId: number, requesterId: number) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${Auth.getToken()}`
         },
         body: JSON.stringify({ userId, requesterId }),
       });

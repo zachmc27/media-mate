@@ -51,7 +51,7 @@ const Login = () => {
             name='username'
             value={loginData.username || ''}
             onChange={handleChange}
-            placeholder="email"
+            placeholder="username"
           />
         </div>
         {/* Password input field */}
