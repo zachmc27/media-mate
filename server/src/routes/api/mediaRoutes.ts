@@ -27,7 +27,6 @@ router.get('/details/:id', async (req: Request, res: Response) => {
     }
 });
 
-
 // route gets the search results for a keyword utilizing the mediaApi keyWordSearch function
 router.get('/keyword/', async (req: Request, res: Response) => {
 
