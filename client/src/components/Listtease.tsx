@@ -31,7 +31,7 @@ export default function Listtease() {
       }, []);
 
   return (
-    <div className="cards-row">
+    <div className="cover-row">
     <div className="list-section">
         <div className="list-title">Brett & Misha</div>   
         <div className="list-1">
