@@ -10,31 +10,31 @@
 }
 
 .logo {
-    
     position: absolute;
     left: 1vw;
- 
     font-size: 40px;
     font-weight: bold;
 }
 
 .tabs-box {
-    
     position: absolute;
     display: flex;
     flex-direction: row;
     right: 3vw;
- 
-    gap: 15px;
+    bottom: 20%;
+    gap: 50px;
+
 }
 
 .tab {
-   
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     opacity: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
 }
 
 .tab p{
@@ -44,6 +44,10 @@
 
 .tab:hover {
     opacity: 100%;
-    scale: 1.01;
+    scale: 1.03;
     transition: opacity .3s ease-in;
+}
+
+.selected {
+    opacity: 100%
 }

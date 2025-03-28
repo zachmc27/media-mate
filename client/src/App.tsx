@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-//import Modal from './pages/Modal';
+// import Modal from './pages/Modal';
 
 function App() {
 
@@ -10,7 +10,7 @@ function App() {
       <Navbar /> 
       <main className='container pt-5'>
         <Outlet />
-          {/* <Modal /> */}
+        {/* <Modal /> */}
       </main>
     </div>
   )

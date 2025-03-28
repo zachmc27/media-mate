@@ -1,4 +1,4 @@
-.cards-row {
+.cover-row {
     display: flex;
     flex-direction: row;
     gap: 30px;
@@ -19,13 +19,13 @@
     margin-bottom: 5px;
 }
 
-.card {
+.cover {
     height: fit-content;
     width: fit-content;
     text-align: center;
 }
 
-.card img {
+.cover img {
     width: 100px;
     height: 100%
 }
@@ -38,7 +38,7 @@
 
 .vert-rule {
     border-left: 1px solid black;
-    height: 70%
+    height: 70%;
 }
 
 .explore {
