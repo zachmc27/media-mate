@@ -9,7 +9,6 @@ interface toWatchAttributes {
 
 }
 
-
 interface toWatchCreationAttributes extends Optional<toWatchAttributes, 'id'> {}
 
 export class toWatch extends Model<toWatchCreationAttributes, toWatchAttributes> implements toWatchAttributes {
@@ -19,7 +18,6 @@ export class toWatch extends Model<toWatchCreationAttributes, toWatchAttributes>
     public userId!: number;
 
 }
-
 
 export function toWatchFactory(sequelize: Sequelize): typeof toWatch {
     toWatch.init(

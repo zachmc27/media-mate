@@ -27,7 +27,6 @@ router.get('/details/:id', async (req: Request, res: Response) => {
     }
 });
 
-
 // route gets the search results for a keyword utilizing the mediaApi keyWordSearch function
 router.get('/keyword/', async (req: Request, res: Response) => {
 
@@ -141,10 +140,7 @@ router.get('/discover/:type', async (req: Request, res: Response) => {
 // // to do: build a route to allow a new toWatchItem to be added
 // router.post('/api/media/toWatch', async (req: Request, res: Response) => {});
 
-
 // // to do: build a route to allow a user to mark a toWatch item as watched and remove it from the toWatch list
 // router.post('/api/media/watched', async (req: Request, res: Response) => {});
-
-
 
 export { router as mediaRouter };

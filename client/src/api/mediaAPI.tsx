@@ -1,4 +1,3 @@
-
 //gets the media details for a specific media id
 // const mediaInfo = async () => {};
 
@@ -10,4 +9,3 @@
 
 // gets a list of media based on a specific keyword searched (string)
 // const keywordSearch = async () => {};
-
