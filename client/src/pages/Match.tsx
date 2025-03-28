@@ -5,7 +5,7 @@ import MatchCard from "../components/MatchCard";
 
 export default function Home() {
   return (
-    <div className="match-container">
+    <div className="section match-container">
         <MatchCard />
     </div>
   )
