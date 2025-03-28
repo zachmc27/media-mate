@@ -1,0 +1,93 @@
+ul {
+    list-style-type: none;
+    padding: 1em;
+    font: 0.65em sans-serif;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  li {
+    padding: 0.5em;
+  }
+
+.profile-container {
+  display: flex;
+  padding-top: 80px;
+  height: 90vh;
+  font: 1.25em sans-serif;
+  gap: 1em;
+}
+
+.profile-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 5px solid rgb(0, 0, 0);
+  flex: 0.65;
+  padding-top: 1em;
+  gap: 0.5em;
+}
+
+.profile-user p {
+    font: 0.65em sans-serif;
+    margin: -0.125em;
+  }
+
+.profile-user img {
+    width: 45%;
+    height: auto;
+    border-radius: 50%;
+    padding: 0.25em;
+  }
+
+.profile-user button {
+    font: 1em sans-serif;
+    margin-top: auto;
+    margin-bottom: 2em;
+
+    border: 2px solid #000000;
+    background-color: transparent;
+    height: 2.5rem;
+    border-radius: 5px;
+    font-size: 0.75em;
+    width: 70%;
+    
+}
+
+.profile-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 1em;
+    flex:3;
+  }
+
+.list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 1em;
+  }
+
+.list-container p{
+    margin: -0.125em;
+}
+
+.movies-container {
+    display: flex;
+    flex-direction: row;
+    height: 250px;
+  }
+
+  .movies-container .card {
+    width: 8em; /* Smaller width for MovieCards in movies-container */
+    height: auto; /* Adjust height dynamically */
+    font-size: 0.75em; /* Scale down text size */
+    margin: 0.5em; /* Add spacing between cards */
+  }
+
+ 
