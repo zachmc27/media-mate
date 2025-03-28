@@ -1,5 +1,6 @@
 import user from "../assets/user.svg"
 import "../styles/Friendlist.css"
+// import { fetchFriends, sendFriendRequest, fetchPendingFriends, acceptFriendRequest, rejectFriendRequest } from "../api/friendAPI";
 
 export default function Friendlist() {
   return (
