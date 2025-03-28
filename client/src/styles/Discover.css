@@ -1,0 +1,67 @@
+.discover-container {
+    display: flex;
+    padding-top: 125px;
+    height: 90vh;
+    font: 1.25em sans-serif;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0.5em;
+  }
+
+.list-container p{
+    margin: -0.125em;
+}
+
+.movies-container {
+    display: flex;
+    flex-direction: row;
+    height: 250px;
+  }
+
+  .movies-container .card {
+    width: 8em; /* Smaller width for MovieCards in movies-container */
+    height: auto; /* Adjust height dynamically */
+    font-size: 0.75em; /* Scale down text size */
+    margin: 0.5em; /* Add spacing between cards */
+  }
+
+  .search-bar-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font: 1em sans-serif;
+    gap: 3em;
+    margin-bottom: 2em;;
+  }
+
+  .search-bar{
+    width: 65%;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    border: 1px solid #000000;
+    border-radius: 3.5px;
+    height: 1.75rem;
+  }
+
+  .search-bar::placeholder{
+    padding-left: 0.5em;
+  }
+
+
+  .search-button {
+    border: 2px solid #000000;
+    background-color: transparent;
+    height: 2.25rem;
+    border-radius: 3.5px;
+    font-size: 0.75em;
+    width: 15%;
+  }
