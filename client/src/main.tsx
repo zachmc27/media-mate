@@ -4,13 +4,13 @@ import './index.css';
 
 import App from './App.tsx';
 
+//pages
 import ErrorPage from './pages/ErrorPage.tsx';
 import Home from './pages/Home.tsx';
 import Login from './pages/Login.tsx';
-
-//import Match from './pages/Match.tsx';
-//import Profile from './pages/Profile.tsx';
-//import Discover from './pages/Discover.tsx';
+import Match from './pages/Match.tsx';
+import Profile from './pages/Profile.tsx';
+import Discover from './pages/Discover.tsx';
 import Flickpicks from './pages/Flickpicks.tsx';
 
 
@@ -39,7 +39,11 @@ const router = createBrowserRouter([
       {
         path: '/flickpicks',
         element: <Flickpicks />
-      }    
+      },
+      {
+        path: '/discover',
+        element: <Discover />
+      },   
     ]
   }
 ])

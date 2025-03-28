@@ -3,19 +3,19 @@ import chicken from "../assets/strangerthings.jpg"
 
 export default function Listtease() {
   return (
-    <div className="cards-row">
+    <div className="cover-row">
     <div className="list-section">
         <div className="list-title">Brett & Misha</div>   
         <div className="list-1">
-            <div className="card">
+            <div className="cover">
                 <img src={chicken} alt="Chicken" />
                 <p className="card-title">Chicken Quiz</p>
             </div>
-            <div className="card">
+            <div className="cover">
                 <img src={chicken} alt="Chicken" />
                 <p className="card-title">Chicken Quiz</p>
             </div>
-            <div className="card">
+            <div className="cover">
                 <img src={chicken} alt="Chicken" />
                 <p className="card-title">Chicken Quiz</p>
             </div>
@@ -27,11 +27,11 @@ export default function Listtease() {
     <div className="list-section">
         <div className="list-title">Watch Later</div>   
         <div className="list-2">
-            <div className="card">
+            <div className="cover">
                 <img src={chicken} alt="Chicken" />
                 <p className="card-title">Chicken Quiz</p>
             </div>
-            <div className="card">
+            <div className="cover">
                 <img src={chicken} alt="Chicken" />
                 <p className="card-title">Chicken Quiz</p>
             </div>
