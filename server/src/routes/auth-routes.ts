@@ -30,7 +30,7 @@ export const login = async (req: Request, res: Response) => {
 
   // Generate a JWT token for the authenticated user
   const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' });
-  return res.json({ token });  // Send the token as a JSON response
+  return res.json({ token, userId: user.id });  // Send the token as a JSON response
   } catch (error) {
   return res.status(401).json({ message: 'Authentication failed' });
   }

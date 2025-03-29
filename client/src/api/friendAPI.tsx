@@ -1,6 +1,6 @@
 import Auth from '../utils/auth';
 
-const fetchFriends = async (userId: number) => {
+export const fetchFriends = async (userId: number) => {
     try {
         const response = await fetch(`/friends/${userId}`, {
                 headers: {
@@ -20,7 +20,7 @@ const fetchFriends = async (userId: number) => {
     }
 }
 
-const sendFriendRequest = async (senderId: number, receiverId: number) => {
+export const sendFriendRequest = async (senderId: number, receiverId: number) => {
     try {
       const response = await fetch('/friends/send', {
         method: 'POST',
@@ -42,7 +42,7 @@ const sendFriendRequest = async (senderId: number, receiverId: number) => {
     }
   };
 
-const fetchPendingFriends = async (userId: number) => {
+export const fetchPendingFriends = async (userId: number) => {
     try {
         const response = await fetch(`/friends/pending/${userId}`, {
           headers: {
@@ -62,7 +62,7 @@ const fetchPendingFriends = async (userId: number) => {
     }    
 }
 
-const acceptFriendRequest = async (userId: number, requesterId: number) => {
+export const acceptFriendRequest = async (userId: number, requesterId: number) => {
     try {
       const response = await fetch('/friends/accept', {
         method: 'POST',
@@ -84,7 +84,7 @@ const acceptFriendRequest = async (userId: number, requesterId: number) => {
     }
   };
 
-const rejectFriendRequest = async (userId: number, requesterId: number) => {
+export const rejectFriendRequest = async (userId: number, requesterId: number) => {
     try {
       const response = await fetch('/friends/reject', {
         method: 'POST',
@@ -106,4 +106,4 @@ const rejectFriendRequest = async (userId: number, requesterId: number) => {
     }
   };
   
-export { fetchFriends, sendFriendRequest, fetchPendingFriends, acceptFriendRequest, rejectFriendRequest };
+export default { fetchFriends, sendFriendRequest, fetchPendingFriends, acceptFriendRequest, rejectFriendRequest };
