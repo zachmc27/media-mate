@@ -43,7 +43,7 @@ export function MediaFactory(sequelize: Sequelize): typeof Media {
             allowNull: false,
         },
         rating: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: false,
         },
         cover: {
@@ -57,6 +57,7 @@ export function MediaFactory(sequelize: Sequelize): typeof Media {
     },
     {
         tableName: 'Media',
+        modelName: 'Media',
         sequelize,
     }
     );
@@ -65,14 +66,16 @@ export function MediaFactory(sequelize: Sequelize): typeof Media {
 
 export interface MediaItem {
     id: number;
-    title?: string;
+    title?: string | undefined;
     name?: string;
     release_date?: string;
+    year: number;
     first_air_date?: string;
     genre_ids: number[];
     vote_average: number;
     popularity: number;
     poster_path?: string;
+    trailerKey?: string;
   }
   
   export interface TMDBResponse {

@@ -16,16 +16,6 @@ export default defineConfig({
         changeOrigin: true,
         secure: false
       },
-      '/friends': {
-        target: 'http://localhost:3001',
-        changeOrigin: true,
-        secure: false
-      },
-      '/seen': {
-        target: 'http://localhost:3001',
-        changeOrigin: true,
-        secure: false
-      },
     },
   },
 });

@@ -12,13 +12,11 @@ const login = async (userInfo: UserLogin) => {
       body: JSON.stringify(userInfo)
     });
 
- 
     if (!response.ok) {
       const errorData = await response.json(); 
       throw new Error(`Error: ${errorData.message}`);   
     }
 
-   
     const data = await response.json();
 
     return data;  
@@ -28,4 +26,26 @@ const login = async (userInfo: UserLogin) => {
   }
 }
 
-export { login };  
+const createUser = async (username: string, email: string, password: string) => {
+  try {
+    const response = await fetch('/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, email, password })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json(); 
+      throw new Error(`Error: ${errorData.message}`);   
+    }
+
+    return await response.json(); 
+  } catch (err) {
+    console.log('Error from user creation: ', err);  
+    return Promise.reject('Could not create user');  
+  }
+}
+
+export { login, createUser };  
