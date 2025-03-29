@@ -4,19 +4,6 @@ dotenv.config();
 
 const BEARER_KEY = process.env.BearerTkn;
 
-// hi
-// interface Media {
-//     id: number;
-//     title: string;
-//     overview: string;
-//     description: string;
-//     poster_path: string;
-//     backdrop_path: string;
-//     release_date: string;
-//     vote_average: number;
-//     trailerKey: string;
-// }
-
 // This function is used to get the details for a specific movie via API and also appends the getTrailerKey function to the mediaDetails object
 export async function getMediaDetails(id: number, type: string): Promise<Media[]> {
     const baseUrl = process.env.TMDB_BASE_URL;
@@ -32,18 +19,18 @@ export async function getMediaDetails(id: number, type: string): Promise<Media[]
 
     try {
         if(type === 'movie'){
-        const response = await fetch(movieUrl, options);
-        const mediaDetails = await response.json();
-        // append the getTrailerKey function to the mediaDetails object
-        mediaDetails.trailerKey = await getTrailerKey(id,type);
-        console.log(mediaDetails);
-        return mediaDetails; // Adjust this return statement based on the expected Media structure
+            const response = await fetch(movieUrl, options);
+            const mediaDetails = await response.json();
+            // append the getTrailerKey function to the mediaDetails object
+            mediaDetails.trailerKey = await getTrailerKey(id,type);
+            // console.log(mediaDetails);
+            return mediaDetails; // Adjust this return statement based on the expected Media structure
         } else if(type === 'tv'){
             const response = await fetch(tvUrl, options);
             const mediaDetails = await response.json();
             // append the getTrailerKey function to the mediaDetails object
             mediaDetails.trailerKey = await getTrailerKey(id,type);
-            console.log(mediaDetails);
+            //console.log(mediaDetails);
             return mediaDetails; // Adjust this return statement based on the expected Media structure
         }
     } catch (err) {
@@ -87,7 +74,6 @@ export async function keyWordSearch(keyword: string): Promise<Media[]> {
         throw err;
     }
 }
-
 
 // This function is used to get the trailer key for a specific movie via API
 async function getTrailerKey(id: number, type: string): Promise<string> {

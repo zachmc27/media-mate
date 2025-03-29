@@ -38,12 +38,11 @@ function LoginForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetState
       // Call the login API endpoint with loginData
       const data = await login(loginData);
       // If login is successful, call Auth.login to store the token in localStorage
-      Auth.login(data.token);
+      Auth.login(data.token, data.userId);
     } catch (err) {
       console.error('Failed to login', err);  // Log any errors that occur during login
     }
   };
-
 
   return(
     <form className='form login-form' onSubmit={handleSubmit}>

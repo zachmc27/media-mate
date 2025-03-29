@@ -12,15 +12,22 @@ class AuthService {
   }
 
 
-  login(idToken: string) {
+  login(idToken: string, userId: number) {
     localStorage.setItem('id_token', idToken);
+    localStorage.setItem('user_Id', userId.toString());
     window.location.assign('/');
   }
 
 
   logout() {
     localStorage.removeItem('id_token');
+    localStorage.removeItem('user_Id');
     window.location.assign('/');
+  }
+
+  getUserId () {
+    const userId = localStorage.getItem("user_Id");
+    return userId ? parseInt(userId, 10) : null;
   }
 }
 

@@ -2,6 +2,7 @@ import "../App.css";
 import "../styles/Profile.css";
 import chicken from "../assets/chicken.jpg"
 import MovieCard from "../components/MovieCard";
+import SeenItList from "../components/SeenIt";
 
 export default function Profile() {
   return (
@@ -13,7 +14,7 @@ export default function Profile() {
             <ul>
                 <li><a href="#">Collab List</a></li>
                 <li><a href="#">Watch Later</a></li>
-                <li><a href="#">Seen It</a></li>
+                <li><a href="#">Seen It</a><SeenItList /></li>
             </ul>
             <button>Log Out</button>
         </div>

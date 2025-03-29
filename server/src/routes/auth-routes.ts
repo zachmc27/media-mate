@@ -30,7 +30,7 @@ export const login = async (req: Request, res: Response) => {
 
   // Generate a JWT token for the authenticated user
   const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' });
-  return res.json({ token });  // Send the token as a JSON response
+  return res.json({ token, userId: user.id });  // Send the token as a JSON response
   } catch (error) {
   return res.status(401).json({ message: 'Authentication failed' });
   }
@@ -41,5 +41,25 @@ const router = Router();
 
 // POST /login - Login a user
 router.post('/login', login);  // Define the login route
+
+// POST /users - Create a new user
+router.post('/register', async (req: Request, res: Response) => {
+  try {
+    const { username, email, password } = req.body;
+
+    const existingUser = await User.findOne({ where: { username }});
+    if (existingUser) {
+      return res.status(400).json({ message: "Username already taken"});
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = await User.create({ username, email, password: hashedPassword, name: null, friends: [], });
+
+    return res.status(201).json({ message: "User created successfully: ", user: { id: newUser.id, username: newUser.username } });
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message });
+  }
+});
 
 export default router;  // Export the router instance
