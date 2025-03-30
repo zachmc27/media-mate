@@ -1,5 +1,5 @@
 import Auth from '../utils/auth';
-
+import { FlickpickSession } from '../interfaces/FlickpickInterface';
 
 // sends a get Request to the server to get the list of flickPickList
 export async function getFlickPicksList(){
@@ -41,7 +41,19 @@ try {
   }
 
   const data = await response.json();
-  console.log("FlickPickList Matching Session Created: " + data.message);
+
+  const deconstructedData: FlickpickSession = {
+    userOneId: data.userOneId,
+    userTwoId: data.userTwoId,
+    flickPickListId: data.flickPickListId,
+    listOfChoices: data.listOfChoices,
+  }
+
+  console.log("FlickPickList Matching Session Created: " + deconstructedData);
+
+
+
+  return data;
 }
 catch (error) {
   console.error('An error occurred while creating a flickPickList matching session');

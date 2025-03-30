@@ -5,6 +5,14 @@ export interface Flickpick {
     listOfChoices: number[];
 }
 
-export interface FlickpickArray {
-    Flickpicks: Flickpick[];
+export interface FlickpickSession {
+    id?: number;
+    userOneId: number;
+    userTwoId: number;
+    flickPickListId: number;
+    listOfChoices?: number[];
+    userOneResponse?: string[];
+    userTwoResponse?: string[];
+    matches?: number[];
+    status?: 'Incomplete' | 'Completed';
 }
