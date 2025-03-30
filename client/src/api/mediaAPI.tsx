@@ -13,7 +13,7 @@ export const mediaInfo = async (id: number, type: string) => {
 
 // discoverMedia by most popular
 export const discoverMedia = async () => {
-    const response = await fetch(`/api/media/discover`, {
+    const response = await fetch(`/api/media/discover/movie`, {
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${Auth.getToken()}`

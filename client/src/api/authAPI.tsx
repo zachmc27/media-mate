@@ -1,7 +1,6 @@
 import { UserLogin } from "../interfaces/UserLogin";  
 import { UserSignup } from "../interfaces/UserSignup";
 
-
 const login = async (userInfo: UserLogin) => {
   try {
 
@@ -13,13 +12,11 @@ const login = async (userInfo: UserLogin) => {
       body: JSON.stringify(userInfo)
     });
 
- 
     if (!response.ok) {
       const errorData = await response.json(); 
       throw new Error(`Error: ${errorData.message}`);   
     }
 
-   
     const data = await response.json();
 
     return data;  
@@ -28,7 +25,6 @@ const login = async (userInfo: UserLogin) => {
     return Promise.reject('Could not fetch user info');  
   }
 }
-
 
 const register = async (userInfo: UserSignup) => {
   try {

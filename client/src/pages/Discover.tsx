@@ -1,6 +1,6 @@
 import "../App.css";
 import "../styles/Discover.css";
-import MovieCard from "../components/MovieCard";
+import MovieCard from "../components/SeenItCard";
 
 export default function Discover() {
 
