@@ -33,8 +33,6 @@ SeenItList.belongsTo(Media, { foreignKey: 'mediaId', as: 'media' });
 Media.hasMany(SeenItList, { foreignKey: 'mediaId' });
 
 // Establish relationships between FlickPickSessionList and FlilckPickList
-// FlilckPickList.hasMany(FlickPickSessionList, { foreignKey: 'flickPickListId' });
-// FlickPickSessionList.belongsTo(FlilckPickList, { foreignKey: 'flickPickListId' });
-
+//need for the listOfChoices to populate in the FlickPickSessionsList based on the matching FlickPickSessionsList .flickPickListId=FlickPickList.id
 
 export { User, Media, SeenItList, FlickPickSessionList, FriendsList, Genre, ToWatchList, FlicklistSelections };
