@@ -42,7 +42,7 @@ export async function getMediaDetails(id: number, type: string): Promise<MediaIt
                 id: mediaDetails.id,
                 title: mediaDetails.title || mediaDetails.name, // 'title' for movies, 'name' for TV shows
                 year: mediaDetails.release_date ? new Date(mediaDetails.release_date).getFullYear() : 0,
-                genre_ids: mediaDetails.genre_ids || [],
+                genre_ids: mediaDetails.genres ? mediaDetails.genres.map((genre) => genre.id) : [],
                 vote_average: mediaDetails.vote_average || 0,
                 poster_path: mediaDetails.poster_path ? `https://image.tmdb.org/t/p/w500${mediaDetails.poster_path}` : '',
                 trailerKey: mediaDetails.trailerKey || '', // The trailer key
