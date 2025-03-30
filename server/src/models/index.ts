@@ -2,18 +2,20 @@ import sequelize from '../config/connection.js'
 import { UserFactory } from './user.js';
 import { MediaFactory } from './media.js';
 import { SeenItListFactory } from './seenItList.js';
-import { MatchedListFactory } from './matchedList.js';
+import { FlickPickSessionListFactory } from './matchedList.js';
 import { GenreFactory } from './genres.js';
 import { FriendsListFactory } from './friendRequest.js';
 import { ToWatchListFactory } from './toWatch.js';
+import { FlicklistSelectionsFactory } from './flickpicksListSelections.js';
 
 const User = UserFactory(sequelize);
 const Media = MediaFactory(sequelize);
 const SeenItList = SeenItListFactory(sequelize);
-const MatchedList = MatchedListFactory(sequelize);
+const FlickPickSessionList = FlickPickSessionListFactory(sequelize);
 const Genre = GenreFactory(sequelize);
 const FriendsList = FriendsListFactory(sequelize);
 const ToWatchList = ToWatchListFactory(sequelize);
+const FlicklistSelections = FlicklistSelectionsFactory(sequelize);
 
 // Build many to one relationships between the user table and the friendlist table
 User.hasMany(FriendsList, { foreignKey: 'requesterId', as: 'sentRequests' });
@@ -30,4 +32,9 @@ Media.hasMany(ToWatchList, { foreignKey: 'mediaId' });
 SeenItList.belongsTo(Media, { foreignKey: 'mediaId', as: 'media' });
 Media.hasMany(SeenItList, { foreignKey: 'mediaId' });
 
-export { User, Media, SeenItList, MatchedList, FriendsList, Genre, ToWatchList };
+// Establish relationships between FlickPickSessionList and FlilckPickList
+// FlilckPickList.hasMany(FlickPickSessionList, { foreignKey: 'flickPickListId' });
+// FlickPickSessionList.belongsTo(FlilckPickList, { foreignKey: 'flickPickListId' });
+
+
+export { User, Media, SeenItList, FlickPickSessionList, FriendsList, Genre, ToWatchList, FlicklistSelections };

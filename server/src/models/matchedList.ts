@@ -1,30 +1,52 @@
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 
-interface MatchedListAttributes {
-    id: number;
+interface FlickPickSessionListAttributes {
+    id?: number;
     userOneId: number;
     userTwoId: number;
-    mediaId: number;
-    userOneResponse: boolean;
-    userTwoResponse: boolean;
+    flickPickListId: number;
+    flickPickList: number[];
+    userOneResponse: boolean[];
+    userTwoResponse: boolean[];
+    matches?: number[];
+    status?: 'Incomplete' | 'Completed';
 }
 
-interface MatchedListCreationAttributes extends Optional<MatchedListAttributes, 'id'> {}
+interface FlickPickSessionListCreationAttributes extends Optional<FlickPickSessionListAttributes, 'id'> {}
 
-export class MatchedList
-    extends Model<MatchedListCreationAttributes, MatchedListAttributes>
-    implements MatchedListAttributes
+export class FlickPickSessionList
+    extends Model<FlickPickSessionListCreationAttributes, FlickPickSessionListAttributes>
+    implements FlickPickSessionListAttributes
 {
-    public id!: number;
+    public id?: number;
     public userOneId!: number;
     public userTwoId!: number;
-    public mediaId!: number;
-    public userOneResponse!: boolean;
-    public userTwoResponse!: boolean;
+    public flickPickListId!: number;
+    public flickPickList: number[] = [];
+    public userOneResponse!: boolean[];
+    public userTwoResponse!: boolean[];
+    public matches?: number[];
+    public status?: 'Incomplete' | 'Completed';
+
+    public async findMatchingValues(userOneResponse: boolean[], userTwoResponse: boolean[]): Promise<number[]> {
+        const matchingIndices: number[] = [];
+        const minLength = Math.min(userOneResponse.length, userTwoResponse.length);
+        for (let i = 0; i < minLength; i++) {
+            if (userOneResponse[i] === userTwoResponse[i]) {
+                matchingIndices.push(i);
+            }
+        }
+        const responsesIndeces = matchingIndices.map((index) => this.flickPickList[index]);
+        this.matches = responsesIndeces;
+        return responsesIndeces;
+    }
+
+    
+        
 }
 
-export function MatchedListFactory(sequelize: Sequelize): typeof MatchedList {
-    MatchedList.init(
+export function FlickPickSessionListFactory(sequelize: Sequelize): typeof FlickPickSessionList {
+    FlickPickSessionList.init(
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -39,24 +61,50 @@ export function MatchedListFactory(sequelize: Sequelize): typeof MatchedList {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            mediaId: {
+            flickPickListId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
             userOneResponse: {
-                type: DataTypes.BOOLEAN,
-                allowNull: false,
+                type: DataTypes.ARRAY(DataTypes.BOOLEAN),
+                allowNull: true,
             },
             userTwoResponse: {
-                type: DataTypes.BOOLEAN,
-                allowNull: false,
+                type: DataTypes.ARRAY(DataTypes.BOOLEAN),
+                allowNull: true,
+            },
+            matches: {
+                type: DataTypes.ARRAY(DataTypes.INTEGER),
+                allowNull: true,
+            },
+            flickPickList: {
+                type: DataTypes.ARRAY(DataTypes.INTEGER),
+                allowNull: true,
+            },
+            status: {
+                type: DataTypes.ENUM('Incomplete', 'Completed'),
+                allowNull: true,
+                defaultValue: 'Incomplete',
             },
         },
         {
-            tableName: 'matchedList',
+            tableName: 'flickpicksessionlist',
             sequelize,
         }
     );
 
-    return MatchedList;
-}
+    FlickPickSessionList.addHook('afterUpdate', async (instance: FlickPickSessionList) => {
+        if (instance.userOneResponse && instance.userTwoResponse) {
+            const matchingValues = await instance.findMatchingValues(
+                instance.userOneResponse,
+                instance.userTwoResponse
+            );
+                console.log('Matching values:', matchingValues);
+                // set status to completed
+                instance.status = 'Completed';
+            }
+        });
+    
+        return FlickPickSessionList;
+    }
+     

@@ -91,7 +91,7 @@ export async function keyWordSearch(keyword: string): Promise<Media[]> {
 }
 
 // This function is used to get the trailer key for a specific movie via API
-async function getTrailerKey(id: number, type: string): Promise<string> {
+export async function getTrailerKey(id: number, type: string): Promise<string> {
     const baseUrl = process.env.TMDB_BASE_URL;
     const movieUrl = `${baseUrl}/movie/${id}/videos`;
     const tvUrl = `${baseUrl}/tv/${id}/videos`;
@@ -120,3 +120,5 @@ async function getTrailerKey(id: number, type: string): Promise<string> {
     // Adjust this return statement based on the expected string structure
     return ''; // Default return statement to handle all cases
 }
+
+

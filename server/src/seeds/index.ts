@@ -1,14 +1,17 @@
 import { seedUsers } from './user-seeds.js';
 import { seedGenres } from './genre-seeds.js';
 import sequelize from '../config/connection.js';
+import { createFlickPickList } from '../routes/api/flickPickListAPI.js';
+
 
 const seedAll = async (): Promise<void> => {
   try {
     await sequelize.sync({ force: true });
     console.log('\n----- DATABASE SYNCED -----\n');
     
-    await seedUsers();
+    await createFlickPickList();
     await seedGenres();
+    await seedUsers();
     console.log('\n----- USERS SEEDED -----\n');
     
     process.exit(0);
