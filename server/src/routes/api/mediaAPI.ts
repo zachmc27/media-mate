@@ -1,11 +1,11 @@
 import dotenv from 'dotenv';
-import { Media, TMDBKeywordResponse } from '../../models/media.js'; 
+import { Media, MediaItem, TMDBKeywordResponse } from '../../models/media.js'; 
 dotenv.config();
 
 const BEARER_KEY = process.env.BearerTkn;
 
 // This function is used to get the details for a specific movie via API and also appends the getTrailerKey function to the mediaDetails object
-export async function getMediaDetails(id: number, type: string): Promise<Media[]> {
+export async function getMediaDetails(id: number, type: string): Promise<MediaItem | null> {
     const baseUrl = process.env.TMDB_BASE_URL;
     const movieUrl = `${baseUrl}/movie/${id}`;
     const tvUrl = `${baseUrl}/tv/${id}`;
@@ -18,27 +18,42 @@ export async function getMediaDetails(id: number, type: string): Promise<Media[]
     };
 
     try {
+        let mediaDetails: MediaItem | null = null;
         if(type === 'movie'){
             const response = await fetch(movieUrl, options);
-            const mediaDetails = await response.json();
+            mediaDetails = await response.json();
             // append the getTrailerKey function to the mediaDetails object
-            mediaDetails.trailerKey = await getTrailerKey(id,type);
+            if (mediaDetails) {
+                mediaDetails.trailerKey = await getTrailerKey(id,type);
+            }
             // console.log(mediaDetails);
-            return mediaDetails; // Adjust this return statement based on the expected Media structure
         } else if(type === 'tv'){
             const response = await fetch(tvUrl, options);
-            const mediaDetails = await response.json();
+            mediaDetails = await response.json();
             // append the getTrailerKey function to the mediaDetails object
-            mediaDetails.trailerKey = await getTrailerKey(id,type);
+            if (mediaDetails) {
+                mediaDetails.trailerKey = await getTrailerKey(id,type);
+            }
             //console.log(mediaDetails);
-            return mediaDetails; // Adjust this return statement based on the expected Media structure
         }
+        if (mediaDetails) {
+            // Return the single media item directly
+            return {
+                id: mediaDetails.id,
+                title: mediaDetails.title || mediaDetails.name, // 'title' for movies, 'name' for TV shows
+                year: mediaDetails.release_date ? new Date(mediaDetails.release_date).getFullYear() : 0,
+                genre_ids: mediaDetails.genre_ids || [],
+                vote_average: mediaDetails.vote_average || 0,
+                poster_path: mediaDetails.poster_path ? `https://image.tmdb.org/t/p/w500${mediaDetails.poster_path}` : '',
+                trailerKey: mediaDetails.trailerKey || '', // The trailer key
+                popularity: mediaDetails.popularity,
+            };
+        }
+        throw new Error('Media details not found');
     } catch (err) {
         console.error(err);
         throw err;
     }
-
-    return []; // Default return statement to handle all cases
 }
 
 // This function is used to get the popular movies via API based on a keyword search.

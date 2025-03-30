@@ -2,6 +2,7 @@ import "../styles/Listtease.css"
 // import chicken from "../assets/strangerthings.jpg"
 import { useEffect, useState } from "react";
 import { discoverMedia, mediaInfo } from "../api/mediaAPI.tsx";
+import { addMediaToWatch } from "../api/toWatchAPI";
 import { addMediaToSeenIt } from "../api/seenItAPI";
 import Media from "../interfaces/Media.tsx";
 import auth from '../utils/auth';
@@ -41,13 +42,16 @@ export default function Listtease() {
             <div className="card" key={item.id}>
               <img src={`https://image.tmdb.org/t/p/w500${item.cover}`} alt={item.title} />
               <p className="card-title">{item.title}</p>
-              <button onClick={() => addMediaToSeenIt(userId!, item.id, item.title)}>Seen</button>
+              <button onClick={() => addMediaToWatch(userId!, item.id, item.title)}>To Watch</button>              
+              <button onClick={() => addMediaToSeenIt(userId!, item.id )}>Seen</button>
             </div>
           ))} 
           {mediaItem && (
             <div className="card" key={mediaItem.id}>
               <img src={`https://image.tmdb.org/t/p/w500${mediaItem.poster_path}`} alt={mediaItem.title} />
               <p className="card-title">{mediaItem.title}</p>
+              <button onClick={() => addMediaToWatch(userId!, mediaItem.id, mediaItem.title)}>To Watch</button>              
+              <button onClick={() => addMediaToSeenIt(userId!, mediaItem.id )}>Seen</button>
             </div>
           )}
         </div>

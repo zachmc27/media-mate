@@ -1,7 +1,7 @@
 import express from 'express';
-import { User } from '../models/user.js';
+import { User } from '../../models/user.js';
 import { Op } from 'sequelize';
-import { FriendsList } from '../models/friendRequest.js';
+import { FriendsList } from '../../models/index.js';
 
 const router = express.Router();
 
@@ -111,7 +111,5 @@ router.post('/reject', async (req, res) => {
     return res.status(400).json({ error: 'An error occurred rejecting a friend request' });
   }
 });
-
-
 
 export default router;
