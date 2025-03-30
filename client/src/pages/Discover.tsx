@@ -1,6 +1,6 @@
 import "../App.css";
 import "../styles/Discover.css";
-import MovieCard from "../components/SeenItCard";
+import MatchCard from "../components/MatchCard";
 
 export default function Discover() {
 
@@ -18,28 +18,28 @@ export default function Discover() {
             <div className="list-container">
                 <p>Popular Now</p>
                 <div className="movies-container">
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
+                <MatchCard />
+                <MatchCard />
+                <MatchCard />
+                <MatchCard />
+                <MatchCard />
+                <MatchCard />
+                <MatchCard />
+                <MatchCard />
                 </div>
             </div>
 
             <div className="list-container">
                 <p>For You</p>
                 <div className="movies-container">
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
+                <MatchCard />
+                <MatchCard />
+                <MatchCard />
+                <MatchCard />
+                <MatchCard />
+                <MatchCard />
+                <MatchCard />
+                <MatchCard />
                 </div>
             </div>
         </div>
