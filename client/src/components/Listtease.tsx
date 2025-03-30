@@ -33,6 +33,7 @@ export default function Listtease() {
         fetchMedia();
       }, []);
 
+
   return (
     <div className="cover-row">
     <div className="list-section">

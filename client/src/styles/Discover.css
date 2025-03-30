@@ -65,3 +65,29 @@
     font-size: 0.75em;
     width: 15%;
   }
+
+  .image-container {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  .image-container img {
+    display: block;
+    width: 100%;
+  }
+
+  .image-container button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: yellowgreen;
+    cursor: pointer;
+    visibility: hidden;
+  }
+
+  .image-container button:hover {
+    background-color: green;
+    visibility: visible;
+  }
