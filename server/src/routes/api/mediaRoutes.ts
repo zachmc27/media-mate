@@ -4,6 +4,7 @@ import type { Request, Response } from 'express';
 // to do : import mediaApi from '../api/mediaApi.js';
 import dotenv from 'dotenv';
 import { Media, TMDBResponse } from '../../models/media.js'; 
+import { Sequelize } from 'sequelize';
 import * as mediaApi from '../api/mediaAPI.js';
 
 dotenv.config();
@@ -131,7 +132,25 @@ router.get('/discover/:type', async (req: Request, res: Response) => {
     }
 });
 
-// // to do : build routes to create a session and add sessions
-// router.post('/api/media/sessions', async (req: Request, res: Response) => {});
+router.get('/trailer/random', async (_req: Request, res: Response) => {
+    //gets a random mediaID from the media table in the database and returns the trailer key ,ID and media type
+    try {
+        const randomMedia = await Media.findOne({
+            order: Sequelize.literal('RANDOM()'), // Randomly selects a row
+        });
+
+        if (!randomMedia) {
+            return res.status(404).json({ error: 'No media found.' });
+        }
+
+        const { id } = randomMedia;
+        const type = 'movie';
+        const trailerKey = await mediaApi.getTrailerKey(id,type);
+        return res.json({ id, trailerKey });
+    } catch (error) {
+        console.error('Error occurred while fetching random media:', error);
+        return res.status(500).json({ error: 'An error occurred while processing your request.' });
+    }
+},);
 
 export { router as mediaRouter };

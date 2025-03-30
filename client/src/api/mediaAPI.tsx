@@ -66,4 +66,15 @@ export const keywordSearch = async (keyword: string) => {
     return response.json();
 };
 
+export const getRandomMediaKey = async () => {
+    const response = await fetch(`/api/media/trialer/random`, {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Auth.getToken()}`
+        }
+    });
+
+    return response.json();
+}
+
 export default {mediaInfo, keywordSearch, discoverMedia,discoverByTypeAndGenre,discoverMediaByType ,discoverMediaByGenre };
