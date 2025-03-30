@@ -1,5 +1,5 @@
 import { UserLogin } from "../interfaces/UserLogin";  
-
+import { UserSignup } from "../interfaces/UserSignup";
 
 const login = async (userInfo: UserLogin) => {
   try {
@@ -26,26 +26,28 @@ const login = async (userInfo: UserLogin) => {
   }
 }
 
-const createUser = async (username: string, email: string, password: string) => {
+const register = async (userInfo: UserSignup) => {
   try {
-    const response = await fetch('/auth/register', {
-      method: 'POST',
+    const response = await fetch("/auth/register", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, email, password })
+      body: JSON.stringify(userInfo),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      const errorData = await response.json(); 
-      throw new Error(`Error: ${errorData.message}`);   
+      throw new Error(data.message || "Failed to register user");
     }
 
-    return await response.json(); 
+    console.log("User registered successfully:", data);
+    return data;
   } catch (err) {
-    console.log('Error from user creation: ', err);  
-    return Promise.reject('Could not create user');  
+    console.error("Error during registration:", err);
+    throw err;
   }
 }
 
-export { login, createUser };  
+export { login, register };  
