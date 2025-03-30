@@ -2,6 +2,7 @@ import { seedUsers } from './user-seeds.js';
 import { seedGenres } from './genre-seeds.js';
 import sequelize from '../config/connection.js';
 import { createFlickPickList } from '../routes/api/flickPickListAPI.js';
+import { seedMedia } from './media-seeds.js';
 
 
 const seedAll = async (): Promise<void> => {
@@ -14,6 +15,10 @@ const seedAll = async (): Promise<void> => {
     await seedUsers();
     console.log('\n----- USERS SEEDED -----\n');
     
+    await seedMedia();
+    console.log('\n----- MEDIA SEEDED -----\n');
+
+
     process.exit(0);
   } catch (error) {
     console.error('Error seeding database:', error);

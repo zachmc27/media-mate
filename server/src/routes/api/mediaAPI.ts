@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import { Media, MediaItem, TMDBKeywordResponse } from '../../models/media.js'; 
 dotenv.config();
 
-const BEARER_KEY = process.env.BearerTkn;
+const BEARER_KEY = process.env.BEARER_KEY;
 
 // This function is used to get the details for a specific movie via API and also appends the getTrailerKey function to the mediaDetails object
 export async function getMediaDetails(id: number, type: string): Promise<MediaItem | null> {
@@ -104,21 +104,31 @@ export async function getTrailerKey(id: number, type: string): Promise<string> {
     };
 
     try {
-        if (type === 'movie') {
-            const response = await fetch(movieUrl, options);
-            const trailerData = await response.json();
-            return trailerData.results.find((trailer: any) => trailer.type === 'Trailer' && trailer.site === 'YouTube' && trailer.official === true)?.key || ''; 
-        } else if (type === 'tv') {
-            const response = await fetch(tvUrl, options);
-            const trailerData = await response.json();
-            return trailerData.results.find((trailer: any) => trailer.type === 'Trailer' && trailer.site === 'YouTube' && trailer.official === true)?.key || ''; 
-        }
-    } catch (err) {
-        console.error(err);
-        throw err;
-    }
-    // Adjust this return statement based on the expected string structure
-    return ''; // Default return statement to handle all cases
-}
+        const url = type === 'movie' ? movieUrl : tvUrl;
+        console.log('Fetching URL:', url); // Log the URL for debugging
+        const response = await fetch(url, options);
 
+        if (!response.ok) {
+            console.error(`Failed to fetch trailer data for ${type} with ID ${id}: ${response.status} - ${response.statusText}`);
+            console.error('Response Headers:', response.headers);
+            return ''; // Return an empty string if the API call fails
+        }
+
+        const trailerData = await response.json();
+
+        if (!trailerData.results || !Array.isArray(trailerData.results)) {
+            console.error(`Invalid trailer data format for ${type} with ID ${id}:`, trailerData);
+            return ''; // Return an empty string if results are missing or not an array
+        }
+
+        const trailer = trailerData.results.find(
+            (trailer: any) => trailer.type === 'Teaser' && trailer.site === 'YouTube' && trailer.official === true
+        );
+
+        return trailer?.key || ''; // Return the trailer key or an empty string if not found
+    } catch (err) {
+        console.error(`Error occurred while fetching trailer key for ${type} with ID ${id}:`, err);
+        throw err; // Re-throw the error for higher-level handling
+    }
+}
 
