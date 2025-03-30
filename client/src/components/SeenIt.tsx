@@ -57,7 +57,7 @@ export default function SeenItList() {
                 title={item.media.title || item.name || "Unknown"}
                 year={item.media.year}
                 cover={item.media.cover}
-                mediaId={item.id}
+                mediaId={item.mediaId}
                 onRemove={handleRemove}
               />
               ))

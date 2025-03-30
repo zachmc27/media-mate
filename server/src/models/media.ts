@@ -76,7 +76,12 @@ export interface MediaItem {
     popularity: number;
     poster_path?: string;
     trailerKey?: string;
+    genres?: genres[];
   }
+
+interface genres {
+    id: number;
+}
   
   export interface TMDBResponse {
     results: MediaItem[];

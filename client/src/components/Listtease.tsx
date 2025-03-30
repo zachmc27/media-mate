@@ -1,7 +1,7 @@
 import "../styles/Listtease.css"
 // import chicken from "../assets/strangerthings.jpg"
 import { useEffect, useState } from "react";
-import { discoverMedia, mediaInfo } from "../api/mediaAPI.tsx";
+import { discoverMediaByGenre, mediaInfo } from "../api/mediaAPI.tsx";
 import { addMediaToWatch } from "../api/toWatchAPI";
 import { addMediaToSeenIt } from "../api/seenItAPI";
 import Media from "../interfaces/Media.tsx";
@@ -15,7 +15,7 @@ export default function Listtease() {
     useEffect(() => {
         const fetchMedia = async () => {
           try {
-            const data = await discoverMedia();
+            const data = await discoverMediaByGenre(28);
             setMediaList(data); // Set fetched data in state
           } catch (error) {
             console.error("Error fetching media:", error);
@@ -32,6 +32,12 @@ export default function Listtease() {
         fetchOneMedia();
         fetchMedia();
       }, []);
+
+    useEffect(() => {
+        if (mediaList) {
+            console.log("Fetched media item: ", mediaList);
+        }
+    }, [mediaList]);
 
   return (
     <div className="cover-row">
