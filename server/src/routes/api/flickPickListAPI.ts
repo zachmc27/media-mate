@@ -23,7 +23,6 @@ if (!BEARER_KEY) {
 // · Sci-Fi – Based on speculative concepts like futuristic technology, space, and aliens.
 // · Fantasy – Often set in magical or supernatural worlds, with mythical creatures or abilities.
 // · Thriller – Suspenseful films that keep the audience on the edge of their seat. (edited) 
-
 // 
 
     const baseUrl = process.env.TMDB_BASE_URL || '';

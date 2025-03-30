@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useDrag } from "react-use-gesture";
-import { FlickpickArray } from "../interfaces/FlickpickInterface";
+import { FlickpickSession } from "../interfaces/FlickpickInterface";
 import { mediaInfo } from "../api/mediaAPI";
+import { createFlickPickListMatchingSession } from "../api/flickPicksAPI";
+import auth from '../utils/auth';
 
 interface FlickpickQuizProps {
     quizId: number;
@@ -19,49 +21,66 @@ interface MediaDetails {
 export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
     const [currentChoice, setCurrentChoice] = useState(0);
     const [mediaDetails, setMediaDetails] = useState<MediaDetails | null>(null);
+    const [userId, setUserId] = useState<number | null>(null);
     const [selectedAnswers, setSelectedAnswers] = useState<(string | null)[]>([]); 
+    const [flickpickMediaList, setFlickpickMediaList] = useState<FlickpickSession | null>(null);
     const controls = useAnimation();
     const decisionMadeRef = useRef(false);
     const [dragDirection, setDragDirection] = useState<"none" | "up" | "down">("none");
-
-    // The flickpick array should come in through here, right now it's just a static array
-    const flickpickQuizData: FlickpickArray = { 
-        Flickpicks: [
-            {
-                id: 1,
-                name: "Action",
-                listOfChoices: [1125899, 1165067, 1373723, 822119, 1229730],
-                description: "Amazing action flicks",
-            },
-            {
-                id: 2,
-                name: "Animation",
-                listOfChoices: [762509, 1241982, 1297763, 1104845, 823219],
-                description: "Incredible Animation Movies",
-            },
-        ]};
-
-    // Determine which flickpick quiz has been selected
-    const selectedQuiz = flickpickQuizData.Flickpicks.find((quiz) => quiz.id === quizId);
-    if (!selectedQuiz) return <p className="Error">Quiz not found.</p>;
-
-    // Iterate through the items in the flickpick quiz
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
     useEffect(() => {
-        getDetails(selectedQuiz.listOfChoices[currentChoice], 'movie');
-    }, [currentChoice]);
+        const id = auth.getUserId();
+        setUserId(id);
+    }, []);
+
+    useEffect(() => {
+        if (!userId) return;
+        const fetchFlickPickList = async () => {
+            try {
+                const data = await createFlickPickListMatchingSession(userId!, 2, quizId);
+                if (data!) {
+                    setFlickpickMediaList(data);
+                } else {
+                    setError("Failed to fetch data.");
+                }
+            } catch (error) {
+                console.error("Error fetching Flickpick data:", error);
+                setError("An error occurred while fetching flickpick data.");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchFlickPickList();
+    }, [userId, quizId]); 
+    
+    useEffect(() => {
+        if (flickpickMediaList) {
+            console.log("Fetched media item: ", flickpickMediaList);
+        }
+    }, [flickpickMediaList]);
+
+    useEffect(() => {
+        if (flickpickMediaList) {
+            const mediaId = flickpickMediaList.listOfChoices?.[currentChoice];
+            if (mediaId !== undefined) {
+                getDetails(mediaId, 'movie');
+            }
+        }
+    }, [currentChoice, flickpickMediaList]);
 
     // Making an API call for each movie as they are displayed.
     const getDetails = async (mediaId: number, type: string) => {
-        console.log("getting details:" + mediaId + type);
         try {
             const response = await mediaInfo(mediaId, type);
-            console.log("mediaInfo called, response: " + response);
             setMediaDetails(response);
-            console.log(mediaDetails);
         } catch (error) {
             console.error("Error fetching movie details:", error);
         }
-    };    
+    };
+    useEffect(() => {
+        console.log("Updated mediaDetails: ", mediaDetails);
+    }, [mediaDetails]);    
 
     // This is the motion functionality on the quiz
     const bind = useDrag(({ movement: [, my], down }) => {
@@ -79,7 +98,7 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
                 decisionMadeRef.current = true; 
             }
             if (decisionMadeRef.current) {
-                setCurrentChoice((prev) => Math.min(prev + 1, selectedQuiz.listOfChoices.length - 1));
+                setCurrentChoice((prev) => Math.min(prev + 1, flickpickMediaList!.listOfChoices!.length - 1));
                 controls.start({ y: 0, opacity: 1 });
             }
         } else {
@@ -96,74 +115,44 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
             // Replace with the API call to submit answers
             // const response = await submitAnswersToAPI(selectedAnswers);
             alert("Answers submitted!");
+            onBack();
         } catch (error) {
             console.error("Error submitting answers:", error);
         }
     };
-
+    if (loading) return <p>Loading your To Watch list...</p>;
+    if (error) return <p className="error">{error}</p>;
+    const isQuizNotFound = !flickpickMediaList || !flickpickMediaList.listOfChoices;
     return (
         <div className="flickpicks">
-            <motion.div
-                {...bind()}
-                className="physics"
-                animate={controls}
-                initial={{ y: 0, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            >
-            {mediaDetails && currentChoice < selectedQuiz.listOfChoices.length - 1 ? (
-                <div className="flickpicksCard">
-                    <img src={mediaDetails.poster_path} alt={mediaDetails.title} draggable={false}/>
-                    <div className="card-container">
-                        <b className="card-title">{mediaDetails.title}</b>
-                        <i className="card-year">{mediaDetails.year}</i>
-                    </div>
+        {isQuizNotFound ? (
+            <p className="Error">Quiz not found.</p>
+        ) : (
+            <>
+                <motion.div {...bind()} className="physics" animate={controls}>
+                    {mediaDetails && currentChoice < flickpickMediaList!.listOfChoices!.length - 1 ? (
+                        <div className="flickpicksCard">
+                            <img src={mediaDetails.poster_path} alt={mediaDetails.title} draggable={false}/>
+                            <div className="card-container">
+                                <b className="card-title">{mediaDetails.title}</b>
+                                <i className="card-year">{mediaDetails.year}</i>
+                            </div>
+                        </div>
+                    ) : (
+                        <button className="submitButton" onClick={submitAnswers}>Submit Answers</button>
+                    )}
+                </motion.div>
+
+                <div className="marks">
+                    {dragDirection === "up" && <span className="green-check">✅</span>}
+                    {dragDirection === "down" && <span className="red-cross">❌</span>}
                 </div>
-          ) : (
-            <button className="submitButton" onClick={submitAnswers}>
-            Submit Answers
-            </button>
-          )}
-        </motion.div>
 
-        {/* Attempt at making Check/ X marks based on drag direction */}
-
-
-                    <div
-                className="marks"
-                style={{ transform: "translateY(-50%)" }}
-            >
-                {dragDirection === "up" && (
-                    <span
-                        style={{
-                            color: "green",
-                            fontSize: "2rem",
-                            position: "absolute",
-                            top: "30%",
-                            left: "20px",
-                        }}>
-                            ✅
-                    </span>
-                )}
-                {dragDirection === "down" && (
-                    <span
-                        style={{
-                            color: "red",
-                            fontSize: "2rem",
-                            position: "absolute",
-                            top: "30%",
-                            right: "20px",
-                        }}>
-                            ❌
-                    </span>
-                )}
-            </div>
-        {/* Navigation Buttons */}
-
-        <div className="button" style={{position: "absolute", bottom: "20px"}}>
-          <button className="backButton" onClick={onBack}>
-            Back
-          </button>
-        </div>
-      </div>
+                <div className="button">
+                    <button className="backButton" onClick={onBack}>Back</button>
+                </div>
+            </>
+        )}
+    </div>
     );
-  }
+}

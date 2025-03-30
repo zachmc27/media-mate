@@ -9,7 +9,7 @@ import * as mediaApi from '../api/mediaAPI.js';
 
 dotenv.config();
 const router = express.Router();
-const BEARER_KEY = process.env.BearerTkn;
+const BEARER_KEY = process.env.BEARER_KEY;
 
 // to do : build route to getDetails
 router.get('/details/:id', async (req: Request, res: Response) => {
