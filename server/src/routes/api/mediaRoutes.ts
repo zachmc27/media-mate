@@ -8,7 +8,6 @@ import * as mediaApi from '../api/mediaAPI.js';
 
 dotenv.config();
 const router = express.Router();
-//const API_KEY = process.env.TMDB_API;
 const BEARER_KEY = process.env.BearerTkn;
 
 // to do : build route to getDetails
@@ -132,18 +131,7 @@ router.get('/discover/:type', async (req: Request, res: Response) => {
     }
 });
 
-// Route for mixed genre discovery list
-
 // // to do : build routes to create a session and add sessions
 // router.post('/api/media/sessions', async (req: Request, res: Response) => {});
-
-// // to do: build a route to allow a new toWatchItem to be added
-// router.post('/api/media/toWatch', async (req: Request, res: Response) => {});
-
-
-// // to do: build a route to allow a user to mark a toWatch item as watched and remove it from the toWatch list
-// router.post('/api/media/watched', async (req: Request, res: Response) => {});
-
-
 
 export { router as mediaRouter };

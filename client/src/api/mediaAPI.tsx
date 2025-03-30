@@ -13,7 +13,7 @@ export const mediaInfo = async (id: number, type: string) => {
 
 // discoverMedia by most popular
 export const discoverMedia = async () => {
-    const response = await fetch(`/api/media/discover`, {
+    const response = await fetch(`/api/media/discover/movie`, {
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${Auth.getToken()}`
@@ -66,30 +66,4 @@ export const keywordSearch = async (keyword: string) => {
     return response.json();
 };
 
-// this call is meant to add a media to the toWatch list through either the matched or discovery pages
-export const addMediaToWatchList = async (userID: number, mediaID: number) => {
-    const response = await fetch(`/api/watchlist/add`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${Auth.getToken()}`
-        },
-        body: JSON.stringify({ userID, mediaID }),
-    });
-    return response.json();
-};
-
-// this call is meant to remove a media from the toWatch list and added to the seenList
-export const watchedMedia = async (userID: number, mediaID: number) => {
-    const response = await fetch(`/api/watchlist/remove`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${Auth.getToken()}`
-        },
-        body: JSON.stringify({ userID, mediaID }),
-    });
-    return response.json();
-};
-
-export default {mediaInfo, keywordSearch, discoverMedia,discoverByTypeAndGenre,discoverMediaByType ,discoverMediaByGenre, addMediaToWatchList, watchedMedia};
+export default {mediaInfo, keywordSearch, discoverMedia,discoverByTypeAndGenre,discoverMediaByType ,discoverMediaByGenre };

@@ -1,27 +1,24 @@
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
-import { SeenItList } from './seenItList.js';
 import { Media } from './media.js';
 import { getMediaDetails } from '../routes/api/mediaAPI.js';
 
-interface ToWatchAttributes {
-
+interface SeenItListAttributes {
     id?: number;
     mediaId: number;
-    Title: string;
     userId: number;
-
+    userRating?: number;
 }
 
-interface ToWatchCreationAttributes extends Optional<ToWatchAttributes, 'id'> {}
+interface SeenItListCreationAttributes extends Optional<SeenItListAttributes, 'id'> {}
 
-export class ToWatch extends Model<ToWatchCreationAttributes, ToWatchAttributes> implements ToWatchAttributes {
+export class SeenItList extends Model<SeenItListCreationAttributes, SeenItListAttributes> implements SeenItListAttributes {
     public id!: number;
     public mediaId!: number;
-    public Title!: string;
     public userId!: number;
+    public userRating?: number;
 
-    // Method to create a to watch item
-    public static async addToWatchItem(data: Omit<ToWatchCreationAttributes, "id">) {
+    // Method to add a new seen item
+    public static async addSeenItItem(data: Omit<SeenItListAttributes, "id">) {
         try {
             let mediaItem = await Media.findOne({ where: { id: data.mediaId } });
             if (!mediaItem) {
@@ -41,60 +38,37 @@ export class ToWatch extends Model<ToWatchCreationAttributes, ToWatchAttributes>
                 });
             }
 
-            const existingToWatchItem = await ToWatch.findOne({ 
+            const existingSeenItItem = await SeenItList.findOne({ 
                 where: { userId: data.userId, mediaId: data.mediaId 
                 }})
 
-            if (existingToWatchItem) {
-                 console.log('This item is already in your to watch list');
+            if (existingSeenItItem) {
+                 console.log('This item is already in your seen it list');
                  return null;
             }
-
-            return await ToWatch.create({
+            
+            return await SeenItList.create({
                 mediaId: mediaItem.id,
-                Title: data.Title,
                 userId: data.userId,
             });
+
         } catch (error) {
-            console.error("Error creating To Watch item:", error);
+            console.error("Error creating SeenIt item:", error);
             throw error;
         }
     }
-        
+    
     // Method to remove a seen item by userId and movieId
-    public static async removeToWatchItem(userId: number, mediaId: number): Promise<boolean> {
-        const deletedRows = await ToWatch.destroy({
+    public static async removeSeenItItem(userId: number, mediaId: number): Promise<boolean> {
+        const deletedRows = await SeenItList.destroy({
             where: { userId, mediaId }
         });
         return deletedRows > 0;
     }
-
-    // Method to add a to watch item to the SeenIt table
-    public static async addToWatchToSeenIt(userId: number, mediaId: number)  {
-        try {
-            const toWatchItem = await ToWatch.findOne({ where: { userId, mediaId } });
-
-            if (!toWatchItem) {
-                throw new Error (`To watch item not found`);
-            }
-
-            await SeenItList.addSeenItItem({
-                mediaId: toWatchItem.mediaId,
-                userId: toWatchItem.userId,
-            });
-
-            await this.removeToWatchItem(userId, mediaId);
-            console.log(`Media item ${mediaId} added to Seen it list`);
-            return { success: true, userId, mediaId };
-        } catch (error) {
-            console.error("Error creating To Watch item:", error);
-            throw error;
-        }
-    }
 }
 
-export function ToWatchListFactory(sequelize: Sequelize): typeof ToWatch {
-    ToWatch.init(
+export function SeenItListFactory(sequelize: Sequelize): typeof SeenItList {
+    SeenItList.init(
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -106,19 +80,19 @@ export function ToWatchListFactory(sequelize: Sequelize): typeof ToWatch {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            Title: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
             userId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
+            userRating: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+            },
         },
         {
-            tableName: 'ToWatch',
+            tableName: 'seenit',
             sequelize,
         }
     );
-    return ToWatch;
+    return SeenItList;
 }
