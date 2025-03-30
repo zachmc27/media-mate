@@ -15,14 +15,14 @@ export const login = async (req: Request, res: Response) => {
 
   // If user is not found, send an authentication failed response
   if (!user) {
-    return res.status(401).json({ message: 'Authentication failed' });
+    return res.status(401).json({ message: 'Authentication failed on user' });
   }
 
   // Compare the provided password with the stored hashed password
   const passwordIsValid = await bcrypt.compare(password, user.password);
   // If password is invalid, send an authentication failed response
   if (!passwordIsValid) {
-    return res.status(401).json({ message: 'Authentication failed' });
+    return res.status(401).json({ message: 'Authentication failed on password' });
   }
 
   // Get the secret key from environment variables
@@ -32,7 +32,7 @@ export const login = async (req: Request, res: Response) => {
   const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' });
   return res.json({ token, userId: user.id });  // Send the token as a JSON response
   } catch (error) {
-  return res.status(401).json({ message: 'Authentication failed' });
+  return res.status(401).json({ message: 'Authentication failed on key' });
   }
 }
 
@@ -52,11 +52,9 @@ router.post('/register', async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Username already taken"});
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await User.create({ username, email, password: password, name: null, friends: [], });
 
-    const newUser = await User.create({ username, email, password: hashedPassword, name: null, friends: [], });
-
-    return res.status(201).json({ message: "User created successfully: ", user: { id: newUser.id, username: newUser.username } });
+    return res.status(201).json({ message: "User created successfully: ", user: { id: newUser.id, username: newUser.username, password: newUser.password } });
   } catch (error: any) {
     return res.status(400).json({ message: error.message });
   }
