@@ -1,16 +1,41 @@
 import "../styles/Flickpicks.css"
 import chicken from "../assets/chicken.jpg"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FlickpickQuiz from "../components/FlickpickQuiz";
+import { getFlickPicksList } from "../api/flickPicksAPI";
+import { Flickpick } from "../interfaces/FlickpickInterface";
 
 export default function Flickpicks() {
         const [currentQuiz, setCurrentQuiz] = useState<number | null>(null);
-    
-        const flickpicks = [
-            { id: 1, name: "Action", description: "Amazing action flicks" },
-            { id: 2, name: "Animation", description: "Incredible Animation Movies" },
-        ];
+        const [flickpickList, setFlickpickList] = useState<Flickpick[] | null>(null);
+        const [error, setError] = useState<string | null>(null);
+        const [loading, setLoading] = useState<boolean>(true);
 
+    useEffect(() => {
+        const fetchFlickPickList = async () => {
+            try {
+                const data = await getFlickPicksList();
+                if (data) {
+                    setFlickpickList(data);
+                } else {
+                    setError("Failed to fetch data.");
+                }
+            } catch (error) {
+                setError("An error occurred while fetching flickpick data.");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchFlickPickList();
+    }, []); 
+    
+        // const flickpicks = [
+        //     { id: 1, name: "Action", description: "Amazing action flicks" },
+        //     { id: 2, name: "Animation", description: "Incredible Animation Movies" },
+        // ];
+
+        if (loading) return <p>Loading your To Watch list...</p>;
+        if (error) return <p className="error">{error}</p>;
   return (
     <div>
         {/* Conditionally render based on currentList state */}
@@ -22,13 +47,17 @@ export default function Flickpicks() {
                     shared answers! 
                 </p>
                 <div className="cards-row">
-                        {flickpicks.map((flickpick) => (
-                            <div key={flickpick.id} className="card" onClick={() => setCurrentQuiz(flickpick.id)}>
-                                <img src={chicken} alt={flickpick.name} />
-                                <h4 className="card-title">{flickpick.name}</h4>
-                                <p className="card-description">{flickpick.description}</p>
-                            </div>
-                        ))}
+                        {flickpickList === null ? (
+                            <p className="error">Error, no flickpick lists available</p>
+                        ) : (
+                            flickpickList.map((flickpick) => (
+                                <div key={flickpick.id} className="card" onClick={() => setCurrentQuiz(flickpick.id)}>
+                                    <img src={chicken} alt={flickpick.name} />
+                                    <h4 className="card-title">{flickpick.name}</h4>
+                                    <p className="card-description">{flickpick.description}</p>
+                                </div>
+                            ))
+                        )}  
                 </div>
             </div>
         ) : (
