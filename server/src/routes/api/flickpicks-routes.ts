@@ -156,7 +156,34 @@ router.put('/matches/:id', async (req: Request, res: Response) => {
     }
 });
 
+// put answers into flickpick session
+// router.put('/answers/:userId', async (req: Request, res: Response) => {
+//     const { userId } = req.params;
+//     const { quizId, userAnswers } = req.body;
 
+//     if (!userId || !quizId || !userAnswers) {
+//         res.status(400).json({ error: 'Please provide all required fields' });
+//         return;
+//     }
+
+//     try {
+//         const flickPickSession = await FlickPickSessionList.findOne({
+//             where: { id: parseInt(userId) }
+//         });
+
+//         if (!flickPickSession) {
+//             res.status(404).json({ error: 'FlickPickSession not found' });
+//             return;
+//         }
+
+//         await flickPickSession.save();
+//         res.json(flickPickSession);
+
+        
+//     } catch (err) {
+//         res.status(400).json({ error: err });
+//     }
+// });
 
 
 // delete a flickPickListSession
