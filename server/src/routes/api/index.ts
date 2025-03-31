@@ -4,6 +4,7 @@ import { mediaRouter } from './mediaRoutes.js';
 import { seenItListRouter } from './seenItList-routes.js';
 import { toWatchListRouter } from './toWatch-routes.js';
 import friendRoutes from './friend-routes.js';
+import flickPicksListRouter from './flickpicks-routes.js'
 
 // Initialize the main application router
 const router = Router();
@@ -21,5 +22,8 @@ router.use('/seen', seenItListRouter);
 
 // Route for seenit-related operations
 router.use('/towatch', toWatchListRouter);
+
+// Route for FlickList-related operations
+router.use('/flickpicks', flickPicksListRouter);
 
 export default router;

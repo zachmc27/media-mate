@@ -2,13 +2,14 @@ import express from "express";
 import fetch from "node-fetch";
 import type { Request, Response } from "express";
 // to do : import mediaApi from '../api/mediaApi.js';
-import dotenv from "dotenv";
-import { Media, TMDBResponse } from "../../models/media.js";
-import * as mediaApi from "../api/mediaAPI.js";
+import dotenv from 'dotenv';
+import { Media, TMDBResponse } from '../../models/media.js'; 
+import { Sequelize } from 'sequelize';
+import * as mediaApi from '../api/mediaAPI.js';
 
 dotenv.config();
 const router = express.Router();
-const BEARER_KEY = process.env.BearerTkn;
+const BEARER_KEY = process.env.BEARER_KEY;
 
 // to do : build route to getDetails
 router.get("/details/:id", async (req: Request, res: Response) => {
@@ -181,7 +182,64 @@ router.get("/movie/recent", async (_req: Request, res: Response) => {
     }
 });
 
-// to do : build routes to create a session and add sessions
-// router.post('/api/media/sessions', async (req: Request, res: Response) => {});
+// Route for filtering discovery list
+router.get('/discover/:type', async (req: Request, res: Response) => {
+    const { type } = req.params; // The :type in the route must be either 'movie' or 'tv'.
+    const genreId = req.query.genre ? Number(req.query.genre) : undefined; // Optionally allows genre to be passed after :type using ?genre=#
+    const genreParam = genreId ? `&with_genres=${genreId}` : '';
+
+    if (type !== "movie" && type !== "tv") {
+        return res.status(400).json({ error: "Invalid type, use either 'movie' or 'tv'."});
+    }
+
+    try {
+        const response = await fetch(`${url}${type}?${genreParam}`, options);
+
+        if (!response) throw new Error("Failed to fetch data from TMDB for Discovery List.");
+
+        const data = (await response.json()) as TMDBResponse;
+
+        const mediaResults = data.results.map((item: any) => {
+            return new Media({
+                id: item.id,
+                title: item.title || item.name,
+                year: parseInt(item.release_date?.split("-")[0] || item.first_air_date?.split("-")[0] || "0"),
+                genre: item.genre_ids,
+                rating: item.vote_average,
+                cover: item.poster_path,
+                embedKey: item.id.toString(),
+            });
+        });
+
+        // Returns 30 titles
+        return res.json(mediaResults);
+
+        //return res.json(mediaResults);
+
+    } catch (error) {
+        return res.status(500).json({ error: "An error occurred retrieving media for the Discovery" });        
+    }
+});
+
+router.get('/trailer/random', async (_req: Request, res: Response) => {
+    //gets a random mediaID from the media table in the database and returns the trailer key ,ID and media type
+    try {
+        const randomMedia = await Media.findOne({
+            order: Sequelize.literal('RANDOM()'), // Randomly selects a row
+        });
+
+        if (!randomMedia) {
+            return res.status(404).json({ error: 'No media found.' });
+        }
+
+        const { id } = randomMedia;
+        const type = 'movie';
+        const trailerKey = await mediaApi.getTrailerKey(id,type);
+        return res.json({ id, trailerKey });
+    } catch (error) {
+        console.error('Error occurred while fetching random media:', error);
+        return res.status(500).json({ error: 'An error occurred while processing your request.' });
+    }
+},);
 
 export { router as mediaRouter };
