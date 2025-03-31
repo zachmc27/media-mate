@@ -74,6 +74,7 @@ export const discoverRecentlyReleased = async() => {
             Authorization: `Bearer ${Auth.getToken()}`
         }
     });
+    
     return response.json();
 }
 

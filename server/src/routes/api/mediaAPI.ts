@@ -132,3 +132,23 @@ export async function getTrailerKey(id: number, type: string): Promise<string> {
     }
 }
 
+export async function Matching(
+    responseOne: Array<{ id: any }>, // Array of objects with an 'id' property
+    responseTwo: Array<{ id: any }>, // Array of objects with an 'id' property
+    listOfChoices: Array<any> // Array of any type
+): Promise<Array<any>> { // Returns an array of any type
+    let matching: Array<number> = [];
+    let matches: Array<any> = [];
+
+    for (let i = 0; i < responseOne.length; i++) {
+        for (let j = 0; j < responseTwo.length; j++) {
+            if (responseOne[i].id === responseTwo[j].id) {
+                matching.push(i);
+                // Creates a const of listOfChoices values where the index is the same as the matching
+                matches.push(listOfChoices[i]);
+            }
+        }
+    }
+
+    return matches;
+}
