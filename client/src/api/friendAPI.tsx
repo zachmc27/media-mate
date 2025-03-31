@@ -106,4 +106,25 @@ export const rejectFriendRequest = async (userId: number | null, requesterId: nu
     }
   };
   
-export default { fetchFriends, sendFriendRequest, fetchPendingFriends, acceptFriendRequest, rejectFriendRequest };
+export const deleteFriend = async (userId: number | null, friendId: number | null) => {
+  try {
+    const response = await fetch(`/api/friends/${userId}/${friendId}`, {
+      method: "DELETE",
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${Auth.getToken()}`
+      },
+      body: JSON.stringify({userId, friendId}),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log('Friend deleted.', data)
+  } catch (error) {
+    console.error('An error occured while deleting friend.')
+  }
+}
+export default { fetchFriends, sendFriendRequest, fetchPendingFriends, acceptFriendRequest, rejectFriendRequest, deleteFriend };

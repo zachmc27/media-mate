@@ -1,7 +1,7 @@
 import "../styles/Friends.css"
 import Friendlist from "./Friendlist"
 import PendingFriends from "./PendingFriends"
-import { sendFriendRequest, fetchPendingFriends, acceptFriendRequest, rejectFriendRequest } from "../api/friendAPI";
+import { sendFriendRequest } from "../api/friendAPI";
 import { useEffect, useState } from "react";
 import sendIcon from "../assets/send-horizontal.svg"
 
@@ -34,9 +34,18 @@ const [friendCode, setFriendCode] = useState<number>(0);
   }
 
   try {
-    await sendFriendRequest(userId, friendCode);
+    console.log('friend', friendCode);
+    console.log('user', userId);
+    if (friendCode !== userId) {
+       await sendFriendRequest(userId, friendCode);
     alert(`Friend request sent to ${friendCode}!`)
     setFriendCode(0);
+    } else if (friendCode === userId) {
+      alert('Cannot send friend request to yourself.')
+    } else {
+      alert('Error sending friend request.')
+    }
+   
   } catch (error) {
     console.error('Error sending friend request', error);
     alert('Failed to send request. Please try again.')

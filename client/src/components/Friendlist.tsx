@@ -1,29 +1,36 @@
 import user from "../assets/user.svg"
 import "../styles/Friendlist.css"
-import { fetchFriends } from "../api/friendAPI";
+import { deleteFriend, fetchFriends } from "../api/friendAPI";
 import { useEffect, useState } from "react";
 import { UserData } from "../interfaces/UserData";
 import Actionmodal from "./Actionmodal";
+// import { retrieveUser } from "../api/userAPI";
+
 
 export default function Friendlist() {
  const [friends, setFriends] = useState<UserData[]>([])
  const [loading, setLoading] = useState(false);
  const [isModalOpen, setIsModalOpen] = useState(false);
- const [selectedFriend, setSelectedFriend] = useState<UserData | null>(null)
+ const [selectedFriend, setSelectedFriend] = useState<UserData | null>(null);
+ const [userId, setUserId] = useState(0)
+
 
  useEffect(() => {
     async function fetchData() {
-        const userId = localStorage.getItem('user_Id')
+        const id = localStorage.getItem('user_Id')
         ? JSON.parse(localStorage.getItem('user_Id') as string)
         : null
 
-        if (userId) {
+        if (id) {
             try {
-              const fetchedList = await fetchFriends(userId);
+              const fetchedList = await fetchFriends(id);
               setFriends(fetchedList); 
+              await setUserId(parseInt(id))
             } catch (error) {
               console.error("Error fetching friends:", error);
             }
+          } else {
+            console.error('No user ID found in localStorage.')
           }
           setLoading(false)
     }
@@ -36,11 +43,11 @@ const handleDeleteClick = (friend: UserData) => {
     setIsModalOpen(true)
 };
 
-const confirmDelete = () => {
+const confirmDelete = async () => {
     if (selectedFriend) {
         setFriends(friends.filter((f) => f.id !== selectedFriend.id));
         setSelectedFriend(null);
-        //modify the code above later to remove the friend from the users database object
+        deleteFriend(userId, selectedFriend.id )
         setIsModalOpen(false);
     }
 };

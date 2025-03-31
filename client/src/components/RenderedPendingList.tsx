@@ -14,15 +14,15 @@ export default function RenderedPendingList() {
 
     useEffect(() => {
         async function fetchData() {
-            const Id = localStorage.getItem('user_Id')
+            const id = localStorage.getItem('user_Id')
             ? JSON.parse(localStorage.getItem('user_Id') as string)
             : null
     
-            if (Id) {
+            if (id) {
                 try {
-                const fetchedList = await fetchPendingFriends(Id);
+                const fetchedList = await fetchPendingFriends(id);
                 setPendingList(fetchedList);
-                setUserId(parseInt(Id));
+                setUserId(parseInt(id));
                 } catch (error) {
                 console.error("Error fetching friends:", error);
                 }
@@ -40,7 +40,7 @@ export default function RenderedPendingList() {
             const pending = await Promise.all(
                 pendingList.map(async (p) => {
                     const user = await retrieveUser(p.requesterId);
-
+                    console.log('user: ',user)
                     return user;
                 })
             );
