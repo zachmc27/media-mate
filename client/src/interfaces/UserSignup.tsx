@@ -1,5 +1,8 @@
+
 export interface UserSignup {
-    username: string | null;  
-    email: string | null;
-    password: string | null;  
+    username: string;  
+    email: string;
+    password: string;  
+    name: string | null;
+    icon: string | null ; // Default icon path
   }
