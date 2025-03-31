@@ -3,7 +3,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useDrag } from "react-use-gesture";
 import { FlickpickSession } from "../interfaces/FlickpickInterface";
 import { mediaInfo } from "../api/mediaAPI";
-import { createFlickPickListMatchingSession, addFlickPickAnswers } from "../api/flickPicksAPI";
+import { createFlickPickMatchingList, submitMatchListResponses } from "../api/flickPicksAPI";
 import auth from '../utils/auth';
 
 interface FlickpickQuizProps {
@@ -42,9 +42,10 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
         if (!userId) return;
         const fetchFlickPickList = async () => {
             try {
-                const data = await createFlickPickListMatchingSession(userId!, 2, quizId);
+                const data = await createFlickPickMatchingList(userId!, quizId);
                 if (data!) {
                     setFlickpickMediaList(data);
+                    setFlickpickId(data.id);
                 } else {
                     setError("Failed to fetch data.");
                 }
@@ -94,6 +95,8 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
     useEffect(() => {
         console.log("Updated mediaDetails: ", mediaDetails);
         console.log("Updated Selected list: ", flickpickAnswers)
+        console.log(flickpickMediaList);
+        console.log(flickpickId);
     }, [mediaDetails]);    
 
     // This is the motion functionality on the quiz
@@ -129,9 +132,8 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
     const submitAnswers = async () => {
          // Make the API call to submit the answers
             try {
-                setFlickpickId(flickpickMediaList!.id!)
                 console.log("Submitting answers:", flickpickAnswers);
-                await addFlickPickAnswers(flickpickId!, userId!, flickpickAnswers);
+                await submitMatchListResponses(flickpickId!, flickpickAnswers, userId!);
             } catch (error) {
                 console.error("Error pushing Flickpick answers");
                 setError("An error occurred while pushing Flickpick answers.");

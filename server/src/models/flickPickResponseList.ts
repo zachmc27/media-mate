@@ -75,4 +75,4 @@ export function FlickPickSessionListFactory(sequelize: Sequelize): typeof FlickP
     );
         return FlickPickSessionList;
     }
-     
+     //[1165067, 822119, 939243, 950396, 777443]
