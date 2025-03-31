@@ -22,22 +22,26 @@ const retrieveUsers = async () => {
   }
 }
 
-const retrieveUser = async (userId: number) => {
+const retrieveOneUser = async (id:number) => {
   try {
-    const response = await fetch(`/api/users/${userId}`, {
+    const response = await fetch(`/api/users/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${Auth.getToken()}`
       }
     });
-    if (!response.ok) {
-      throw new Error (`Error: ${response.statusText}`);
-    }
-
     const data = await response.json();
-    return data
-  } catch (error) {
-    console.error('An error occured while fetching user')
+
+    if(!response.ok) {
+      throw new Error('Invalid user API response, check network tab!');
+    }
+    console.log('User data:', data);
+    return data;
+
+  } catch (err) { 
+    console.log('Error from data retrieval:', err);
+    return [];
   }
 }
-export { retrieveUsers, retrieveUser };
+
+export { retrieveUsers, retrieveOneUser };

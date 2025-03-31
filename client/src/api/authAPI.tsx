@@ -1,5 +1,11 @@
 import { UserLogin } from "../interfaces/UserLogin";  
 import { UserSignup } from "../interfaces/UserSignup";
+// import blueIcon from "../assets/profileIcon_01.png";
+// import orangeIcon from "../assets/profileIcon_02.png";
+
+// function getRandomNumber(min: number, max: number): number {
+//   return Math.floor(Math.random() * (max - min + 1)) + min;
+// }
 
 const login = async (userInfo: UserLogin) => {
   try {
@@ -27,6 +33,8 @@ const login = async (userInfo: UserLogin) => {
 }
 
 const register = async (userInfo: UserSignup) => {
+  //const iconImages = [blueIcon, orangeIcon];
+  //const userWithIcon = {...userInfo, icon: iconImages[getRandomNumber(0,1)]}
   try {
     const response = await fetch("/auth/register", {
       method: "POST",
