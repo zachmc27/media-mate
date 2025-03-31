@@ -18,6 +18,9 @@ export class Matches extends Model<MatchesAttributes, MatchesCreationAttributes>
     public listId!: number;
     public responseUserOne!: string[];
     public responseUserTwo!: string[];
+
+
+
 }
 
 export function MatchesFactory(sequelize: Sequelize): typeof Matches {

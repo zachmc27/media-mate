@@ -38,7 +38,7 @@ export class FlickPickSessionList
         return this.listOfChoices;
 
     }
-
+    
     
         
 }

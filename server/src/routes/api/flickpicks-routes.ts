@@ -2,7 +2,7 @@ import express from 'express';
 import { Request, Response } from 'express';
 import { FlickListSelections } from '../../models/flickpicksListSelections.js';
 import { FlickPickSessionList } from '../../models/flickPickResponseList.js';
-import * as mediaApi from "./mediaAPI.js";
+import * as matches from "./findMatches.js";
 // import * as flickPicksList from './flickPickListAPI.js';
 
 
@@ -147,13 +147,14 @@ router.post('/matches-create', async (req: Request, res: Response) => {
         const userOneResponse = userOneSession.response;
         const userTwoResponse = userTwoSession.response;
 
+
+
         if (!userOneSession.listOfChoices) {
             res.status(400).json({ error: 'List of choices is undefined' });
             return;
         }
-        const formattedUserOneResponse = userOneResponse.map((id: string) => ({ id }));
-        const formattedUserTwoResponse = userTwoResponse.map((id: string) => ({ id }));
-        const match = mediaApi.Matching(formattedUserOneResponse, formattedUserTwoResponse, userOneSession.listOfChoices);
+     
+        const match = matches.findMatches(userOneResponse, userTwoResponse);
 
         res.json({ match });
     } catch (err) {
