@@ -78,6 +78,8 @@ export const seedGenres = async () => {
         id: 37,
         name: "Western"
       },
+      // start of tv show genres 
+    
       {
         id: 10759,
         name: "Action & Adventure"

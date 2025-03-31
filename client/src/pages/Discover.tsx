@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 import "../styles/Discover.css";
+
 import MovieCard from "../components/SeenItCard";
 import auth from "../utils/auth";
 import { discoverMedia, discoverMediaByGenre, discoverRecentlyReleased } from "../api/mediaAPI";
@@ -23,6 +24,7 @@ export default function Discover() {
       }
     };
     fetchDiscoverMovies();
+
 
     const fetchForYou = async () => {
       try {
@@ -77,6 +79,7 @@ export default function Discover() {
               <button onClick={() => addMediaToSeenIt(userId!, item.id)}>
                 Seen
               </button>
+
             </div>
           ))}
         </div>

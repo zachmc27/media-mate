@@ -33,3 +33,6 @@ export function GenreFactory(sequelize: Sequelize): typeof Genre {
 
   return Genre;
 }
+export interface GenreResult {
+  name: string;
+}
