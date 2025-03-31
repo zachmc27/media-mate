@@ -3,6 +3,7 @@ import { User } from '../models/user.js';  // Import the User model
 import jwt from 'jsonwebtoken';  // Import the JSON Web Token library
 import bcrypt from 'bcrypt';  // Import the bcrypt library for password hashing
 
+
 // Login function to authenticate a user
 export const login = async (req: Request, res: Response) => {
   try {
@@ -44,17 +45,27 @@ router.post('/login', login);  // Define the login route
 
 // POST /users - Create a new user
 router.post('/register', async (req: Request, res: Response) => {
-  try {
-    const { username, email, password } = req.body;
 
+  try {
+    const { username, email, password, name } = req.body;
+    // user.getRandomIcon()
     const existingUser = await User.findOne({ where: { username }});
     if (existingUser) {
       return res.status(400).json({ message: "Username already taken"});
     }
 
-    const newUser = await User.create({ username, email, password: password, name: null, friends: [], });
+    //const defaultIconUrl = '../assets/profileIcon_01.png';
 
-    return res.status(201).json({ message: "User created successfully: ", user: { id: newUser.id, username: newUser.username, password: newUser.password } });
+    const newUser = await User.create({ username, email, password: password, name: name, friends: []});
+
+    return res.status(201).json({ message: "User created successfully",
+      user: {
+        id: newUser.id,
+        username: newUser.username,
+        email: newUser.email,
+        icon: newUser.icon, // Include the icon in the response
+      },
+    });
   } catch (error: any) {
     return res.status(400).json({ message: error.message });
   }
