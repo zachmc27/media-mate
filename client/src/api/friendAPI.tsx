@@ -62,7 +62,7 @@ export const fetchPendingFriends = async (userId: number) => {
     }    
 }
 
-export const acceptFriendRequest = async (userId: number, requesterId: number) => {
+export const acceptFriendRequest = async (userId: number | null, requesterId: number | null) => {
     try {
       const response = await fetch('/api/friends/accept', {
         method: 'POST',
@@ -84,7 +84,7 @@ export const acceptFriendRequest = async (userId: number, requesterId: number) =
     }
   };
 
-export const rejectFriendRequest = async (userId: number, requesterId: number) => {
+export const rejectFriendRequest = async (userId: number | null, requesterId: number | null) => {
     try {
       const response = await fetch('/api/friends/reject', {
         method: 'POST',

@@ -22,4 +22,22 @@ const retrieveUsers = async () => {
   }
 }
 
-export { retrieveUsers };
+const retrieveUser = async (userId: number) => {
+  try {
+    const response = await fetch(`/api/users/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Auth.getToken()}`
+      }
+    });
+    if (!response.ok) {
+      throw new Error (`Error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data
+  } catch (error) {
+    console.error('An error occured while fetching user')
+  }
+}
+export { retrieveUsers, retrieveUser };
