@@ -43,6 +43,7 @@ try {
   const data = await response.json();
 
   const deconstructedData: FlickpickSession = {
+    id: data.id,
     userOneId: data.userOneId,
     userTwoId: data.userTwoId,
     flickPickListId: data.flickPickListId,
@@ -86,6 +87,29 @@ catch (error) {
 }
 }
 
+// Push flickpick answers to backend
+export const addFlickPickAnswers = async ( id: number, userId: number, userAnswers: number[] ) => {
+
+  try {
+    const response = await fetch(`/api/flickpicks/answers/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Auth.getToken()}`
+      },
+      body: JSON.stringify({ userId, userAnswers }),
+    });
+  
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+  
+    console.log("FlickPickList Matching Session Updated");
+  }
+  catch (error) {
+    console.error('An error occurred while updating a flickPickList matching session');
+  }
+  }
 
 // gets all flickPickListMatchingSessions for a user
 export const getFlickPickListMatchingSessions = async (userId: number) => {

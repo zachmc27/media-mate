@@ -161,11 +161,7 @@ router.post('/matches-create', async (req: Request, res: Response) => {
         res.status(400).json({ error: err });
     }
 
-
 });
-
-
-
 
 // delete a flickPickListSession
 // router.delete('/matches/:id', async (req: Request, res: Response) => {

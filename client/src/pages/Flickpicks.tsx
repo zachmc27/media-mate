@@ -28,11 +28,6 @@ export default function Flickpicks() {
         };
         fetchFlickPickList();
     }, []); 
-    
-        // const flickpicks = [
-        //     { id: 1, name: "Action", description: "Amazing action flicks" },
-        //     { id: 2, name: "Animation", description: "Incredible Animation Movies" },
-        // ];
 
         if (loading) return <p>Loading your To Watch list...</p>;
         if (error) return <p className="error">{error}</p>;

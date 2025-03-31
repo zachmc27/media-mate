@@ -19,10 +19,11 @@ const SeenItCard: React.FC<SeenItCardProps> = ({
 }) => {
     return (
       <div className="card">
-        <img src={cover} alt={title} ><button onClick={() => onRemove(mediaId)}>Remove</button></img>
+        <img src={cover} alt={title} ></img>
         <div className="card-container">
           <b className="card-title">{title}</b>
           <i className="card-year">{year}</i>
+          <button onClick={() => onRemove(mediaId)}>Remove</button>
         </div>
       </div>
     );
