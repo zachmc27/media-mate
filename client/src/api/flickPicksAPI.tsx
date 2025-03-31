@@ -63,7 +63,7 @@ catch (error) {
 
 // adds a userResponse to a flickPickListMatchingSession
 // id is the flickPickListMatchingSession id or id of the session
-export const addFlickPickListMatchingSessionResponse = async (id: number, userResponse: string, userId: number) => {
+export const submitFlickPickResponses = async (id: number, answer : number[], userId: number) => {
 
 try {
   const response = await fetch(`/api/flickpicks/matches/${id}`, {
@@ -72,7 +72,7 @@ try {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${Auth.getToken()}`
     },
-    body: JSON.stringify({ userResponse, userId }),
+    body: JSON.stringify({ answer, userId }),
   });
 
   if (!response.ok) {

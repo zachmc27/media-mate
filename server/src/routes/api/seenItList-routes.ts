@@ -15,7 +15,7 @@ router.get('/:userId', async (req: Request, res: Response) => {
         {
           model: Media,
           as: 'media',
-          attributes: ['id', 'title', 'year', 'cover'],
+          attributes: ['id', 'title', 'year', 'cover', 'genre'],
         },
       ],
   });
