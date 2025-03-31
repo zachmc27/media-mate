@@ -1,4 +1,4 @@
-import { retrieveUser } from "../api/userAPI";
+import { retrieveOneUser } from "../api/userAPI";
 import { fetchPendingFriends, acceptFriendRequest, rejectFriendRequest } from "../api/friendAPI";
 import { UserData } from "../interfaces/UserData";
 import { PendingData } from "../interfaces/PendingData";
@@ -39,7 +39,7 @@ export default function RenderedPendingList() {
         async function fetchPendingUsers() {
             const pending = await Promise.all(
                 pendingList.map(async (p) => {
-                    const user = await retrieveUser(p.requesterId);
+                    const user = await retrieveOneUser(p.requesterId);
                     console.log('user: ',user)
                     return user;
                 })
