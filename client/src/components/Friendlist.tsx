@@ -12,8 +12,9 @@ export default function Friendlist() {
  const [loading, setLoading] = useState(false);
  const [isModalOpen, setIsModalOpen] = useState(false);
  const [selectedFriend, setSelectedFriend] = useState<UserData | null>(null);
- const [userId, setUserId] = useState(0)
-
+ const [userId, setUserId] = useState(0);
+ const [isFlickListOpen, setFlickListOpen] = useState(false)
+ const [selectedList, setSelectedList] = useState('')
 
  useEffect(() => {
     async function fetchData() {
@@ -52,9 +53,24 @@ const confirmDelete = async () => {
     }
 };
 
-const cancelDelete = () => {
+const cancel = () => {
     setSelectedFriend(null);
     setIsModalOpen(false);
+    setFlickListOpen(false)
+}
+
+const handleMatchClick = async (friend: UserData) => {
+  setSelectedFriend(friend)
+  setFlickListOpen(true)
+}
+
+const matchLists = async () => {
+  alert(`Matching ${selectedList}...`)
+  setFlickListOpen(false)
+}
+
+const handleFlickClick = async (selection: string) => {
+  setSelectedList(selection)
 }
 
  if (loading) {
@@ -69,17 +85,28 @@ const cancelDelete = () => {
             <img src={user} alt="users-avatar" />
             <p>{friend.username}</p>
             <div className="buttons">
-            <button>Match</button>
+            <button onClick={() => handleMatchClick(friend)}>Match</button>
             <button onClick={() => handleDeleteClick(friend)}>Delete</button>
             </div>
         </div>
         ))}
         { isModalOpen && (
-            <Actionmodal cancel={cancelDelete} confirm={confirmDelete}>
+            <Actionmodal cancel={cancel} confirm={confirmDelete}>
             <p>Are you sure you want to delete {selectedFriend?.username}?</p>
         </Actionmodal>
         )
-
+        }
+        {
+          isFlickListOpen && (
+            <Actionmodal cancel={cancel} confirm={matchLists}>
+              <p>Which list would you like to compare?</p>
+              <ul className="flicklist">
+                <button className="flicklist-item" onClick={() => {handleFlickClick('Comedy')}}> Comedy</button>
+                <button className="flicklist-item" onClick={() => {handleFlickClick('Horror')}}>Horror</button>
+                <button className="flicklist-item" onClick={() => {handleFlickClick('Drama')}}>Drama</button>
+              </ul>
+            </Actionmodal>
+          )
         }
         
     </div>
