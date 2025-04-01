@@ -7,6 +7,7 @@ interface FlickPickSessionListAttributes {
     flickPickListId: number;
     listOfChoices?: number[];
     response: string[];
+    status: "Inprogress" | "Completed";
 }
 
 interface FlickPickSessionListCreationAttributes extends Optional<FlickPickSessionListAttributes, 'id'> {}
@@ -20,6 +21,7 @@ export class FlickPickSessionList
     public flickPickListId!: number;
     public response!: string[];
     public listOfChoices?: number[];
+    public status!: "Inprogress" | "Completed";
 
     public async addListOfChoices(): Promise<number[]> {
 
@@ -37,6 +39,12 @@ export class FlickPickSessionList
         console.log(this.listOfChoices);
         return this.listOfChoices;
 
+    }
+    public async setStausToCompleted(): Promise<void> {
+        // sets the status of the current session to 'Completed'
+        // this is called when the user has finished making their selections
+        this.status = 'Completed';
+        await this.save();
     }
     
     
@@ -67,6 +75,11 @@ export function FlickPickSessionListFactory(sequelize: Sequelize): typeof FlickP
                 type: DataTypes.ARRAY(DataTypes.INTEGER),
                 allowNull: true,
             },
+            status: {
+                type: DataTypes.ENUM('Inprogress', 'Completed'),
+                allowNull: false,
+                defaultValue: 'Inprogress',
+            },
         },
         {
             tableName: 'flickpicksessionlist',
@@ -75,4 +88,4 @@ export function FlickPickSessionListFactory(sequelize: Sequelize): typeof FlickP
     );
         return FlickPickSessionList;
     }
-     
+    

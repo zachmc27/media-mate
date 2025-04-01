@@ -51,6 +51,7 @@ router.post('/matches', async (req: Request, res: Response) => {
             userId,
             flickPickListId,
             response: [], // Default value for userOneResponse
+            status: 'Inprogress'
         });
 // calls the addListOfChoices function to set the listOfChoices of the current session to the listOfChoices of the FlickListSelections
         await newFlickPickSession.addListOfChoices();
@@ -96,7 +97,10 @@ router.put('/matches/:id', async (req: Request, res: Response) => {
             return;
         }
 
-        flickPickSession.response = response;
+        flickPickSession.response = answer;
+
+        //SETS STATUS TO COMPLETED
+        await flickPickSession.setStausToCompleted();
         await flickPickSession.save();
         res.json(flickPickSession);
     } catch (err) {
@@ -161,11 +165,27 @@ router.post('/matches-create', async (req: Request, res: Response) => {
         res.status(400).json({ error: err });
     }
 
-
 });
 
+//gets all flickPickResponseList items by userId
+router.get('/matches/:userId', async (req: Request, res: Response) => {
+    const { userId } = req.params;
 
+    if (!userId) {
+        res.status(400).json({ error: 'Please provide a userId' });
+        return;
+    }
 
+    try {
+        const flickPickListSessions = await FlickPickSessionList.findAll({
+            where: { userId: parseInt(userId) }
+        });
+
+        res.json(flickPickListSessions);
+    } catch (err) {
+        res.status(400).json({ error: err });
+    }
+});
 
 // delete a flickPickListSession
 // router.delete('/matches/:id', async (req: Request, res: Response) => {
