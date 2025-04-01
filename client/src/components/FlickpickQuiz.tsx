@@ -6,6 +6,7 @@ import { mediaInfo } from "../api/mediaAPI";
 import { createFlickPickMatchingList, submitMatchListResponses } from "../api/flickPicksAPI";
 import auth from '../utils/auth';
 import { addMediaToWatch } from "../api/toWatchAPI";
+import DetailsModal from "../components/DetailsModal";
 
 interface FlickpickQuizProps {
     quizId: number;
@@ -31,6 +32,8 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
     const [dragDirection, setDragDirection] = useState<"none" | "up" | "down">("none");
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
 
     // get userId and store it in a constant
     useEffect(() => {
@@ -82,6 +85,16 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
         decisionMadeRef.current = false; // Reset for the next choice
     }, [currentChoice]);
 
+    // Modal Functionality
+    const openModal = (mediaId: number) => {
+        setSelectedMediaId(mediaId);
+        setShowModal(true);
+    };
+    const closeModal = () => {
+        setShowModal(false);
+        setSelectedMediaId(null);
+    };
+
     // Making a get details API call for each movie as they are displayed.
     const getDetails = async (mediaId: number, type: string) => {
         try {
@@ -109,7 +122,7 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
                 console.log("True");
                 const mediaId: number | undefined = flickpickMediaList!.listOfChoices?.[currentChoice];
                 if (typeof mediaId === 'number') {
-                addMediaToWatch(userId, mediaId );
+                addMediaToWatch(userId!, mediaId );
                 setFlickpickAnswers(prevAnswers => [...prevAnswers, mediaId]);
             }
                 setDragDirection("up");
@@ -174,10 +187,12 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
                 </div>
 
                 <div className="button">
+                    <button className="detailsButton" onClick={() => openModal(mediaDetails!.id)}>Details</button>
                     <button className="backButton" onClick={onBack}>Back</button>
                 </div>
             </>
         )}
+              {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}
     </div>
     );
 }

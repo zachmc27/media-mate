@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import sendIcon from "../assets/send-horizontal.svg"
 import { retrieveOneUser } from "../api/userAPI";
 
-
 export default function Friends() {
 const [userId, setUserId] = useState<number>(0)
 const [friendCode, setFriendCode] = useState<number>(0);
@@ -79,7 +78,6 @@ const [friendCode, setFriendCode] = useState<number>(0);
         </div>
         <PendingFriends />
         <Friendlist />
-        
     </div>
   )
 }
