@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 
 // uncomment once implementing friendlist logic
-// import Friends from "./Friends"
+import Friends from "./Friends"
 
 //visual assets
 import "../styles/Navbar.css"
@@ -10,14 +10,20 @@ import heart from "../assets/heart.svg"
 import film from "../assets/film.svg"
 import user from "../assets/user.svg"
 import users from "../assets/users.svg"
+import { useState } from "react";
 
 
 const Navbar = () => {
 
+  const [friendActive, setFriendsActive] = useState(false)
   const location = useLocation();
 
-  return (
+  function handleFriendsActive() {
+    setFriendsActive(!friendActive)
+  }
 
+  return (
+    <>
     <div className="navbar">
       <div className="logo">Cinematch</div>
       <div className="tabs-box">
@@ -33,18 +39,18 @@ const Navbar = () => {
           <img src={film} alt="reel icon" />
           <div>Discover</div>
         </Link>
-        <div className="tab">
+        <button className={friendActive ? "tab selected remove-btn-styling" : "tab remove-btn-styling"} onClick={handleFriendsActive}>
           <img src={users} alt="people icon" />
-          <div>Friends</div>
-        </div>
+          <div onClick={handleFriendsActive}>Friends</div>
+        </button>
         <Link to="/profile" className={location.pathname === '/profile' ? "tab selected" : "tab"}>
           <img src={user} alt="person icon" />
           <div>Profile</div>
         </Link>
       </div>
     </div>
-    
- 
+    {friendActive && <Friends />}
+    </>
   )
 }
 

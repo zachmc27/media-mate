@@ -3,12 +3,29 @@
     position: absolute;
     width: 25%;
     height: 100vh;
+    top: 80px;
     right: 0px;
-    bottom: -608px;
     z-index: 2;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .add-friend {
-    border: 1px solid black;
-    margin: 30px 10px 0px 10px
+    margin: 30px 10px 0px 10px;
+    width: fit-content;
+    display: flex;
+    gap: 5px;
+}
+
+.add-friend button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.send-icon {
+    width: 15px;
+    height: 15px;
 }

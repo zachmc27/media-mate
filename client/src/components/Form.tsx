@@ -2,6 +2,7 @@ import { useState, FormEvent, ChangeEvent } from "react";
 import Auth from '../utils/auth';  
 import { login, register } from "../api/authAPI";  
 import { UserLogin } from "../interfaces/UserLogin"; 
+import pic from "../assets/profileIcon_01.png";
 
 const Form = () => {
     const [showForm, setShowForm] = useState('login');
@@ -95,6 +96,8 @@ function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStat
     username: "",
     email: "",
     password: "",
+    name: "",
+    icon: pic,
   });
   
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -111,7 +114,10 @@ function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStat
     try {
       const data = await register(signUpData); // Call the register function from authAPI
       console.log("User registered successfully:", data);
+      
       setShowForm("login"); // Switch to login form after successful registration
+
+      alert(`Account for ${data.user.username} was created`)
     } catch (err: any) {
       console.error("Error during registration:", err);
       alert(err.message || "An error occured during registration"); // Show error message to the user
@@ -122,6 +128,15 @@ function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStat
   return (
             <form className='form signup-form' onSubmit={handleSubmit}>
                 <h1>Sign Up</h1>
+                <div className="form-group">
+                    <input 
+                        className="form-input"
+                        type='text'
+                        name='name'
+                        onChange={handleChange}
+                        placeholder="name"
+                    />
+                </div>
                 <div className="form-group">
                     <input 
                         className="form-input"

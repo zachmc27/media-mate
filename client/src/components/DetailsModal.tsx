@@ -1,7 +1,6 @@
-import React from "react";
-import "../styles/details.css";
+import "../styles/DetailsModal.css";
 
-const Modal = () => {
+const DetailsModal = () => {
   return (
     <div className="backdrop">
       <div className="details">
@@ -28,4 +27,4 @@ const Modal = () => {
   );
 };
 
-export default Modal;
+export default DetailsModal;
