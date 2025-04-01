@@ -6,7 +6,7 @@ import auth from "../utils/auth";
 import { discoverMedia, discoverMediaByGenre, discoverRecentlyReleased, keywordSearch,} from "../api/mediaAPI";
 import Media from "../interfaces/Media";
 import { addMediaToWatch } from "../api/toWatchAPI";
-import { addMediaToSeenIt, fetchSeenIt } from "../api/seenItAPI";
+import {addMediaToSeenIt, fetchSeenIt, getUserGenrePreferences,} from "../api/seenItAPI";
 
 export default function Discover() {
   const [popularMovies, setPopularMovies] = useState<Media[]>([]);
@@ -28,19 +28,32 @@ export default function Discover() {
     fetchDiscoverMovies();
 
     const fetchForYou = async () => {
+      console.log("FETCHFORYOU");
       try {
-        const favoriteGenre = 10402; //await fetchFavoriteGenre(userId);
-        const favoriteMovies = await discoverMediaByGenre(favoriteGenre);
-        setForYou(favoriteMovies);
+        const favoriteGenre = await getUserGenrePreferences(userId!); //await fetchFavoriteGenre(userId);
+        console.log("FAV GENRE =====", favoriteGenre);
+        if (typeof favoriteGenre === "number") {
+          const favoriteMovies = await discoverMediaByGenre(favoriteGenre);
+          setForYou(favoriteMovies);
+          console.log("THIS IS YOUR FAV", favoriteMovies);
+        } else {
+          const recentlyReleased = await discoverRecentlyReleased();
+          setForYou(recentlyReleased);
+        }
       } catch (error) {
         console.error("error", error);
       }
     };
     fetchForYou();
   }, []);
+  useEffect(() => {
+    console.log("the for your genres are" + forYou);
+    console.log("User ID equals" + userId);
+  }, [forYou]);
 
+  // functionaility for the search bar
   const handleSearch = async () => {
-    if (query.trim() === '') {
+    if (query.trim() === "") {
       setSearchResults([]); // Clear search results if query is empty
       return;
     }
