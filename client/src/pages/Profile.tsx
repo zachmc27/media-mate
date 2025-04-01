@@ -3,10 +3,9 @@ import "../styles/Profile.css";
 import { retrieveOneUser } from "../api/userAPI";
 import auth from "../utils/auth";
 import chicken from "../assets/chicken.jpg";
-//import blueIcon from "../assets/profileIcon_01.png";
-//import orangeIcon from "../assets/profileIcon_02.png";
 import SeenItList from "../components/SeenIt";
 import ToWatchList from "../components/ToWatch";
+import Actionmodal from "../components/Actionmodal";
 import { useState, useEffect } from "react";
 
 
@@ -14,8 +13,25 @@ import { useState, useEffect } from "react";
 export default function Profile() {
     const [currentList, setCurrentList] = useState<string>('collab');
     const [userData, setUserData] = useState<any>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     //const iconImages = [blueIcon, orangeIcon];
+
+    // Log out modal functions
+    const openLogOutModal = () =>{
+      setIsModalOpen(true)
+    }
+
+    const confirmLogOut = () => {
+      auth.logout();
+      setIsModalOpen(false);
+  }
+
+    const cancelLogOut = () => {
+      setIsModalOpen(false);
+  }
     
+
+  // Nav routes
     const handleCollabClick = () => {
         setCurrentList('collab');
       };
@@ -28,6 +44,8 @@ export default function Profile() {
         setCurrentList('seenIt');
       };
 
+
+      // populate user profile with user info
       useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -64,7 +82,16 @@ export default function Profile() {
                 <li><a href="#" onClick={handleWatchLaterClick}>Watch Later</a></li>
                 <li><a href="#" onClick={handleSeenItClick}>Seen It</a></li>
             </ul>
-            <button onClick={auth.logout}>Log Out</button>
+            
+            {/* Log out modal */}
+            { isModalOpen && (
+                <Actionmodal cancel={cancelLogOut} confirm={confirmLogOut}>
+                        <p>Are you sure you want to log out?</p>
+                </Actionmodal>
+                    )
+            
+            }
+            <button onClick={openLogOutModal}>Log Out</button>
         </div>
         <div className="profile-list-container">
             {/* Conditionally render based on currentList state */}

@@ -3,3 +3,27 @@
     width: 100%;
     height: 100%;
 }
+
+.button-filled, .button-lined:hover{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #000000;
+    background-color: #000000;
+    height: 2.75rem;
+    border-radius: 5px;
+    font-size: 0.75em;
+    font: #ffffff;
+}
+
+.button-lined, .button-filled:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #000000;
+    background-color: transparent;
+    height: 2.75rem;
+    border-radius: 5px;
+    font-size: 0.75em;
+    font: #000000;
+}

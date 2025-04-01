@@ -3,9 +3,11 @@ import Auth from '../utils/auth';
 import { login, register } from "../api/authAPI";  
 import { UserLogin } from "../interfaces/UserLogin"; 
 import pic from "../assets/profileIcon_01.png";
+import NotifyModal from "../components/NotifyModal";
 
 const Form = () => {
     const [showForm, setShowForm] = useState('login');
+    
 
     return (
         <div>
@@ -16,6 +18,8 @@ const Form = () => {
     );
 }
 
+
+/***************  LOG IN FORM  ****************/
 function LoginForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStateAction<string>> }) {
      // State to manage the login form data
   const [loginData, setLoginData] = useState<UserLogin>({
@@ -91,6 +95,10 @@ function LoginForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetState
      )
 }
 
+
+
+/***************  SIGN UP FORM  ****************/
+
 function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStateAction<string>> }) {
   const [signUpData, setSignUpData] = useState({
     username: "",
@@ -99,6 +107,31 @@ function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStat
     name: "",
     icon: pic,
   });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    handleChange(e);
+    setPassword(e.target.value);
+    setPasswordError(''); // Clear error when password changes
+  };
+
+  const handleConfirmPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+   handleChange(e);
+   setConfirmPassword(e.target.value);
+   setPasswordError(''); // Clear error when confirm password changes
+  };
+
+  const validatePassword = () => {
+    if (password !== confirmPassword) {
+      setPasswordError("Passwords do not match");
+      return false;
+    }
+    return true;
+  };
   
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -108,20 +141,30 @@ function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStat
     });
   };
 
+  // close modal and change to login page
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setShowForm("login");
+  }
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
+    if (validatePassword()) {
+      // Proceed with form submission
+    
     try {
       const data = await register(signUpData); // Call the register function from authAPI
       console.log("User registered successfully:", data);
-      
-      setShowForm("login"); // Switch to login form after successful registration
+       // Switch to login form after successful registration
 
-      alert(`Account for ${data.user.username} was created`)
+      setIsModalOpen(true);
     } catch (err: any) {
       console.error("Error during registration:", err);
       alert(err.message || "An error occured during registration"); // Show error message to the user
     }
+  } else {
+    alert(passwordError);
+  }
   };
 
 
@@ -160,19 +203,28 @@ function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStat
                         className="form-input"
                         type='password'
                         name='password'
-                        onChange={handleChange}
+                        onChange={handlePasswordChange}
                         placeholder="password"
                     />
                 </div>
-                {/* <div className="form-group">
+                <div className="form-group">
                     <input 
                         className="form-input"
                         type='password'
-                        name='password'
-                        onChange={handleChange}
+                        name='passwordConfirm'
+                        onChange={handleConfirmPasswordChange}
                         placeholder="re-enter password"
                     />
-                </div> */}
+                </div> 
+
+                { isModalOpen && (
+                  <NotifyModal cancel={closeModal}>
+                      <p>{`${signUpData.username}'s account has been made!`}</p>
+                  </NotifyModal>
+                  )
+                            
+                }
+
                 <div className="form-group">
                     <button className="form-button" type='submit'>Sign Up</button>
                 </div>
