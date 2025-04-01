@@ -66,7 +66,6 @@ export const keywordSearch = async (keyword: string) => {
     return response.json();
 };
 
-
 // gets the list of the recently released movies
 export const discoverRecentlyReleased = async() => {
     const response = await fetch(`/api/media/movie/recent`, {
