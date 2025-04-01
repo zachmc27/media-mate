@@ -35,16 +35,15 @@ router.get('/:userId', async (req: Request, res: Response) => {
 // Add an item to the to watch list
 router.post('/add', async (req: Request, res: Response) => {
   try {
-    const { userId, mediaId, Title } = req.body;
+    const { userId, mediaId } = req.body;
 
-    if(!userId || !mediaId || !Title) {
+    if(!userId || !mediaId ) {
       return res.status(400).json({ error: "Missing userId/mediaId/Title."})
     }
     // console.log("Request body:", req.body);
     const newToWatchItem = await ToWatchList.addToWatchItem({
       userId,
       mediaId,
-      Title,
     });
 
     return res.status(201).json(newToWatchItem);

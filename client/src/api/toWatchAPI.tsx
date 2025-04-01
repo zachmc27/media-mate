@@ -26,7 +26,7 @@ export const fetchToWatch = async (userId: number) => {
 }
 
 // this call is meant to add a media to the toWatch list through either the matched or discovery pages
-export const addMediaToWatch = async (userID: number, mediaID: number, Title: string) => {
+export const addMediaToWatch = async (userID: number, mediaID: number ) => {
     try {
         const response = await fetch(`/api/towatch/add`, {
             method: 'POST',
@@ -34,7 +34,7 @@ export const addMediaToWatch = async (userID: number, mediaID: number, Title: st
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${Auth.getToken()}`
             },
-            body: JSON.stringify({ userId: userID, mediaId: mediaID, Title: Title }),
+            body: JSON.stringify({ userId: userID, mediaId: mediaID }),
         });
         // console.log("Sending request with data:", { userId: userID, mediaId: mediaID, Title: Title });
         const responseData = await response.json();

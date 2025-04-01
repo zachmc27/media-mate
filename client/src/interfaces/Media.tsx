@@ -1,7 +1,6 @@
 export default interface Media {
     id: number;
     title: string;
-    Title: string;
     name: string;
     mediaTitle: string;
     mediaId: number;
