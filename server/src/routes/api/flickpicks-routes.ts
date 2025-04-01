@@ -176,7 +176,9 @@ router.get('/matches/:userId', async (req: Request, res: Response) => {
 
     try {
         const flickPickListSessions = await FlickPickSessionList.findAll({
-            where: { userId: parseInt(userId) }
+            where: { userId: parseInt(userId),
+                    status: 'Completed'
+             }
         });
 
         res.json(flickPickListSessions);
@@ -184,6 +186,25 @@ router.get('/matches/:userId', async (req: Request, res: Response) => {
         res.status(400).json({ error: err });
     }
 });
+
+
+
+router.get('/collabs/:userId', async (req: Request, res: Response) => {
+    const { userId } = req.params;
+
+    if (!userId) {
+        res.status(400).json({ error: 'Please provide a userId' });
+        return;
+    }
+
+    try {
+        const collabList = await matches.getCollabLists(parseInt(userId));
+        res.json(collabList);
+    } catch (err) {
+        res.status(400).json({ error: err });
+    }
+}
+);
 
 // delete a flickPickListSession
 // router.delete('/matches/:id', async (req: Request, res: Response) => {
