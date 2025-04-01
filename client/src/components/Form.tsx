@@ -18,7 +18,6 @@ const Form = () => {
     );
 }
 
-
 /***************  LOG IN FORM  ****************/
 function LoginForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStateAction<string>> }) {
      // State to manage the login form data
@@ -95,8 +94,6 @@ function LoginForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetState
      )
 }
 
-
-
 /***************  SIGN UP FORM  ****************/
 
 function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStateAction<string>> }) {
@@ -166,7 +163,6 @@ function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStat
     alert(passwordError);
   }
   };
-
 
   return (
             <form className='form signup-form' onSubmit={handleSubmit}>
@@ -242,6 +238,4 @@ function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStat
             </form>
         );
     }
-
-
 export default Form;

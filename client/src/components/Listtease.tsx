@@ -2,15 +2,13 @@ import "../styles/Listtease.css"
 // import chicken from "../assets/strangerthings.jpg"
 import { useEffect, useState } from "react";
 import { discoverMediaByGenre } from "../api/mediaAPI.tsx";
-import { addMediaToWatch } from "../api/toWatchAPI";
-import { addMediaToSeenIt } from "../api/seenItAPI";
 import Media from "../interfaces/Media.tsx";
-import auth from '../utils/auth';
+// import auth from '../utils/auth';
 import DetailsModal from "../components/DetailsModal";
 
 export default function Listtease() {
     const [mediaList, setMediaList] = useState<Media[]>([]);
-    const userId: number | null = auth.getUserId();  
+    // const userId: number | null = auth.getUserId();  
 
     // Details Model UseStates
     const [showModal, setShowModal] = useState<boolean>(false);

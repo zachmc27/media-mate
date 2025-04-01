@@ -1,14 +1,14 @@
 import React from "react";
 import "../styles/MatchCard.css";
-// import chicken from "../assets/strangerthings.jpg"
 
 interface ToWatchCardProps {
     title: string;
     year: number;
     cover: string;
     mediaId: number;
+    detailsModal: (mediaId: number) => void;
+    seenIt: (mediaId: number) => void;
     onRemove: (mediaId: number) => void;
-    onMoveToSeenIt: (mediaId: number) => void;
 }
 
 const ToWatchCard: React.FC<ToWatchCardProps> = ({
@@ -16,15 +16,18 @@ const ToWatchCard: React.FC<ToWatchCardProps> = ({
     year,
     cover,
     mediaId,
-    onMoveToSeenIt,
+    detailsModal,
+    seenIt,
+    onRemove,
 }) => {
     return (
       <div className="card">
-        <img src={cover} alt={title} />
+        <img src={cover} alt={title} onClick={() => detailsModal(mediaId)}/>
         <div className="card-container">
           <b className="card-title">{title}</b>
           <i className="card-year">{year}</i>
-          <button onClick={() => onMoveToSeenIt(mediaId)}>Seen</button>
+          <button onClick={() => seenIt(mediaId)}>Seen</button>
+          <button onClick={() => onRemove(mediaId)}>Remove</button>
         </div>
       </div>
     );

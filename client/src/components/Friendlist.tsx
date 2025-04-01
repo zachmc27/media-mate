@@ -6,7 +6,6 @@ import { UserData } from "../interfaces/UserData";
 import Actionmodal from "./Actionmodal";
 // import { retrieveUser } from "../api/userAPI";
 
-
 export default function Friendlist() {
  const [friends, setFriends] = useState<UserData[]>([])
  const [loading, setLoading] = useState(false);
