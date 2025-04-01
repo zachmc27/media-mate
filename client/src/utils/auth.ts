@@ -22,7 +22,7 @@ class AuthService {
   logout() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('user_Id');
-    window.location.assign('/');
+    window.location.assign('/login');
   }
 
   getUserId () {
