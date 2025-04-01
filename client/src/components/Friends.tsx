@@ -4,6 +4,8 @@ import PendingFriends from "./PendingFriends"
 import { sendFriendRequest } from "../api/friendAPI";
 import { useEffect, useState } from "react";
 import sendIcon from "../assets/send-horizontal.svg"
+import { retrieveOneUser } from "../api/userAPI";
+
 
 export default function Friends() {
 const [userId, setUserId] = useState<number>(0)
@@ -28,8 +30,18 @@ const [friendCode, setFriendCode] = useState<number>(0);
  }, []);
 
  async function handleSendRequest() {
+  const user = await retrieveOneUser(userId)
+
+  console.log('current user data: ', user)
   if(typeof friendCode !== "number") {
+    setFriendCode(0)
     alert('Please enter a valid friend code.')
+    return;
+  }
+  if (user.friends.includes(friendCode)) {
+    
+    setFriendCode(0)
+    alert('User is already your friend.');
     return;
   }
 
@@ -41,6 +53,7 @@ const [friendCode, setFriendCode] = useState<number>(0);
     alert(`Friend request sent to ${friendCode}!`)
     setFriendCode(0);
     } else if (friendCode === userId) {
+      setFriendCode(0)
       alert('Cannot send friend request to yourself.')
     } else {
       alert('Error sending friend request.')
@@ -58,6 +71,7 @@ const [friendCode, setFriendCode] = useState<number>(0);
           <input 
           type="text" 
           placeholder="Friend code ..."
+          value={friendCode > 0 ? friendCode : ''}
           onChange={(e) => setFriendCode(parseInt(e.target.value))}/>
           <button type="submit" onClick={handleSendRequest}>
             <img src={sendIcon} alt="" className='send-icon'/>

@@ -56,7 +56,7 @@ export default function SeenItList() {
                 key={item.id}
                 title={item.media.title || item.name || "Unknown"}
                 year={item.media.year}
-                cover={item.media.cover}
+                cover={`https://image.tmdb.org/t/p/w500${item.media.cover}`}
                 mediaId={item.mediaId}
                 onRemove={handleRemove}
               />

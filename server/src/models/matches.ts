@@ -2,22 +2,20 @@ import { DataTypes, Sequelize, Model, Optional} from 'sequelize';
 
 interface MatchesAttributes {
     id: number;
-    userIdOne: number;
-    userIdTwo: number;
-    listId: number;
-    responseUserOne: string[];
-    responseUserTwo: string[];
+    userOneId: number;
+    userTwoId: number;
+    flickPickListId: number;
+    matches: number[];
 }
 
 interface MatchesCreationAttributes extends Optional<MatchesAttributes, 'id'> {}
 
 export class Matches extends Model<MatchesAttributes, MatchesCreationAttributes> implements MatchesAttributes {
     public id!: number;
-    public userIdOne!: number;
-    public userIdTwo!: number;
-    public listId!: number;
-    public responseUserOne!: string[];
-    public responseUserTwo!: string[];
+    public userOneId!: number;
+    public userTwoId!: number;
+    public flickPickListId!: number;
+    public matches!: number[];
 
 
 
@@ -31,24 +29,20 @@ export function MatchesFactory(sequelize: Sequelize): typeof Matches {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            userIdOne: {
+            userOneId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            userIdTwo: {
+            userTwoId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            listId: {
+            flickPickListId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            responseUserOne: {
-                type: DataTypes.ARRAY(DataTypes.STRING),
-                allowNull: false,
-            },
-            responseUserTwo: {
-                type: DataTypes.ARRAY(DataTypes.STRING),
+            matches: {
+                type: DataTypes.ARRAY(DataTypes.INTEGER),
                 allowNull: false,
             },
         },

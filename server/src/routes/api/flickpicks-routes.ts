@@ -2,6 +2,7 @@ import express from 'express';
 import { Request, Response } from 'express';
 import { FlickListSelections } from '../../models/flickpicksListSelections.js';
 import { FlickPickSessionList } from '../../models/flickPickResponseList.js';
+import { Matches } from '../../models/matches.js';
 import * as matches from "./findMatches.js";
 // import * as flickPicksList from './flickPickListAPI.js';
 
@@ -46,6 +47,7 @@ router.post('/matches', async (req: Request, res: Response) => {
             userId,
             flickPickListId,
             response: [], // Default value for userOneResponse
+            status: 'Inprogress'
         });
 
 // calls the addListOfChoices function to set the listOfChoices of the current session to the listOfChoices of the FlickListSelections
@@ -93,6 +95,9 @@ router.put('/matches/:id', async (req: Request, res: Response) => {
         }
 
         flickPickSession.response = answer;
+
+        //SETS STATUS TO COMPLETED
+        await flickPickSession.setStausToCompleted();
         await flickPickSession.save();
         res.json(flickPickSession);
     } catch (err) {
@@ -101,62 +106,83 @@ router.put('/matches/:id', async (req: Request, res: Response) => {
 });
 
 // create a new match between two flickPickListSessions
-router.post('/matches-create', async (req: Request, res: Response) => {
+router.post('/matches/compare', async (req: Request, res: Response) => {
 
     const { userOneId, userTwoId, flickPickListId } = req.body;
 
+   //check to see if all required fields are provided
     if (!userOneId || !userTwoId || !flickPickListId) {
         res.status(400).json({ error: 'Please provide all required fields' });
         return;
     }
-
+    //check to see if the userOneId and userTwoId are the same  
+    if (userOneId === userTwoId) {
+        res.status(400).json({ error: 'Please provide different user Ids' });
+        return;
+    }
+    //check to if both user have a completed flickPickListSession for the flickPickListId
     try {
         const userOneSession = await FlickPickSessionList.findOne({
-            where: { userId: userOneId, flickPickListId: flickPickListId }
+            where: { userId: userOneId, flickPickListId, status: 'Completed' }
+
         });
 
         const userTwoSession = await FlickPickSessionList.findOne({
-            where: { userId: userTwoId, flickPickListId: flickPickListId }
+            where: { userId: userTwoId, flickPickListId, status: 'Completed' }
         });
-        if (!userOneSession) {
-            res.status(404).json({ error: 'UserOneSession not found' });
-            return;
-        }
-
-        const matchingResponseSession = await FlickPickSessionList.findOne({
-            where: {
-            userId: userTwoId,
-            flickPickListId: userOneSession.flickPickListId
-            }
-        });
-
-        if (!matchingResponseSession) {
-            res.status(404).json({ error: 'Matching FlickPickSession not found' });
-            return;
-        }
 
         if (!userOneSession || !userTwoSession) {
-            res.status(404).json({ error: 'FlickPickSession not found' });
+            res.status(400).json({ error: 'You friend has not completed this FlickPick' });
             return;
         }
 
         const userOneResponse = userOneSession.response;
         const userTwoResponse = userTwoSession.response;
 
-
-
-        if (!userOneSession.listOfChoices) {
-            res.status(400).json({ error: 'List of choices is undefined' });
+        // checks to make sure both are number[]
+        if (!Array.isArray(userOneResponse) || !Array.isArray(userTwoResponse)) {
+            res.status(400).json({ error: 'Invalid response' });
             return;
         }
-     
-        const match = matches.findMatches(userOneResponse, userTwoResponse);
+
+        //calls the findMatches function to compare the two responses
+        const match = await matches.findMatches(userOneResponse, userTwoResponse);
+    
+        //inserts the matches into the matches database model
+        await Matches.create({
+            userOneId,
+            userTwoId,
+            flickPickListId,
+            matches: match
+        });
 
         res.json({ match });
+
     } catch (err) {
         res.status(400).json({ error: err });
     }
 
+});
+
+
+//gets all flickPickResponseList items by userId
+router.get('/matches/:userId', async (req: Request, res: Response) => {
+    const { userId } = req.params;
+
+    if (!userId) {
+        res.status(400).json({ error: 'Please provide a userId' });
+        return;
+    }
+
+    try {
+        const flickPickListSessions = await FlickPickSessionList.findAll({
+            where: { userId: parseInt(userId) }
+        });
+
+        res.json(flickPickListSessions);
+    } catch (err) {
+        res.status(400).json({ error: err });
+    }
 });
 
 // delete a flickPickListSession

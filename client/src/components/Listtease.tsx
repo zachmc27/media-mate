@@ -1,7 +1,7 @@
 import "../styles/Listtease.css"
 // import chicken from "../assets/strangerthings.jpg"
 import { useEffect, useState } from "react";
-import { discoverMediaByGenre, mediaInfo } from "../api/mediaAPI.tsx";
+import { discoverMediaByGenre } from "../api/mediaAPI.tsx";
 import { addMediaToWatch } from "../api/toWatchAPI";
 import { addMediaToSeenIt } from "../api/seenItAPI";
 import Media from "../interfaces/Media.tsx";
@@ -9,7 +9,6 @@ import auth from '../utils/auth';
 
 export default function Listtease() {
     const [mediaList, setMediaList] = useState<Media[]>([]);
-    const [mediaItem, setMediaItem] = useState<Media>();
     const userId: number | null = auth.getUserId();  
 
     useEffect(() => {
@@ -21,15 +20,6 @@ export default function Listtease() {
             console.error("Error fetching media:", error);
           }
         };
-        const fetchOneMedia = async () => {
-            try {
-              const data = await mediaInfo(762509, 'movie');
-              setMediaItem(data); // Set fetched data in state
-            } catch (error) {
-              console.error("Error fetching media:", error);
-            }
-          };
-        fetchOneMedia();
         fetchMedia();
       }, []);
 
@@ -52,14 +42,6 @@ export default function Listtease() {
               <button onClick={() => addMediaToSeenIt(userId!, item.id )}>Seen</button>
             </div>
           ))} 
-          {mediaItem && (
-            <div className="card" key={mediaItem.id}>
-              <img src={`https://image.tmdb.org/t/p/w500${mediaItem.poster_path}`} alt={mediaItem.title} />
-              <p className="card-title">{mediaItem.title}</p>
-              <button onClick={() => addMediaToWatch(userId!, mediaItem.id, mediaItem.title)}>To Watch</button>              
-              <button onClick={() => addMediaToSeenIt(userId!, mediaItem.id )}>Seen</button>
-            </div>
-          )}
         </div>
     </div>
 

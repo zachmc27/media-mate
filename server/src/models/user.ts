@@ -2,7 +2,9 @@ import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 import { FriendsList } from './friendRequest.js';
 import bcrypt from 'bcrypt';
 
-const imageIconArray = ["https://i.postimg.cc/FsPn99hG/profile-Icon-02.png", "https://i.postimg.cc/X7NzSZ6p/profile-Icon-01.png"];
+const imageIconArray = ["https://i.postimg.cc/FsPn99hG/profile-Icon-02.png", 
+  "https://i.postimg.cc/X7NzSZ6p/profile-Icon-01.png", 
+  "https://www.clipartmax.com/png/small/263-2638022_sensible-world-icon-star-wars-ewok-avatar.png"];
 
 function getRandomNumber(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;

@@ -37,3 +37,21 @@
     display: flex;
     gap: 10px
 }
+
+.flicklist {
+    border: 1px solid rgb(0, 0, 0, .3);
+    border-radius: 10px;
+    padding: 10px
+}
+
+.flicklist-item {
+    border: 1px solid transparent;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.flicklist-item:hover, .flicklist-item:focus {
+    border: 1px solid blue;
+}

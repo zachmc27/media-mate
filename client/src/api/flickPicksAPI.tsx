@@ -23,6 +23,57 @@ try {
 }
 }
 
+
+//sends a post request to initiate matching between two users and the flickPickList
+
+export async function initiateFlickPickMatching(userOneId: number, userTwoId: number, flickPickListId: number){
+try {
+    const response = await fetch(`api/flickpicks/matches/compare`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Auth.getToken()}`
+        },
+        body: JSON.stringify({ userOneId, userTwoId, flickPickListId }),
+    });
+
+    if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log(data.message);
+    return data;
+}
+catch (error) {
+    console.error('An error occurred while initiating flickPick matching');
+}
+}
+
+
+
+
+//gets flickPickList by userId for Friends List
+
+export const getFlickPicksListByUserId = async (userId: number) => {
+try {
+    const response = await fetch(`/api/flickpicks/${userId}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${Auth.getToken()}`
+            }
+        });
+    if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+    const data = await response.json();
+    return (data);
+} catch (error) {
+    console.error('An error occurred while fetching flickPicks data');
+} 
+}
+
 // creates a new flickPickListMatchingSession
 export const createFlickPickMatchingList = async (userId: number, flickPickListId: number) => {
 
