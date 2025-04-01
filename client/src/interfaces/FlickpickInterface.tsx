@@ -7,12 +7,7 @@ export interface Flickpick {
 
 export interface FlickpickSession {
     id?: number;
-    userOneId: number;
-    userTwoId: number;
+    userId: number;
     flickPickListId: number;
     listOfChoices?: number[];
-    userOneResponse?: string[];
-    userTwoResponse?: string[];
-    matches?: number[];
-    status?: 'Incomplete' | 'Completed';
 }
