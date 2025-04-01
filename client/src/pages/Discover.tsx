@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../App.css";
 import "../styles/Discover.css";
 
-import MovieCard from "../components/SeenItCard";
+import DetailsModal from "../components/DetailsModal";
 import auth from "../utils/auth";
 import { discoverMedia, discoverMediaByGenre, discoverRecentlyReleased } from "../api/mediaAPI";
 import Media from "../interfaces/Media";
@@ -11,8 +11,11 @@ import { addMediaToSeenIt, fetchSeenIt } from "../api/seenItAPI";
 
 export default function Discover() {
   const [popularMovies, setPopularMovies] = useState<Media[]>([]);
-  const userId: number | null = auth.getUserId();
+  const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
   const [forYou, setForYou] = useState<Media[]>([]);
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const userId: number | null = auth.getUserId();
 
   useEffect(() => {
     const fetchDiscoverMovies = async () => {
@@ -24,6 +27,7 @@ export default function Discover() {
       }
     };
     fetchDiscoverMovies();
+
 
 
     const fetchForYou = async () => {
@@ -39,6 +43,15 @@ export default function Discover() {
     fetchForYou();
   }, []);
 
+  // Modal Functionality
+  const openModal = (mediaId: number) => {
+    setSelectedMediaId(mediaId);
+    setShowModal(true);
+  };
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedMediaId(null);
+  };
   // useEffect(() => {
   //   if (popularMovies) {
   //     console.log("fetched media item", popularMovies);
@@ -65,21 +78,12 @@ export default function Discover() {
         <p>Popular Now</p>
         <div className="movies-container">
           {popularMovies.slice(0, 9).map((item) => (
-            <div className="card" key={item.id}>
+            <div className="card" key={item.id}  onClick={() => openModal(item.id)}>
               <img
                 src={`https://image.tmdb.org/t/p/w500${item.cover}`}
                 alt={item.title}
               />
               <p className="card-title">{item.title}</p>
-              <button
-                onClick={() => addMediaToWatch(userId!, item.id, item.title)}
-              >
-                To Watch
-              </button>
-              <button onClick={() => addMediaToSeenIt(userId!, item.id)}>
-                Seen
-              </button>
-
             </div>
           ))}
         </div>
@@ -89,20 +93,12 @@ export default function Discover() {
         <p>For You</p>
         <div className="movies-container">
           {forYou.slice(0, 9).map((item) => (
-            <div className="card" key={item.id}>
+            <div className="card" key={item.id} onClick={() => openModal(item.id)}>
               <div className="image-container">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${item.cover}`}
                   alt={item.title}
                 ></img>
-                <button
-                  onClick={() => addMediaToWatch(userId!, item.id, item.title)}
-                >
-                  To Watch
-                </button>
-                <button onClick={() => addMediaToSeenIt(userId!, item.id)}>
-                  Seen
-                </button>
               </div>
 
               <p className="card-title">{item.title}</p>
@@ -110,6 +106,7 @@ export default function Discover() {
           ))}
         </div>
       </div>
+      {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}
     </div>
   );
 }

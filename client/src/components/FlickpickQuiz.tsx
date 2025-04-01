@@ -5,6 +5,7 @@ import { FlickpickSession } from "../interfaces/FlickpickInterface";
 import { mediaInfo } from "../api/mediaAPI";
 import { createFlickPickMatchingList, submitMatchListResponses } from "../api/flickPicksAPI";
 import auth from '../utils/auth';
+import { addMediaToWatch } from "../api/toWatchAPI";
 
 interface FlickpickQuizProps {
     quizId: number;
@@ -108,6 +109,7 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
                 console.log("True");
                 const mediaId: number | undefined = flickpickMediaList!.listOfChoices?.[currentChoice];
                 if (typeof mediaId === 'number') {
+                addMediaToWatch(userId, mediaId );
                 setFlickpickAnswers(prevAnswers => [...prevAnswers, mediaId]);
             }
                 setDragDirection("up");
@@ -155,7 +157,7 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
                 <motion.div {...bind()} className="physics" animate={controls}>
                     {mediaDetails && currentChoice < flickpickMediaList!.listOfChoices!.length - 1 ? (
                         <div className="flickpicksCard">
-                            <img src={mediaDetails.poster_path} alt={mediaDetails.title} draggable={false}/>
+                            <img src={`https://image.tmdb.org/t/p/w500${mediaDetails.poster_path}`} alt={mediaDetails.title} draggable={false}/>
                             <div className="card-container">
                                 <b className="card-title">{mediaDetails.title}</b>
                                 <i className="card-year">{mediaDetails.year}</i>

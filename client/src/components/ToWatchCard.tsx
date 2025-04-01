@@ -16,7 +16,6 @@ const ToWatchCard: React.FC<ToWatchCardProps> = ({
     year,
     cover,
     mediaId,
-    onRemove,
     onMoveToSeenIt,
 }) => {
     return (
@@ -25,7 +24,6 @@ const ToWatchCard: React.FC<ToWatchCardProps> = ({
         <div className="card-container">
           <b className="card-title">{title}</b>
           <i className="card-year">{year}</i>
-          <button onClick={() => onRemove(mediaId)}>Remove</button>
           <button onClick={() => onMoveToSeenIt(mediaId)}>Seen</button>
         </div>
       </div>

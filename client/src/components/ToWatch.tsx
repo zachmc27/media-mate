@@ -68,7 +68,7 @@ export default function ToWatchList() {
               toWatchList.map((item) => (
                 <ToWatchCard
                   key={item.id}
-                  title={item.Title || item.name || "Unknown"}
+                  title={item.media.title || item.name || "Unknown"}
                   year={item.media.year}
                   cover={`https://image.tmdb.org/t/p/w500${item.media.cover}`}
                   mediaId={item.mediaId}
