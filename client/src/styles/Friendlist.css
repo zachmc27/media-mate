@@ -4,23 +4,36 @@
     flex-direction: column;
     gap: 5px;
     margin-top: 30px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .friend {
     border: 1px solid black;
     display: flex;
     flex-direction: row;
+    align-items: center;
     padding: 5px;
     position: relative;
+    width: 100%;
+    height: fit-content
+}
+
+.friend img {
+    width: 50px;
+    height: 50px
 }
 
 .friend p {
-    margin: 0
+    margin: 0;
+    margin-left: 5px;
+    font-size: 18px;
 }
 
 .buttons {
     position: absolute;
-    right: 0px;
+    right: 15px;
     display: flex;
     gap: 10px
 }

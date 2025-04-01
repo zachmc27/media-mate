@@ -1,0 +1,59 @@
+.pending-container {
+    margin-top: 10px;
+    width: 100%; /* Ensure the container takes full width */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box; 
+    overflow: hidden; 
+}
+
+.pending-dropdown {
+    border: none;
+    background-color: rgb(182, 182, 182);
+    border-radius: 5px;
+    padding: 5px 10px; 
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.pending-list {
+    width: 100%; 
+    max-width: 100%;
+    box-sizing: border-box; 
+    overflow-x: auto; 
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.pending-friend {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    position: relative;
+    width: 100%;
+    height: fit-content;
+   
+}
+
+.pending-friend img {
+    width: 20px;
+    height: 20px
+}
+
+.pending-friend p {
+    margin: 0;
+    margin-left: 5px;
+    font-size: 18px;
+}
+
+.action-buttons {
+    position: absolute;
+    right: 15px;
+    display: flex;
+    gap: 10px
+}
