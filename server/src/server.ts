@@ -1,5 +1,5 @@
 const forceDatabaseRefresh = false;
-
+import path from "node:path";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -15,6 +15,10 @@ app.use(express.static('../client/dist'));
 
 app.use(express.json());
 app.use(routes);
+
+app.get("*", (_req, res) => {
+  res.sendFile(path.resolve(__dirname, "../../client/dist", "index.html"));
+});
 
 sequelize.sync({force: forceDatabaseRefresh}).then(() => {
   app.listen(PORT, () => {
