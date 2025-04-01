@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 
 
 export default function Profile() {
-    const [currentList, setCurrentList] = useState<string>('collab');
+    const [currentList, setCurrentList] = useState<string>('watchLater');
     const [userData, setUserData] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     //const iconImages = [blueIcon, orangeIcon];
@@ -54,7 +54,6 @@ export default function Profile() {
                 console.error("User ID is null. Cannot retrieve user data.");
                 return;
               }
-        
               // Await the result of retrieveOneUser
               const data = await retrieveOneUser(userId);
               setUserData(data); // Set the resolved user data

@@ -14,6 +14,9 @@ export default interface Media {
     poster_path: string;
     userRating: number;
     media: MediaDetails;
+    trailerKey: string;
+    overview: string;
+    cast: string;
 }
 
 interface MediaDetails {
