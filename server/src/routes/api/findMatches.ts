@@ -1,13 +1,8 @@
 
-
-export function findMatches(array: any[], array2: any[]): Promise<any[]> {
-    const matches: any[] = [];
-
-    for (let i = 0; i < Math.min(array.length, array2.length); i++) {
-        if (array[i] === array2[i]) {
-            matches.push(array[i]);
-        }
-    }
-
-    return Promise.resolve(matches);
+export async function findMatches(array: any[], array2: any[]): Promise<any[]> {
+    const matches = array.filter((item, index) => item === array2[index]);
+    return matches;
 }
+
+//input: [ 'a', 'b', 'c' ,'f','6'], [ 'a', '6', 'c' ]
+//output: [ 'a', 'c' ]
