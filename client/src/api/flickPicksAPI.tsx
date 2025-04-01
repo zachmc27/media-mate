@@ -46,7 +46,7 @@ try {
 }
 
 // creates a new flickPickListMatchingSession
-export const createFlickPickListMatchingSession = async (userOneId: number, userTwoId: number, flickPickListId: number) => {
+export const createFlickPickMatchingList = async (userId: number, flickPickListId: number) => {
 
 try {
   const response = await fetch('/api/flickpicks/matches', {
@@ -55,7 +55,7 @@ try {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${Auth.getToken()}`
     },
-    body: JSON.stringify({ userOneId, userTwoId, flickPickListId }),
+    body: JSON.stringify({ userId, flickPickListId }),
   });
 
   if (!response.ok) {
@@ -65,8 +65,8 @@ try {
   const data = await response.json();
 
   const deconstructedData: FlickpickSession = {
-    userOneId: data.userOneId,
-    userTwoId: data.userTwoId,
+    id: data.id,
+    userId: data.userId,
     flickPickListId: data.flickPickListId,
     listOfChoices: data.listOfChoices,
   }
@@ -84,7 +84,7 @@ catch (error) {
 
 // adds a userResponse to a flickPickListMatchingSession
 // id is the flickPickListMatchingSession id or id of the session
-export const submitFlickPickResponses = async (id: number, answer : number[], userId: number) => {
+export const submitMatchListResponses = async (id: number, answer : number[], userId: number) => {
 
 try {
   const response = await fetch(`/api/flickpicks/matches/${id}`, {
@@ -108,6 +108,30 @@ catch (error) {
 }
 }
 
+// // Push flickpick answers to backend
+// export const addFlickPickAnswers = async ( id: number, userId: number, userAnswers: number[] ) => {
+
+//   try {
+//     const response = await fetch(`/api/flickpicks/matches/${id}`, {
+//       method: 'PUT',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Authorization: `Bearer ${Auth.getToken()}`
+//       },
+//       body: JSON.stringify({ userId, userAnswers }),
+//     });
+  
+//     if (!response.ok) {
+//       throw new Error(`Error: ${response.statusText}`);
+//     }
+  
+//     console.log("FlickPickList Matching Session Updated");
+//     console.log(response.json);
+//   }
+//   catch (error) {
+//     console.error('An error occurred while updating a flickPickList matching session');
+//   }
+//   }
 
 // gets all flickPickListMatchingSessions for a user
 export const getFlickPickListMatchingSessions = async (userId: number) => {

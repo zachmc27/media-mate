@@ -3,7 +3,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useDrag } from "react-use-gesture";
 import { FlickpickSession } from "../interfaces/FlickpickInterface";
 import { mediaInfo } from "../api/mediaAPI";
-import { createFlickPickListMatchingSession } from "../api/flickPicksAPI";
+import { createFlickPickMatchingList, submitMatchListResponses } from "../api/flickPicksAPI";
 import auth from '../utils/auth';
 
 interface FlickpickQuizProps {
@@ -22,25 +22,30 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
     const [currentChoice, setCurrentChoice] = useState(0);
     const [mediaDetails, setMediaDetails] = useState<MediaDetails | null>(null);
     const [userId, setUserId] = useState<number | null>(null);
-    const [selectedAnswers, setSelectedAnswers] = useState<(string | null)[]>([]); 
+    const [flickpickAnswers, setFlickpickAnswers] = useState<number[]>([]); 
     const [flickpickMediaList, setFlickpickMediaList] = useState<FlickpickSession | null>(null);
+    const [flickpickId, setFlickpickId] = useState<number | null>(null);
     const controls = useAnimation();
     const decisionMadeRef = useRef(false);
     const [dragDirection, setDragDirection] = useState<"none" | "up" | "down">("none");
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+
+    // get userId and store it in a constant
     useEffect(() => {
         const id = auth.getUserId();
         setUserId(id);
     }, []);
 
+    // Create and fetch the flickpick match session
     useEffect(() => {
         if (!userId) return;
         const fetchFlickPickList = async () => {
             try {
-                const data = await createFlickPickListMatchingSession(userId!, 2, quizId);
+                const data = await createFlickPickMatchingList(userId!, quizId);
                 if (data!) {
                     setFlickpickMediaList(data);
+                    setFlickpickId(data.id);
                 } else {
                     setError("Failed to fetch data.");
                 }
@@ -53,13 +58,15 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
         };
         fetchFlickPickList();
     }, [userId, quizId]); 
-    
-    useEffect(() => {
-        if (flickpickMediaList) {
-            console.log("Fetched media item: ", flickpickMediaList);
-        }
-    }, [flickpickMediaList]);
 
+    // Console log the latest fetch media item
+    // useEffect(() => {
+    //     if (flickpickMediaList) {
+    //         console.log("Fetched media item: ", flickpickMediaList);
+    //     }
+    // }, [flickpickMediaList]);
+
+    // Allow for iteration through the movies in the flickpick session, and get details.
     useEffect(() => {
         if (flickpickMediaList) {
             const mediaId = flickpickMediaList.listOfChoices?.[currentChoice];
@@ -69,7 +76,12 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
         }
     }, [currentChoice, flickpickMediaList]);
 
-    // Making an API call for each movie as they are displayed.
+    //Reset decision made so that the next choice works again.
+    useEffect(() => {
+        decisionMadeRef.current = false; // Reset for the next choice
+    }, [currentChoice]);
+
+    // Making a get details API call for each movie as they are displayed.
     const getDetails = async (mediaId: number, type: string) => {
         try {
             const response = await mediaInfo(mediaId, type);
@@ -78,8 +90,13 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
             console.error("Error fetching movie details:", error);
         }
     };
+
+    // Console logging choices
     useEffect(() => {
         console.log("Updated mediaDetails: ", mediaDetails);
+        console.log("Updated Selected list: ", flickpickAnswers)
+        console.log(flickpickMediaList);
+        console.log(flickpickId);
     }, [mediaDetails]);    
 
     // This is the motion functionality on the quiz
@@ -89,6 +106,10 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
         if (!down) {
             if (my < -dragThreshold && !decisionMadeRef.current) {
                 console.log("True");
+                const mediaId: number | undefined = flickpickMediaList!.listOfChoices?.[currentChoice];
+                if (typeof mediaId === 'number') {
+                setFlickpickAnswers(prevAnswers => [...prevAnswers, mediaId]);
+            }
                 setDragDirection("up");
                 decisionMadeRef.current = true; 
             }
@@ -109,16 +130,18 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
 
     // Function to submit answers needs a submit API still
     const submitAnswers = async () => {
-        try {
-            // Make the API call to submit the answers
-            console.log("Submitting answers:", selectedAnswers);
-            // Replace with the API call to submit answers
-            // const response = await submitAnswersToAPI(selectedAnswers);
+         // Make the API call to submit the answers
+            try {
+                console.log("Submitting answers:", flickpickAnswers);
+                await submitMatchListResponses(flickpickId!, flickpickAnswers, userId!);
+            } catch (error) {
+                console.error("Error pushing Flickpick answers");
+                setError("An error occurred while pushing Flickpick answers.");
+            }
             alert("Answers submitted!");
+            setFlickpickAnswers([]);
+            setFlickpickId(null);
             onBack();
-        } catch (error) {
-            console.error("Error submitting answers:", error);
-        }
     };
     if (loading) return <p>Loading your To Watch list...</p>;
     if (error) return <p className="error">{error}</p>;

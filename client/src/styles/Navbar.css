@@ -48,6 +48,12 @@
     transition: opacity .3s ease-in;
 }
 
+.remove-btn-styling {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    opacity: 50%;
+}
 .selected {
     opacity: 100%
 }

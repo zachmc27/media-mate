@@ -66,15 +66,17 @@ export const keywordSearch = async (keyword: string) => {
     return response.json();
 };
 
-export const getRandomMediaKey = async () => {
-    const response = await fetch(`/api/media/trialer/random`, {
+
+// gets the list of the recently released movies
+export const discoverRecentlyReleased = async() => {
+    const response = await fetch(`/api/media/movie/recent`, {
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${Auth.getToken()}`
         }
     });
-
+    
     return response.json();
 }
 
-export default {mediaInfo, keywordSearch, discoverMedia,discoverByTypeAndGenre,discoverMediaByType ,discoverMediaByGenre };
+export default {mediaInfo, keywordSearch, discoverMedia,discoverByTypeAndGenre,discoverMediaByType ,discoverMediaByGenre, discoverRecentlyReleased };

@@ -5,8 +5,6 @@ import { FlickPickSessionList } from '../../models/flickPickResponseList.js';
 import * as matches from "./findMatches.js";
 // import * as flickPicksList from './flickPickListAPI.js';
 
-
-
 const router = express.Router();
 // gets all flickPickLists
 
@@ -23,9 +21,6 @@ _res.json(flickPickLists);
 // checks and returns all unqiue flickPickListSessions by a user Id located in either userOneId or userTwoId
 
 // router.get('/matches/:userId', async (req: Request, res: Response) => {});
-
-
-
 
 // new flickPickListSession
 
@@ -53,6 +48,7 @@ router.post('/matches', async (req: Request, res: Response) => {
             response: [], // Default value for userOneResponse
             status: 'Inprogress'
         });
+
 // calls the addListOfChoices function to set the listOfChoices of the current session to the listOfChoices of the FlickListSelections
         await newFlickPickSession.addListOfChoices();
         res.json(newFlickPickSession);
@@ -72,12 +68,12 @@ router.get('/matches', async (_req: Request, res: Response) => {
 });
 
 
-// get a flickPickListSession
+// Update a Matchlist session with answers
 router.put('/matches/:id', async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { response, userId } = req.body;
+    const { answer, userId } = req.body;
 
-    if (!response || !userId  || !id) {
+    if (!answer || !userId  || !id) {
         res.status(400).json({ error: 'Please provide all required fields' });
         return;
     }
@@ -166,6 +162,7 @@ router.post('/matches-create', async (req: Request, res: Response) => {
     }
 
 });
+
 
 //gets all flickPickResponseList items by userId
 router.get('/matches/:userId', async (req: Request, res: Response) => {

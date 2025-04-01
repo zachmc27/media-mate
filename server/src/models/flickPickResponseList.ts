@@ -88,4 +88,3 @@ export function FlickPickSessionListFactory(sequelize: Sequelize): typeof FlickP
     );
         return FlickPickSessionList;
     }
-    

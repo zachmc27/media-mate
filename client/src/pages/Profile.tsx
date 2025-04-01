@@ -1,12 +1,21 @@
 import "../App.css";
 import "../styles/Profile.css";
-import chicken from "../assets/chicken.jpg"
+import { retrieveOneUser } from "../api/userAPI";
+import auth from "../utils/auth";
+import chicken from "../assets/chicken.jpg";
+//import blueIcon from "../assets/profileIcon_01.png";
+//import orangeIcon from "../assets/profileIcon_02.png";
 import SeenItList from "../components/SeenIt";
 import ToWatchList from "../components/ToWatch";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+
 
 export default function Profile() {
     const [currentList, setCurrentList] = useState<string>('collab');
+    const [userData, setUserData] = useState<any>(null);
+    //const iconImages = [blueIcon, orangeIcon];
+    
     const handleCollabClick = () => {
         setCurrentList('collab');
       };
@@ -19,18 +28,43 @@ export default function Profile() {
         setCurrentList('seenIt');
       };
 
+      useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+              const userId = auth.getUserId();
+              if (userId === null) {
+                console.error("User ID is null. Cannot retrieve user data.");
+                return;
+              }
+        
+              // Await the result of retrieveOneUser
+              const data = await retrieveOneUser(userId);
+              setUserData(data); // Set the resolved user data
+              
+            } catch (err) {
+              console.error("Error fetching user data:", err);
+            }
+          };
+        
+          fetchUserData();
+          
+      }, []);
+ 
+
   return (
     <div className="profile-container">
         <div className="profile-user">
-            <img src={chicken} alt="Chicken" />
-            <b>First Last</b> 
-            <p>username</p>
+            <img src={userData?.icon || chicken} alt="Chicken" />
+            {/* <h1>Profile</h1> */}
+            <b>{userData?.name || 'First Last'}</b> 
+            <p>{userData?.username || 'username'}</p>
+            <p>ID: {userData?.id || 'id'}</p>
             <ul>
                 <li><a href="#" onClick={handleCollabClick}>Collab List</a></li>
                 <li><a href="#" onClick={handleWatchLaterClick}>Watch Later</a></li>
                 <li><a href="#" onClick={handleSeenItClick}>Seen It</a></li>
             </ul>
-            <button>Log Out</button>
+            <button onClick={auth.logout}>Log Out</button>
         </div>
         <div className="profile-list-container">
             {/* Conditionally render based on currentList state */}

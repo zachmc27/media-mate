@@ -2,6 +2,12 @@ import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 import { FriendsList } from './friendRequest.js';
 import bcrypt from 'bcrypt';
 
+const imageIconArray = ["https://i.postimg.cc/FsPn99hG/profile-Icon-02.png", "https://i.postimg.cc/X7NzSZ6p/profile-Icon-01.png"];
+
+function getRandomNumber(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 // Define the attributes for the User model
 interface UserAttributes {
   id: number;
@@ -10,6 +16,7 @@ interface UserAttributes {
   email: string;
   password: string;
   friends: number[];
+  icon: string | null;
 }
 
 // Define the optional attributes for creating a new User
@@ -23,6 +30,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public password!: string;
   public friends!: number[];
   public name!: string | null;
+  public icon!: string | null;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -31,6 +39,12 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public async setPassword(password: string) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(password, saltRounds);
+  }
+
+  public async setRandomIcon(){
+    const icon = imageIconArray[getRandomNumber(0,1)];
+    this.icon = icon;
+    return this.icon;
   }
 
 //_________________________Friend Request Methods Start_________________________//
@@ -127,6 +141,11 @@ export function UserFactory(sequelize: Sequelize): typeof User {
         allowNull: true,
         defaultValue: [],
       },
+      icon: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: "",
+      },
     },
     {
       tableName: 'users',  // Name of the table in PostgreSQL
@@ -135,6 +154,7 @@ export function UserFactory(sequelize: Sequelize): typeof User {
         // Before creating a new user, hash and set the password
         beforeCreate: async (user: User) => {
           await user.setPassword(user.password);
+          await user.setRandomIcon();
         },
         // Before updating a user, hash and set the new password if it has changed
         beforeUpdate: async (user: User) => {

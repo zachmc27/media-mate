@@ -80,5 +80,15 @@ img {
     height: 2.75rem;
     border-radius: 5px;
     font-size: 0.75em;
+    font: #000000;
     width: 100%;
+  }
+
+  .form-button:hover {
+    background-color: #5a5a5a;
+    font: #ffffff;
+  }
+
+  .form-button:active{
+    background-color: #000000;
   }

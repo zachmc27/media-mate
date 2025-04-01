@@ -90,6 +90,13 @@ router.post('/accept', async (req, res) => {
     const user = await User.findByPk(userId);
     if (!user) return res.status(404).json({ error: 'User not found' });
 
+    const requester = await User.findByPk(requesterId)
+    if (!requester) return res.status(404).json({ error: 'Requester not found'})
+
+    user.friends = [...user.friends, requesterId];
+
+    await user.save();
+    
     await user.acceptFriendRequest(requesterId);
     return res.status(200).json({ message: 'Friend request accepted' });
   } catch (error) {
@@ -110,6 +117,28 @@ router.post('/reject', async (req, res) => {
   } catch (error) {
     return res.status(400).json({ error: 'An error occurred rejecting a friend request' });
   }
+});
+
+// Delete friend
+router.delete('/:userId/:friendId', async (req, res) => {
+    const { userId, friendId } = req.params;
+
+    try {
+      const user = await User.findByPk(userId);
+
+      if (!user) {
+        return res.status(404).json({ message: 'User not found'});
+      }
+
+      user.friends = user.friends.filter((id) => id.toString() !== friendId)
+
+      await user.save();
+
+      return res.status(200).json({ message: 'Friend deleted successfully'})
+    } catch (err) {
+      return res.status(400).json({ message: 'Error deleting friend', err})
+      console.error('Error deleting friend: ', err)
+    }
 });
 
 export default router;
