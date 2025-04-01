@@ -122,9 +122,15 @@ export async function getTrailerKey(id: number, type: string): Promise<string> {
             return ''; // Return an empty string if results are missing or not an array
         }
 
-        const trailer = trailerData.results.find(
+        let trailer = trailerData.results.find(
             (trailer: any) => trailer.type === 'Teaser' && trailer.site === 'YouTube' && trailer.official === true
         );
+        if (!trailer) {
+            trailer = trailerData.results.find(
+            (trailer: any) => trailer.type === 'Trailer' && trailer.site === 'YouTube' && trailer.official === true
+            );
+        }
+
 
         return trailer?.key || ''; // Return the trailer key or an empty string if not found
     } catch (err) {

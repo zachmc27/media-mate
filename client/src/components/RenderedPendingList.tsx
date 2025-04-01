@@ -10,7 +10,6 @@ export default function RenderedPendingList() {
     const [pendingFriends, setPendingFriends] = useState<UserData[]>([])
     const [loading, setLoading] = useState(false);
     const [userId, setUserId] = useState(0)
-    
 
     useEffect(() => {
         async function fetchData() {
@@ -20,19 +19,18 @@ export default function RenderedPendingList() {
     
             if (id) {
                 try {
-                const fetchedList = await fetchPendingFriends(id);
-                setPendingList(fetchedList);
-                setUserId(parseInt(id));
+                    const fetchedList = await fetchPendingFriends(id);
+                    setPendingList(fetchedList);
+                    setUserId(parseInt(id));
                 } catch (error) {
-                console.error("Error fetching friends:", error);
+                    console.error("Error fetching friends:", error);
                 }
             }
             setLoading(false)
-
         }
-    
         fetchData();
     }, []);
+
     console.log(userId)
     console.log('Pending friends:', pendingList)
     useEffect(() => {
@@ -98,8 +96,5 @@ export default function RenderedPendingList() {
             </li>
             ))
         }
-    </ul>)     
-     
-      
-  
+    </ul>)
 }

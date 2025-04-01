@@ -3,13 +3,17 @@ import { fetchToWatch, removeMediaToWatch, seenToWatch } from "../api/toWatchAPI
 import Media from "../interfaces/Media.tsx";
 import auth from '../utils/auth';
 import ToWatchCard from "./ToWatchCard.tsx";
+import DetailsModal from "../components/DetailsModal";
 // import "../styles/ToWatch.css";
 
 export default function ToWatchList() {
     const [toWatchList, setToWatchList] = useState<Media[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const userId: number | null = auth.getUserId();    
+    const userId: number | null = auth.getUserId();
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
+    
     if (userId === null) {
         setError("You must be logged in to access this page.");
         setLoading(false);
@@ -59,6 +63,16 @@ export default function ToWatchList() {
         }
     };
 
+    // Details Modal Functionality
+    const openModal = (mediaId: number) => {
+      setSelectedMediaId(mediaId);
+      setShowModal(true);
+    };
+    const closeModal = () => {
+      setShowModal(false);
+      setSelectedMediaId(null);
+    };
+
     if (loading) return <p>Loading your To Watch list...</p>;
     if (error) return <p className="error">{error}</p>;
   
@@ -68,17 +82,19 @@ export default function ToWatchList() {
               toWatchList.map((item) => (
                 <ToWatchCard
                   key={item.id}
-                  title={item.Title || item.name || "Unknown"}
+                  detailsModal={openModal}
+                  title={item.media.title || item.name || "Unknown"}
                   year={item.media.year}
                   cover={`https://image.tmdb.org/t/p/w500${item.media.cover}`}
                   mediaId={item.mediaId}
+                  seenIt={handleMoveToSeenIt}
                   onRemove={handleRemove}
-                  onMoveToSeenIt={handleMoveToSeenIt}
                 />
               ))
             ) : (
               <p>Nothing to watch yet.</p>
             )}
+          {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}
       </div>
     );
   }
