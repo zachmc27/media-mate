@@ -18,7 +18,6 @@ class AuthService {
     window.location.assign('/');
   }
 
-
   logout() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('user_Id');

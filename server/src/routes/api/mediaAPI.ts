@@ -24,7 +24,7 @@ export async function getMediaDetails(id: number, type: string): Promise<MediaIt
             mediaDetails = await response.json();
             // append the getTrailerKey function to the mediaDetails object
             if (mediaDetails) {
-                mediaDetails.trailerKey = await getTrailerKey(id,type);
+                mediaDetails.trailerKey = await getTrailerKey(id, type);
             }
             // console.log(mediaDetails);
         } else if(type === 'tv'){
@@ -44,9 +44,10 @@ export async function getMediaDetails(id: number, type: string): Promise<MediaIt
                 year: mediaDetails.release_date ? new Date(mediaDetails.release_date).getFullYear() : 0,
                 genre_ids: mediaDetails.genres ? mediaDetails.genres.map((genre) => genre.id) : [],
                 vote_average: mediaDetails.vote_average || 0,
-                poster_path: mediaDetails.poster_path ? `https://image.tmdb.org/t/p/w500${mediaDetails.poster_path}` : '',
+                poster_path: mediaDetails.poster_path ? `${mediaDetails.poster_path}` : '',
                 trailerKey: mediaDetails.trailerKey || '', // The trailer key
                 popularity: mediaDetails.popularity,
+                overview: mediaDetails.overview || '',
             };
         }
         throw new Error('Media details not found');

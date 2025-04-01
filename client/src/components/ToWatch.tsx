@@ -70,7 +70,7 @@ export default function ToWatchList() {
                   key={item.id}
                   title={item.Title || item.name || "Unknown"}
                   year={item.media.year}
-                  cover={item.media.cover}
+                  cover={`https://image.tmdb.org/t/p/w500${item.media.cover}`}
                   mediaId={item.mediaId}
                   onRemove={handleRemove}
                   onMoveToSeenIt={handleMoveToSeenIt}

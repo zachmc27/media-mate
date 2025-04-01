@@ -77,6 +77,7 @@ export interface MediaItem {
     poster_path?: string;
     trailerKey?: string;
     genres?: genres[];
+    overview?: string;
   }
 
 interface genres {
