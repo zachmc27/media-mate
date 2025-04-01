@@ -84,7 +84,7 @@
     margin: 5px 0;
     background-color: yellowgreen;
     cursor: pointer;
-    visibility: hidden;
+    
   }
 
   .image-container button:hover {
