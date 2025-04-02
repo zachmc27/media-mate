@@ -8,11 +8,22 @@ import { Link } from "react-router-dom";
 
 export default function Listtease() {
     const [mediaList, setMediaList] = useState<Media[]>([]);
+     const [width, setWidth] = useState(window.innerWidth);
     // const userId: number | null = auth.getUserId();  
 
     // Details Model UseStates
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
+
+
+    useEffect(() => {
+      const handleResize = () => setWidth(window.innerWidth);
+  
+      window.addEventListener("resize", handleResize);
+      
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
 
     useEffect(() => {
         const fetchMedia = async () => {
@@ -55,8 +66,10 @@ export default function Listtease() {
           ))} 
         </div>
     </div>
-
-    <div className="vert-rule"></div>
+    {
+      width > 1175 && <div className="vert-rule"></div>
+    }
+    
 
     <div className="list-section">
         <div className="list-title">Watch Later</div>   

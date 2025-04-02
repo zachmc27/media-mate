@@ -3,7 +3,7 @@
     border-top: 1px solid black;
     height: 350px;
     width: 60%;
-    margin-bottom: 100px;
+    margin-bottom: 300px;
 }
 
 .tabs {
@@ -26,4 +26,16 @@
     scale: 1.1;
     transition: opacity .3s ease-in;
     transition: scale .1s ease-in;
+}
+
+@media (max-width: 572px) {
+    .tease-title {
+        font-size: 20px
+    }
+}
+
+@media (max-width: 462px) {
+    .tease-title {
+        font-size: 18px
+    }
 }
