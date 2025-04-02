@@ -1,41 +1,41 @@
+
+
 .flickpicks {
-    border: 1px solid black;
-    position: relative;
     height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
 .info-blurb {
-    position: absolute;
-    top: 15%;
-    width: 350px;
+    font: var(--subtitle-lg) sans-serif;
+    color: var(--medium);
+    width: 30em;
     height: fit-content;
     margin: 0 auto;
-    font-size: 15px;
-    opacity: 70%;
+    opacity: 100%;
 }
 
 .cards-row {
-    position: absolute;
-    top: 25%;
+    padding: 3em;
     left: 10%;
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
     height: fit-content;
     width: fit-content;
+    column-gap: 50px;
+    row-gap: 120px
 
 }
 
 .card {
-    border: 1px solid black;
+    border: 1px solid var(--dark);
     height: 200px;
     width: 200px;
-    margin-top: 50px;
+    
     text-align: center;
     opacity: 80%;
 }
@@ -53,12 +53,19 @@
 }
 
 .card-title {
-    margin-top: 10px; 
-    font-size: 16px; 
+    padding-top: 10px; 
+    font-size: var(--subtitle-lg); 
     font-weight: bold;
+    /* text-transform: uppercase; */
   }
 
 .flickpicksCard {
     height: 500px;
     width: 400px;
+}
+
+.card-description{
+    padding: 0px;
+    font: var(--subtitle-sm) sans-serif;
+    color: var(--medium);
 }
