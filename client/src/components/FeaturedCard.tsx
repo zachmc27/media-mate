@@ -5,6 +5,7 @@ import Media from "../interfaces/Media.tsx";
 //import auth from '../utils/auth';
 import { mediaInfo, discoverMedia } from "../api/mediaAPI.tsx";
 
+
 export default function FeaturedCard() {
     const [mediaArray, setMediaArray] = useState<Media[]>([]);  
     const [mediaItem, setMediaItem] = useState<Media>();

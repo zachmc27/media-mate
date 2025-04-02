@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 import "../styles/Discover.css";
-import useAuthRedirect from "../utils/useAuthRedirect";
+
+
 import auth from "../utils/auth";
 import { discoverMedia, discoverMediaByGenre, keywordSearch, discoverRecentlyReleased} from "../api/mediaAPI";
+
 import Media from "../interfaces/Media";
 import DetailsModal from "../components/DetailsModal";
-import { addMediaToWatch } from "../api/toWatchAPI";
-import {addMediaToSeenIt, fetchSeenIt, getUserGenrePreferences,} from "../api/seenItAPI";
+import {getUserGenrePreferences} from "../api/seenItAPI";
 
 
 export default function Discover() {
@@ -47,7 +48,7 @@ export default function Discover() {
       }
     };
     fetchForYou();
-  }, []);
+  }, [userId]);
   useEffect(() => {
   }, [forYou]);
 

@@ -37,23 +37,29 @@ export const getUserGenrePreferences = async (userId: number) => {
     }
     const data = await response.json();
 
-    // Flatten all numbers into a single array
-const allNumbers = data.flatMap((item: any) => item.media.genre);
+    // Extract all genre IDs into a single array
+    interface MediaItem {
+      media: {
+        genre: number[];
+      };
+    }
 
-// Count occurrences of each number
-const frequencyMap = allNumbers.reduce<any>((acc, num) => {
-    acc[num] = (acc[num] || 0) + 1;
-    return acc;
-}, {});
+    const allGenreIds: number[] = data.flatMap((item: MediaItem) => item.media.genre);
 
+    // Count occurrences of each genre ID
+    const frequencyMap = allGenreIds.reduce<Record<number, number>>((acc, genreId) => {
+      acc[genreId] = (acc[genreId] || 0) + 1;
+      return acc;
+    }, {});
 
-// // Find the most common number
-const mostCommonNumber = Object.entries(frequencyMap)
-    .reduce((a, b) => (b[1] > a[1] ? b : a))[0];
-return parseInt(mostCommonNumber);
+    // Find the genre ID with the highest occurrence
+    const mostCommonGenreId = Object.entries(frequencyMap).reduce((a, b) =>
+      b[1] > a[1] ? b : a
+    )[0];
 
-} catch (error) {
-    console.error("An error occurred while fetching seen data");
+    return parseInt(mostCommonGenreId);
+  } catch (error) {
+    console.error("An error occurred while fetching genre preferences:", error);
   }
 };
 
