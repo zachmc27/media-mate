@@ -96,8 +96,5 @@ export default function RenderedPendingList() {
             </li>
             ))
         }
-    </ul>)     
-     
-      
-  
+    </ul>)
 }
