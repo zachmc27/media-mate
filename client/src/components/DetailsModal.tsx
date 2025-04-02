@@ -26,10 +26,10 @@ const DetailsModal = ({ mediaId, onClose }: DetailsModalProps) => {
           setMediaItem(data);
       } catch (error) {
           console.error("Error fetching media:", error);
-      };
+      }
     }
       fetchOneMedia(mediaId);
-    }, []);
+    }, [mediaId]);
 
   useEffect(() => {
     if (mediaItem) {

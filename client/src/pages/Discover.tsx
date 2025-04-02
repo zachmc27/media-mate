@@ -8,8 +8,7 @@ import { discoverMedia, discoverMediaByGenre, keywordSearch, discoverRecentlyRel
 
 import Media from "../interfaces/Media";
 import DetailsModal from "../components/DetailsModal";
-import { addMediaToWatch } from "../api/toWatchAPI";
-import {addMediaToSeenIt, fetchSeenIt, getUserGenrePreferences,} from "../api/seenItAPI";
+import {getUserGenrePreferences} from "../api/seenItAPI";
 
 
 export default function Discover() {
@@ -52,7 +51,7 @@ export default function Discover() {
       }
     };
     fetchForYou();
-  }, []);
+  }, [userId]);
   useEffect(() => {
   }, [forYou]);
 

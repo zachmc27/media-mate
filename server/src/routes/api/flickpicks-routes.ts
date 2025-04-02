@@ -181,7 +181,22 @@ router.get('/matches/:userId', async (req: Request, res: Response) => {
              }
         });
 
-        res.json(flickPickListSessions);
+        //get the name from the FlickListSelections and adds it to the result object
+        const result = await Promise.all(flickPickListSessions.map(async item => {
+            const flickPickList = await FlickListSelections.findOne({
+                where: { id: item.flickPickListId }
+            });
+
+            return {
+                flickPickListId: item.flickPickListId,
+                flickPickListName: flickPickList ? flickPickList.name : null,
+                status: item.status,
+                
+            };
+        }));
+
+        res.json(result);
+        
     } catch (err) {
         res.status(400).json({ error: err });
     }
