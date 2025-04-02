@@ -57,6 +57,7 @@ router.post('/register', async (req: Request, res: Response) => {
     //const defaultIconUrl = '../assets/profileIcon_01.png';
 
     const newUser = await User.create({ username, email, password: password, name: name, friends: []});
+   
 
     return res.status(201).json({ message: "User created successfully",
       user: {
@@ -68,6 +69,7 @@ router.post('/register', async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     return res.status(400).json({ message: error.message });
+    
   }
 });
 

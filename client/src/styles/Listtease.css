@@ -13,8 +13,7 @@
 .list-1, .list-2 {
     display: flex;
     flex-direction: row;
-    gap: 30px;
-    align-items: flex-start; /* Ensure consistent vertical alignment */
+    gap: 30px
 }
 
 .list-title {
@@ -37,12 +36,11 @@
     font: var(--subtitle-sm) sans-serif; 
     color: var(--light);
     font-weight: bold;
-    overflow-wrap: break-word;
 }
 
 .vert-rule {
     border-left: 2px solid var(--light);
-    height: 90%;
+    height: 70%;
 }
 
 .explore {

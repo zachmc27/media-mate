@@ -93,14 +93,14 @@ export default function Discover() {
           className="search-bar"
           placeholder="Search for movies..."
         />
-        <button className="search-button" onClick={handleSearch}>
+        <button className="search-button btn-lined" onClick={handleSearch}>
           Search
         </button>
       </div>
       {/* Search Results Section */}
       {query && !loading && searchResults.length > 0 && (
         <div className="list-container">
-          <p>Search Results</p>
+          <p className="title-md-light">Search Results</p>
           <div className="movies-container">
             {searchResults.slice(0, 9).map((item) => (
               <div className="card" key={item.id} onClick={() => openModal(item.id)}>
@@ -115,21 +115,23 @@ export default function Discover() {
         </div>
       )}
       <div className="list-container">
-        <p>Popular Now</p>
+        <p className="p-light">Popular Now</p>
         <div className="movies-container">
           {popularMovies.slice(0, 9).map((item) => (
             <div className="card" key={item.id}  onClick={() => openModal(item.id)}>
+              <div className="image-container">
               <img
                 src={`https://image.tmdb.org/t/p/w500${item.cover}`}
                 alt={item.title}
               />
+              </div>
               <p className="card-title">{item.title}</p>
             </div>
           ))}
         </div>
       </div>
       <div className="list-container">
-        <p>For You</p>
+        <p className="p-light">For You</p>
         <div className="movies-container">
           {forYou.slice(0, 9).map((item) => (
             <div className="card" key={item.id} onClick={() => openModal(item.id)}>

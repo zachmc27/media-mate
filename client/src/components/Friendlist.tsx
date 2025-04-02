@@ -37,7 +37,6 @@ export default function Friendlist() {
           }
           setLoading(false)
     }
-
     fetchData();
  }, []);
 
@@ -67,8 +66,8 @@ const handleMatchClick = async (friend: UserData) => {
   setFlickListOpen(true)
 }
 
+// Populates list of available match genres
 useEffect(() => {
-  console.log("triggered getflickpickmatchingsessions, userId is " + userId);
     const getMatchingLists = async (userId: number) => {
         try {
             const response = await getFlickPickListMatchingSessions(userId);
@@ -83,7 +82,6 @@ useEffect(() => {
 useEffect(() => {
   console.log("my match lists: " + matchListsCompleted);
 }, [matchListsCompleted])
-
 
 const handleFlickClick = async (selection: number) => {
   setSelectedList(selection)
@@ -100,7 +98,6 @@ const matchLists = async () => {
   }
   alert(`Matching ${selectedFriend.username!}...`)
   try {
-    console.log("Friend: " + selectedFriend.id);
     await initiateFlickPickMatching(userId!, selectedFriend.id, selectedList);
     console.log("FlickPick match created");
   } catch (error) {

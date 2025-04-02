@@ -63,9 +63,24 @@ img {
   }
 
   .form-input::placeholder {
-    font: var(--medium) var(--subtitle-md);/* Optional: Adjust the font size */
+    font: var(--subtitle-md);/* Optional: Adjust the font size */
+    color: var(--medium) ;
     opacity: 1; /* Ensure the placeholder is fully visible */
     padding-left: 0.5rem;
+  }
+
+  input[type="text"], textarea {
+
+    background-color : var(--light);
+    color: var(--dark); 
+  
+  }
+
+  input[type="password"], textarea {
+
+    background-color : var(--light);
+    color: var(--dark); 
+  
   }
 
   .form-button {

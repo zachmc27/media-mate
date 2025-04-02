@@ -162,7 +162,7 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
     if (error) return <p className="error">{error}</p>;
     const isQuizNotFound = !flickpickMediaList || !flickpickMediaList.listOfChoices;
     return (
-        <div className="flickpicks">
+        <div className="flickpicks card-info-container">
         {isQuizNotFound ? (
             <p className="Error">Quiz not found.</p>
         ) : (
@@ -171,25 +171,27 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
                     {mediaDetails && currentChoice < flickpickMediaList!.listOfChoices!.length - 1 ? (
                         <div className="flickpicksCard">
                             <img src={`https://image.tmdb.org/t/p/w500${mediaDetails.poster_path}`} alt={mediaDetails.title} draggable={false}/>
-                            <div className="card-container">
-                                <b className="card-title">{mediaDetails.title}</b>
+                            <div className="card-info-container">
+                                <b className="title-md-light card-title">{mediaDetails.title}</b>
                                 <i className="card-year">{mediaDetails.year}</i>
                             </div>
+
+                            <div className="marks">
+                    {dragDirection === "up" && <span className="green-check">✅</span>}
+                    {dragDirection === "down" && <span className="red-cross">❌</span>}
+                </div>
+
+                <div className="btn-container">
+                    <button className="detailsButton btn-fill" onClick={() => openModal(mediaDetails!.id)}>Details</button>
+                    <button className="backButton btn-lined" onClick={onBack}>Back</button>
+                </div>
                         </div>
                     ) : (
                         <button className="submitButton" onClick={submitAnswers}>Submit Answers</button>
                     )}
                 </motion.div>
 
-                <div className="marks">
-                    {dragDirection === "up" && <span className="green-check">✅</span>}
-                    {dragDirection === "down" && <span className="red-cross">❌</span>}
-                </div>
-
-                <div className="button">
-                    <button className="detailsButton" onClick={() => openModal(mediaDetails!.id)}>Details</button>
-                    <button className="backButton" onClick={onBack}>Back</button>
-                </div>
+                
             </>
         )}
               {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}

@@ -1,9 +1,6 @@
 import Auth from '../utils/auth';
 import { FlickpickSession } from '../interfaces/FlickpickInterface';
 
-
-
-
 // gets the unique CallabList for a userId
 
 export async function getCollabLists(userId: number){
