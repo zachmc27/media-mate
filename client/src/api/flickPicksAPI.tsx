@@ -51,10 +51,6 @@ try {
   //   }
   // ]
 
-
-
-
-
 // sends a get Request to the server to get the list of flickPickList
 export async function getFlickPicksList(){
 try {
@@ -76,7 +72,6 @@ try {
     console.error('An error occurred while fetching flickPicks data');       
 }
 }
-
 
 //sends a post request to initiate matching between two users and the flickPickList
 
@@ -228,13 +223,13 @@ try {
     if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
-
+      console.log('Tried to get completed flickpicks' + response);
     const data = await response.json();
     return (data);
 }
 catch (error) {
     console.error('An error occurred while fetching flickPickList matching sessions');
-}
+  }
 }
 
 // deletes a flickPickListMatchingSession by id
@@ -256,5 +251,5 @@ try {
 }
 catch (error) {
     console.error('An error occurred while deleting a flickPickList matching session');
-}
+  }
 }

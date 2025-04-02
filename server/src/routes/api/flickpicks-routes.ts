@@ -68,7 +68,6 @@ router.get('/matches', async (_req: Request, res: Response) => {
     }
 });
 
-
 // Update a Matchlist session with answers
 router.put('/matches/:id', async (req: Request, res: Response) => {
     const { id } = req.params;
@@ -164,16 +163,13 @@ router.post('/matches/compare', async (req: Request, res: Response) => {
 
 });
 
-
 //gets all flickPickResponseList items by userId
 router.get('/matches/:userId', async (req: Request, res: Response) => {
     const { userId } = req.params;
-
     if (!userId) {
         res.status(400).json({ error: 'Please provide a userId' });
         return;
     }
-
     try {
         const flickPickListSessions = await FlickPickSessionList.findAll({
             where: { userId: parseInt(userId),
@@ -201,8 +197,6 @@ router.get('/matches/:userId', async (req: Request, res: Response) => {
         res.status(400).json({ error: err });
     }
 });
-
-
 
 router.get('/collabs/:userId', async (req: Request, res: Response) => {
     const { userId } = req.params;
@@ -246,6 +240,5 @@ router.get('/collabs/:userId', async (req: Request, res: Response) => {
 //         res.status(400).json({ error: err });
 //     }
 // });
-
 
 export default router;

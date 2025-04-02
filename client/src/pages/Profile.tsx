@@ -5,6 +5,7 @@ import auth from "../utils/auth";
 import chicken from "../assets/chicken.jpg";
 import SeenItList from "../components/SeenIt";
 import ToWatchList from "../components/ToWatch";
+import CollabsList from "../components/Collab";
 import Actionmodal from "../components/Actionmodal";
 import { useState, useEffect } from "react";
 import useAuthRedirect from "../utils/useAuthRedirect";
@@ -89,10 +90,7 @@ export default function Profile() {
             {/* Conditionally render based on currentList state */}
             {currentList === 'collab' && (
                 <div className="list-container">
-                    <p>Brett + Misha</p>
-                    <div className="movies-container">
-                        <p>Collab cards to appear here.</p>
-                    </div>
+                    <CollabsList />
                 </div>
             )}
             {currentList === 'watchLater' && (

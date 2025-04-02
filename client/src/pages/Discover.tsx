@@ -2,14 +2,11 @@ import { useEffect, useState } from "react";
 import "../App.css";
 import "../styles/Discover.css";
 
-
+import DetailsModal from "../components/DetailsModal";
 import auth from "../utils/auth";
 import { discoverMedia, discoverMediaByGenre, keywordSearch, discoverRecentlyReleased} from "../api/mediaAPI";
-
 import Media from "../interfaces/Media";
-import DetailsModal from "../components/DetailsModal";
-import {getUserGenrePreferences} from "../api/seenItAPI";
-
+import { getUserGenrePreferences } from "../api/seenItAPI";
 
 export default function Discover() {
   const [popularMovies, setPopularMovies] = useState<Media[]>([]);
@@ -19,10 +16,7 @@ export default function Discover() {
   const [query, setQuery] = useState<string>(""); // State for search query
   const [searchResults, setSearchResults] = useState<Media[]>([]); // State for search results
   const [loading, setLoading] = useState<boolean>(false); // State for loading
-
   const userId: number | null = auth.getUserId();
-
-
 
   useEffect(() => {
     const fetchDiscoverMovies = async () => {
