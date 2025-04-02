@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 import "../styles/Discover.css";
-// import MovieCard from "../components/SeenItCard";
+
 import auth from "../utils/auth";
-import { discoverMedia, discoverMediaByGenre, discoverRecentlyReleased, keywordSearch,} from "../api/mediaAPI";
+import { discoverMedia, discoverMediaByGenre, keywordSearch, discoverRecentlyReleased} from "../api/mediaAPI";
 import Media from "../interfaces/Media";
 import DetailsModal from "../components/DetailsModal";
 import { addMediaToWatch } from "../api/toWatchAPI";
-import {addMediaToSeenIt, getUserGenrePreferences,} from "../api/seenItAPI";
+import {addMediaToSeenIt, fetchSeenIt, getUserGenrePreferences,} from "../api/seenItAPI";
 
 
 export default function Discover() {
@@ -32,6 +32,7 @@ export default function Discover() {
     fetchDiscoverMovies();
     
     const fetchForYou = async () => {
+      console.log("FETCHFORYOU");
       try {
         const favoriteGenre = await getUserGenrePreferences(userId!); //await fetchFavoriteGenre(userId);
         if (typeof favoriteGenre === "number") {
