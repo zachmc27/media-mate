@@ -5,14 +5,15 @@
     position: absolute;
     width: 100%;
     height: 75%;
-   
-    align-items: center;
+
+    align-items: flex-start;
 }
 
 .list-1, .list-2 {
     display: flex;
     flex-direction: row;
-    gap: 30px
+    gap: 30px;
+    align-items: flex-start; /* Ensure consistent vertical alignment */
 }
 
 .list-title {
@@ -21,7 +22,7 @@
 
 .cover {
     height: fit-content;
-    width: fit-content;
+    width: 100px;
     text-align: center;
 }
 
@@ -32,13 +33,15 @@
 
 .card-title {
     margin-top: 10px; 
-    font-size: 16px; 
+    font: var(--subtitle-sm) sans-serif; 
+    color: var(--light);
     font-weight: bold;
+    overflow-wrap: break-word;
 }
 
 .vert-rule {
     border-left: 2px solid var(--light);
-    height: 70%;
+    height: 90%;
 }
 
 .explore {
@@ -47,6 +50,8 @@
     text-align: center;
     display: flex;
     align-items: center;
+    font: var(--subtitle-sm) sans-serif;
+    color: var(--light);
 }
 
 .explore h3 {

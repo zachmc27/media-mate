@@ -50,7 +50,7 @@ export default function Listtease() {
             {mediaList.slice(0, 3).map((item) => (
             <div className="cover" key={item.id} onClick={() => openModal(item.id)}>
               <img src={`https://image.tmdb.org/t/p/w500${item.cover}`} alt={item.title} />
-              <p className="cover-title">{item.title}</p>
+              <p className="card-title">{item.title}</p>
             </div>
           ))} 
         </div>
@@ -64,13 +64,13 @@ export default function Listtease() {
         {mediaList.slice(4, 6).map((item) => (
             <div className="cover" key={item.id} onClick={() => openModal(item.id)}>
               <img src={`https://image.tmdb.org/t/p/w500${item.cover}`} alt={item.title} />
-              <p className="cover-title">{item.title}</p>
+              <p className="card-title">{item.title}</p>
             </div>
           ))}
         </div>
     </div>
     <div className="explore">
-       <Link to="/profile" className="explore-text">Explore more...</Link>
+       <Link to="/profile" className="explore-text links">Explore more...</Link>
     </div>
     {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}
   </div>

@@ -22,7 +22,7 @@ body{
     padding: 0;
 }
 
-a {
+a, .links{
     color: var(--medium);
 }
 
