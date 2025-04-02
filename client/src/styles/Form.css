@@ -1,10 +1,6 @@
 
 h1 {
-    font-size: 3em;
     text-align: center;
-    color: #000000;
-    margin-top: 2.5em;
-    margin-bottom: 1em;
 }
 
 p {
@@ -19,7 +15,7 @@ a{
 }
 
 .form-container {
-  font: 1.2em sans-serif;
+  font: var(--medium) var(--subtitle-md) sans-serif;
   padding: 1rem;
   height: auto;
   display: flex;
@@ -62,11 +58,12 @@ img {
     border-radius: 3.5px;
     height: 2.5rem;
     width: 100%;
+    font-size: var(--subtitle-md);
+    padding-left: 0.5rem;
   }
 
   .form-input::placeholder {
-    color: #a0a0a0; /* Change the placeholder text color */
-    font-size: 0.9rem;/* Optional: Adjust the font size */
+    font: var(--medium) var(--subtitle-md);/* Optional: Adjust the font size */
     opacity: 1; /* Ensure the placeholder is fully visible */
     padding-left: 0.5rem;
   }

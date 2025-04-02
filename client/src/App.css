@@ -1,29 +1,112 @@
+:root {
+    --dark: #292929;
+    --medium: #707070;
+    --light: #FFFFFF;
+    --accent: #3a87e6;
+
+    --title-xl: 64px;
+    --title-lg: 32px;
+    --title-md: 26px;
+    --subtitle-lg: 20px;
+    --subtitle-md: 18px;
+    --subtitle-sm: 14px;
+
+    background-color: var(--dark);
+    color: var(--light);
+
+}
+
+body{
+    margin: 0;
+    margin-top: -0.05em;
+    padding: 0;
+}
+
+a {
+    color: var(--medium);
+}
+
 .section {
-    border: 1px solid black;
+    padding-top: 6em;
     width: 100%;
     height: 100%;
 }
 
-.button-filled, .button-lined:hover{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #000000;
-    background-color: #000000;
-    height: 2.75rem;
-    border-radius: 5px;
-    font-size: 0.75em;
-    font: #ffffff;
+.title-xl-light{
+    font: var(--title-xl) sans-serif;
+    font-weight: bold;
+    color: var(--light);
 }
 
-.button-lined, .button-filled:hover {
+.title-xl-dark{
+    font: var(--title-xl) sans-serif;
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.title-lg-light{
+    font: var(--title-lg) sans-serif;
+    font-weight: bold;
+    color: var(--light);
+}
+
+.title-lg-dark{
+    font: var(--title-lg) sans-serif;
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.title-md-light{
+    font: var(--title-md) sans-serif;
+    font-weight: bold;
+    color: var(--light);
+}
+
+.title-md-dark{
+    font: var(--title-md) sans-serif;
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.p-light{
+    font: var(--subtitle-lg) sans-serif;
+    color: var(--light);
+}
+
+.p-dark{
+    font: var(--subtitle-lg) sans-serif;
+    color: var(--dark);
+}
+
+
+.padding-root {
+    padding: 0em 2em;
+    
+}
+
+
+.btn-fill, .btn-lined:hover{
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #000000;
+    border: 2px solid var(--light);
+    background-color: var(--light);
+    height: 2.75rem;
+    border-radius: 5px;
+    color: var(--dark);
+    font: var(--subtitle-md) sans-serif;
+    width: 100%;
+}
+
+.btn-lined, .btn-fill:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--light);
     background-color: transparent;
     height: 2.75rem;
     border-radius: 5px;
-    font-size: 0.75em;
-    font: #000000;
+    color: var(--light);
+    font: var(--subtitle-md) sans-serif;
+    width: 100%;
 }

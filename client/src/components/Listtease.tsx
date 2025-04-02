@@ -45,7 +45,7 @@ export default function Listtease() {
   return (
     <div className="cover-row">
     <div className="list-section">
-        <div className="list-title">Brett & Misha</div>   
+        <div className="list-title p-light">Brett & Misha</div>   
         <div className="list-1">
             {mediaList.slice(0, 3).map((item) => (
             <div className="cover" key={item.id} onClick={() => openModal(item.id)}>
@@ -59,7 +59,7 @@ export default function Listtease() {
     <div className="vert-rule"></div>
 
     <div className="list-section">
-        <div className="list-title">Watch Later</div>   
+        <div className="list-title p-light">Watch Later</div>   
         <div className="list-2">
         {mediaList.slice(4, 6).map((item) => (
             <div className="cover" key={item.id} onClick={() => openModal(item.id)}>

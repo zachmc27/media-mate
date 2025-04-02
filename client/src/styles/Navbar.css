@@ -1,8 +1,8 @@
 
 
 .navbar {
-    width: 100vw;
-    height: 80px;
+    width: 100%;
+    height: 100px;
     border: 1px solid black;
     position: fixed;
     display: flex;
@@ -23,7 +23,6 @@
     display: flex;
     flex-direction: row;
     right: 3vw;
-    bottom: 20%;
     gap: 50px;
 
 }
@@ -34,20 +33,21 @@
     align-items: center;
     flex-direction: column;
     opacity: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 15px;
+    width: 40px;
+    height: 40px;
+    font: var(--subtitle-md) sans-serif;
 }
 
 .tab p{
    margin: 0;
-   font-size: 13px;
+   font-size: var(--subtitle-md);
 }
 
 .tab:hover {
     opacity: 100%;
     scale: 1.03;
     transition: opacity .3s ease-in;
+    color: var(--dark);
 }
 
 .remove-btn-styling {

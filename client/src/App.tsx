@@ -10,7 +10,7 @@ function App() {
   return (
     <div>
       {!isLoginPage && <Navbar />}
-      <main className='container pt-5'>
+      <main className='section'>
         <Outlet />
       </main>
     </div>

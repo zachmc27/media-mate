@@ -36,9 +36,9 @@ export default function Teases() {
   return (
     <div className="teases-box">
         <div className="tabs">
-            <h1 onClick={handleFlickClick} className={isFlickTabOpen ? "selected tease-title" : 'tease-title'}>Flickpick</h1>
-            <h1 onClick={handleDiscoverClick} className={isDiscoverTabOpen ? "selected tease-title" : 'tease-title'}>Discover</h1>
-            <h1 onClick={handleListClick} className={isListTabOpen ? 'selected tease-title' : 'tease-title'}>My Lists</h1>
+            <h1 onClick={handleFlickClick} className={isFlickTabOpen ? "selected tease-title" : 'tease-title'}>FLICKPICK</h1>
+            <h1 onClick={handleDiscoverClick} className={isDiscoverTabOpen ? "selected tease-title" : 'tease-title'}>DISCOVER</h1>
+            <h1 onClick={handleListClick} className={isListTabOpen ? 'selected tease-title' : 'tease-title'}>MY LISTS</h1>
         </div>
         {
           isFlickTabOpen && <Flicktease />
