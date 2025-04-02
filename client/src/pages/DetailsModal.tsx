@@ -1,7 +1,9 @@
 // import React from "react";
 import "../styles/details.css";
+import useAuthRedirect from "../utils/useAuthRedirect";
 
 const Modal = () => {
+  useAuthRedirect();
   return (
     <div className="backdrop">
       <div className="details">
