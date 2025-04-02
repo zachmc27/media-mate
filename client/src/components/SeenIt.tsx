@@ -10,7 +10,6 @@ export default function SeenItList() {
     const [seenList, setSeenList] = useState<Media[]>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
-
     const userId: number | null = auth.getUserId();    
     if (userId === null) {
       return;
@@ -22,8 +21,7 @@ export default function SeenItList() {
           const data = await fetchSeenIt(userId);
           if (data) {
             setSeenList(data);
-          } else {
-          }
+          } 
         } catch (error) {
           console.log("An error occurred while fetching seen it data.");
         }

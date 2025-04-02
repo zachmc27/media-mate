@@ -4,7 +4,7 @@ import "../styles/Discover.css";
 
 import DetailsModal from "../components/DetailsModal";
 import auth from "../utils/auth";
-import { discoverMedia, discoverMediaByGenre, keywordSearch,} from "../api/mediaAPI";
+import { discoverMedia, discoverMediaByGenre, keywordSearch, discoverRecentlyReleased} from "../api/mediaAPI";
 import Media from "../interfaces/Media";
 import { getUserGenrePreferences } from "../api/seenItAPI";
 
