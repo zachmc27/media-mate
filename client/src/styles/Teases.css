@@ -7,15 +7,18 @@
 }
 
 .tabs {
- 
     display: flex;
     gap: 20px;
     margin-left: 5px;
 }
 
-.tabs h1 {
+.tease-title {
     font-size: 25px;
     opacity: 50%;
+}
+
+.selected {
+    opacity: 100%;
 }
 
 .tabs h1:hover {

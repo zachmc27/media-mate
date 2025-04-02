@@ -1,5 +1,4 @@
-.cards-row {
-  
+.tease-row {
     position: absolute;
     width: 100%;
     display: flex;
@@ -9,8 +8,8 @@
 
 }
 
-.card {
-    border: 1px solid black;
+.flick-card {
+
     height: 150px;
     width: 150px;
     margin-top: 50px;
@@ -38,12 +37,12 @@
     align-items: center;
 }
 
-.explore h3 {
+.explore-text {
     opacity: 50%;
     font-weight: 100;
 }
 
-.explore h3:hover {
+.explore-text:hover {
     opacity: 100%;
     transition: opacity .2s ease-in;
 }
