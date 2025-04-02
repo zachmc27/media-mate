@@ -7,13 +7,15 @@ import SeenItList from "../components/SeenIt";
 import ToWatchList from "../components/ToWatch";
 import Actionmodal from "../components/Actionmodal";
 import { useState, useEffect } from "react";
+import useAuthRedirect from "../utils/useAuthRedirect";
 
 export default function Profile() {
     const [currentList, setCurrentList] = useState<string>('watchLater');
     const [userData, setUserData] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    useAuthRedirect();
     //const iconImages = [blueIcon, orangeIcon];
-
+    
     // Log out modal functions
     const openLogOutModal = () =>{
       setIsModalOpen(true)
@@ -28,7 +30,6 @@ export default function Profile() {
       setIsModalOpen(false);
   }
     
-
   // Nav routes
     const handleCollabClick = () => {
         setCurrentList('collab');
@@ -42,30 +43,24 @@ export default function Profile() {
         setCurrentList('seenIt');
       };
 
-
       // populate user profile with user info
       useEffect(() => {
         const fetchUserData = async () => {
+          const userId = auth.getUserId();
+            if (!userId) {
+              console.error("User ID is null. Cannot retrieve user data.");
+              return;
+            }
             try {
-              const userId = auth.getUserId();
-              if (userId === null) {
-                console.error("User ID is null. Cannot retrieve user data.");
-                return;
-              }
-              // Await the result of retrieveOneUser
               const data = await retrieveOneUser(userId);
               setUserData(data); // Set the resolved user data
-              
             } catch (err) {
               console.error("Error fetching user data:", err);
             }
           };
-        
           fetchUserData();
-          
       }, []);
  
-
   return (
     <div className="profile-container">
         <div className="profile-user">

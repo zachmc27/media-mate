@@ -24,7 +24,7 @@ export const discoverMedia = async () => {
 
 // gets a list of media based on a specific genre
 export const discoverMediaByGenre = async (genre: number) => {
-    const response = await fetch(`/api/media/discover?genre=${genre}`, {
+    const response = await fetch(`/api/media/discover/movie?genre=${genre}`, {
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${Auth.getToken()}`

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 import "../styles/Discover.css";
-
+import useAuthRedirect from "../utils/useAuthRedirect";
 import DetailsModal from "../components/DetailsModal";
 // import auth from "../utils/auth";
 import { discoverMedia, discoverMediaByGenre, keywordSearch,} from "../api/mediaAPI";
 import Media from "../interfaces/Media";
+import { addMediaToWatch } from "../api/toWatchAPI";
+import {addMediaToSeenIt, fetchSeenIt, getUserGenrePreferences,} from "../api/seenItAPI";
+
 
 export default function Discover() {
   const [popularMovies, setPopularMovies] = useState<Media[]>([]);
@@ -15,6 +18,7 @@ export default function Discover() {
   const [query, setQuery] = useState<string>(""); // State for search query
   const [searchResults, setSearchResults] = useState<Media[]>([]); // State for search results
   const [loading, setLoading] = useState<boolean>(false); // State for loading
+  useAuthRedirect();
   // const userId: number | null = auth.getUserId();
 
   useEffect(() => {
@@ -29,16 +33,28 @@ export default function Discover() {
     fetchDiscoverMovies();
     
     const fetchForYou = async () => {
+      console.log("FETCHFORYOU");
       try {
-        const favoriteGenre = 10402; //await fetchFavoriteGenre(userId);
-        const favoriteMovies = await discoverMediaByGenre(favoriteGenre);
-        setForYou(favoriteMovies);
+        const favoriteGenre = await getUserGenrePreferences(userId!); //await fetchFavoriteGenre(userId);
+        console.log("FAV GENRE =====", favoriteGenre);
+        if (typeof favoriteGenre === "number") {
+          const favoriteMovies = await discoverMediaByGenre(favoriteGenre);
+          setForYou(favoriteMovies);
+          console.log("THIS IS YOUR FAV", favoriteMovies);
+        } else {
+          const recentlyReleased = await discoverRecentlyReleased();
+          setForYou(recentlyReleased);
+        }
       } catch (error) {
         console.error("error", error);
       }
     };
     fetchForYou();
   }, []);
+  useEffect(() => {
+    console.log("the for your genres are" + forYou);
+    console.log("User ID equals" + userId);
+  }, [forYou]);
 
   // Modal Functionality
   const openModal = (mediaId: number) => {
@@ -56,7 +72,7 @@ export default function Discover() {
   // }, [popularMovies]);
   
   const handleSearch = async () => {
-    if (query.trim() === '') {
+    if (query.trim() === "") {
       setSearchResults([]); // Clear search results if query is empty
       return;
     }
