@@ -3,7 +3,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useDrag } from "react-use-gesture";
 import { FlickpickSession } from "../interfaces/FlickpickInterface";
 import { mediaInfo } from "../api/mediaAPI";
-import { createFlickPickMatchingList, submitMatchListResponses } from "../api/flickPicksAPI";
+import { createUserFlickPickList, submitMatchListResponses } from "../api/flickPicksAPI";
 import auth from '../utils/auth';
 import { addMediaToWatch } from "../api/toWatchAPI";
 import DetailsModal from "../components/DetailsModal";
@@ -46,7 +46,7 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
         if (!userId) return;
         const fetchFlickPickList = async () => {
             try {
-                const data = await createFlickPickMatchingList(userId!, quizId);
+                const data = await createUserFlickPickList(userId!, quizId);
                 if (data!) {
                     setFlickpickMediaList(data);
                     setFlickpickId(data.id);
