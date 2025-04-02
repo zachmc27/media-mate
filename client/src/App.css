@@ -91,7 +91,7 @@ a, .links{
     justify-content: center;
     border: 2px solid var(--light);
     background-color: var(--light);
-    height: 2.75rem;
+    height: 2.75em;
     border-radius: 5px;
     color: var(--dark);
     font: var(--subtitle-md) sans-serif;
@@ -104,7 +104,7 @@ a, .links{
     justify-content: center;
     border: 2px solid var(--light);
     background-color: transparent;
-    height: 2.75rem;
+    height: 2.75em;
     border-radius: 5px;
     color: var(--light);
     font: var(--subtitle-md) sans-serif;

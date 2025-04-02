@@ -25,11 +25,13 @@
   }
 
   .card-title{
-    line-height: 1.25;
+    
+    text-wrap: balance;
   }
 
   .card-year{
-    font: 0.5em sans-serif; /* Adjust font size if needed */
+    font: var(--subtitle-sm) sans-serif; /* Adjust font size if needed */
+    color: var(--light);
     line-height: 1.25;
   }
   
