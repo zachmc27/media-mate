@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import { getCollabLists } from "../api/flickPicksAPI.tsx";
-import Media from "../interfaces/Media.tsx";
+import CollabList from "../interfaces/CollabInterface";
 import auth from '../utils/auth.ts';
 import CollabListCard from "./CollabListCard";
 import DetailsModal from "./DetailsModal.tsx";
-// import "../styles/ToWatch.css";
 
 export default function CollabsList() {
-    const [collabsList, setCollabsList] = useState<Media[]>([]);
+    const [collabsList, setCollabsList] = useState<CollabList[]>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
-  const userId: number | null = auth.getUserId();
+    const userId: number | null = auth.getUserId();
 
   useEffect(() => {
     if (userId === null) {
@@ -30,10 +29,8 @@ export default function CollabsList() {
         console.log("An error occurred while fetching to watch data.");
       }
     };
-
     fetchData();
   }, [userId]);
-    
 
     // Details Modal Functionality
     const openModal = (mediaId: number) => {
@@ -44,24 +41,41 @@ export default function CollabsList() {
       setShowModal(false);
       setSelectedMediaId(null);
     };
+
+    useEffect(() => {
+      console.log(collabsList);
+    }, [collabsList] )
   
     return (
       <div className="movies-container">
-            {collabsList.length > 0 ? (
-              collabsList.map((item) => (
-                <CollabListCard
-                  key={item.id}
-                  detailsModal={openModal}
-                  title={item.media.title || item.name || "Unknown"}
-                  year={item.media.year}
-                  cover={`https://image.tmdb.org/t/p/w500${item.media.cover}`}
-                  mediaId={item.mediaId}
-                />
-              ))
-            ) : (
-              <p>Nothing to watch yet.</p>
-            )}
-          {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}
-      </div>
+      {/* Check if collabsList is empty or null */}
+      {collabsList.length === 0 ? (
+          <p className="error">No matching collabs available. Check your friends list to make some.</p>
+      ) : (
+          collabsList.map((collabInstance) => (
+              <div key={collabInstance.name}>
+                  <h4 className="collabName">{collabInstance.name}</h4>
+                  
+                  {/* Check if mediaDetails exists and has items */}
+                  {collabInstance.mediaDetails?.length > 0 ? (
+                      collabInstance.mediaDetails.map((mediaItems) => (
+                          <CollabListCard
+                              key={mediaItems.id}
+                              detailsModal={openModal}
+                              title={mediaItems.title || "Unknown"}
+                              year={mediaItems.year || 0}
+                              cover={`https://image.tmdb.org/t/p/w500${mediaItems.poster_path}`}
+                              mediaId={mediaItems.id}
+                          />
+                      ))
+                  ) : (
+                      <p className="error">No items in this collab list.</p>
+                  )}
+              </div>
+          ))
+      )}
+
+      {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}
+  </div>
     );
   }
