@@ -16,6 +16,41 @@ export async function findMatches(array: any[], array2: any[]): Promise<any[]> {
 //output: [123,133]
 
 
+/**
+ * Fetches and consolidates collaboration lists for a given user based on matches.
+ *
+ * This function retrieves all matches where the given `userId` is either `userOneId` or `userTwoId`.
+ * It consolidates the matches into unique user combinations, fetches user names, and appends
+ * match details and flick pick list IDs. Additionally, it fetches media details for each match.
+ *
+ * @param userId - The ID of the user for whom to fetch collaboration lists.
+ * @returns A promise that resolves to an array of collaboration objects, each containing:
+ * - `name`: A string representing the names of the two users in the collaboration.
+ * - `userOneId`: The ID of the first user in the collaboration.
+ * - `userTwoId`: The ID of the second user in the collaboration.
+ * - `matches`: An array of unique match IDs.
+ * - `flickPickListId`: An array of unique flick pick list IDs.
+ * - `mediaDetails`: An array of media details for each match.
+ *
+ * @throws Will throw an error if the database queries fail or if fetching media details fails.
+ *
+ * Example return value:
+ * ```typescript
+ * [
+ *   {
+ *     name: "Alice & Bob",
+ *     userOneId: 1,
+ *     userTwoId: 2,
+ *     matches: [101, 102],
+ *     flickPickListId: [201, 202],
+ *     mediaDetails: [
+ *       { id: 101, title: "Movie A", type: "movie" },
+ *       { id: 102, title: "Movie B", type: "movie" }
+ *     ]
+ *   }
+ * ]
+ * ```
+ */
 export async function getCollabLists(userId: number) {
     // Fetch all matches where the userId is either userOneId or userTwoId
     const matchesList = await Matches.findAll({
@@ -42,30 +77,35 @@ export async function getCollabLists(userId: number) {
                 userTwoId: Math.max(match.userOneId, match.userTwoId),
                 flickPickListId: [],
                 matches: []
-                
             };
         }
+
+        // Append matches and flickPickListId to the existing entry
         collabList[key].matches = collabList[key].matches.concat(match.matches);
         collabList[key].flickPickListId = collabList[key].flickPickListId.concat(match.flickPickListId);
     }
 
-    // Flatten the matches and flickPickListId arrays for each unique combination
+    // Flatten and deduplicate the matches and flickPickListId arrays for each unique combination
     Object.values(collabList).forEach((entry: any) => {
         entry.matches = Array.from(new Set(entry.matches.flat()));
         entry.flickPickListId = Array.from(new Set(entry.flickPickListId.flat()));
     });
 
     console.log(collabList);
-    //Loop through the collabList.matches and get the media details and add it to the collabList object
+
+    // Loop through the collabList.matches and fetch media details for each match
     for (const collab of Object.values(collabList)) {
         const mediaDetails = await Promise.all(
             collab.matches.map((matchId: number) => getMediaDetails(matchId, 'movie')) // Assuming 'movie' as the type
         );
         collab.mediaDetails = mediaDetails;
     }
+
+    // Return the consolidated collaboration list as an array
     return Object.values(collabList);
 }
-//example input
+
+// Example usage:
 // const matchesList = [
 //     { userOneId: 1, userTwoId: 2, matches: [1, 2, 3] },
 //     { userOneId: 2, userTwoId: 1, matches: [4, 5] },

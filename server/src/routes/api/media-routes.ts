@@ -131,7 +131,4 @@ router.get('/discover/:type', async (req: Request, res: Response) => {
     }
 });
 
-// // to do : build routes to create a session and add sessions
-// router.post('/api/media/sessions', async (req: Request, res: Response) => {});
-
 export { router as mediaRouter };

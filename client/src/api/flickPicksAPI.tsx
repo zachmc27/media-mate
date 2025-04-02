@@ -121,7 +121,27 @@ try {
 }
 
 // creates a new flickPickListMatchingSession
-export const createFlickPickMatchingList = async (userId: number, flickPickListId: number) => {
+/**
+ * Creates a FlickPickList matching session for a user.
+ *
+ * This function sends a POST request to the `/api/flickpicks/matches` endpoint
+ * to create a new matching session for the specified user and FlickPickList.
+ * It includes the user's authentication token in the request headers and
+ * sends the user ID and FlickPickList ID in the request body.
+ *
+ * @param userId - The ID of the user for whom the FlickPickList matching session is being created.
+ * @param flickPickListId - The ID of the FlickPickList to be associated with the matching session.
+ * @returns A promise that resolves to the created FlickPickList matching session data.
+ *          The returned data includes the session ID, user ID, FlickPickList ID, and list of choices.
+ * @throws An error if the request fails or the response is not OK.
+ *
+ * @example
+ * ```typescript
+ * const session = await createUserFlickPickList(123, 456);
+ * console.log(session);
+ * ```
+ */
+export const createUserFlickPickList = async (userId: number, flickPickListId: number) => {
 
 try {
   const response = await fetch('/api/flickpicks/matches', {
@@ -182,34 +202,8 @@ catch (error) {
   console.error('An error occurred while updating a flickPickList matching session');
 }
 }
-
-// // Push flickpick answers to backend
-// export const addFlickPickAnswers = async ( id: number, userId: number, userAnswers: number[] ) => {
-
-//   try {
-//     const response = await fetch(`/api/flickpicks/matches/${id}`, {
-//       method: 'PUT',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${Auth.getToken()}`
-//       },
-//       body: JSON.stringify({ userId, userAnswers }),
-//     });
-  
-//     if (!response.ok) {
-//       throw new Error(`Error: ${response.statusText}`);
-//     }
-  
-//     console.log("FlickPickList Matching Session Updated");
-//     console.log(response.json);
-//   }
-//   catch (error) {
-//     console.error('An error occurred while updating a flickPickList matching session');
-//   }
-//   }
-
 // gets all flickPickListMatchingSessions for a user
-export const getFlickPickListMatchingSessions = async (userId: number) => {
+export const getFlickPickListResponses = async (userId: number) => {
 try {
     const response = await fetch(`/api/flickpicks/matches/${userId}`, {
             headers: {
@@ -230,7 +224,7 @@ catch (error) {
 }
 
 // deletes a flickPickListMatchingSession by id
-export const deleteFlickPickListMatchingSession = async (id: number) => {
+export const deleteFlickPickList = async (id: number) => {
 try {
     const response = await fetch(`/api/flickpicks/matches/${id}`, {
             method: 'DELETE',

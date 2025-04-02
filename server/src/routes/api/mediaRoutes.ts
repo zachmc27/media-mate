@@ -31,7 +31,7 @@ router.get("/details/:id", async (req: Request, res: Response) => {
   }
 });
 
-// route gets the search results for a keyword utilizing the mediaApi keyWordSearch function
+// route gets the search results for a keyword search
 router.get("/keyword/", async (req: Request, res: Response) => {
   const keyword = req.query.keyword;
   try {
@@ -149,6 +149,7 @@ router.get("/discover/:type", async (req: Request, res: Response) => {
   }
 });
 
+// Route for getting recently released movies
 router.get("/movie/recent", async (_req: Request, res: Response) => {
     const baseUrl = process.env.TMDB_BASE_URL;
 
