@@ -36,24 +36,20 @@ export const getUserGenrePreferences = async (userId: number) => {
       throw new Error(`Error: ${response.statusText}`);
     }
     const data = await response.json();
-    console.log('ATTEMPTING TO GET DATA', data);
 
     // Flatten all numbers into a single array
 const allNumbers = data.flatMap((item: any) => item.media.genre);
 
-console.log("LOGGING NUMBERS", allNumbers)
 // Count occurrences of each number
 const frequencyMap = allNumbers.reduce<any>((acc, num) => {
     acc[num] = (acc[num] || 0) + 1;
     return acc;
 }, {});
 
-console.log('============',frequencyMap);
 
 // // Find the most common number
 const mostCommonNumber = Object.entries(frequencyMap)
     .reduce((a, b) => (b[1] > a[1] ? b : a))[0];
-console.log("Most Common Number:", mostCommonNumber);
 return parseInt(mostCommonNumber);
 
 } catch (error) {

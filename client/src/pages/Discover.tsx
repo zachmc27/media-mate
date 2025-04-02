@@ -6,9 +6,7 @@ import DetailsModal from "../components/DetailsModal";
 import auth from "../utils/auth";
 import { discoverMedia, discoverMediaByGenre, keywordSearch,} from "../api/mediaAPI";
 import Media from "../interfaces/Media";
-import { addMediaToWatch } from "../api/toWatchAPI";
-import {addMediaToSeenIt, fetchSeenIt, getUserGenrePreferences,} from "../api/seenItAPI";
-
+import { getUserGenrePreferences } from "../api/seenItAPI";
 
 export default function Discover() {
   const [popularMovies, setPopularMovies] = useState<Media[]>([]);
@@ -35,11 +33,9 @@ export default function Discover() {
       console.log("FETCHFORYOU");
       try {
         const favoriteGenre = await getUserGenrePreferences(userId!); //await fetchFavoriteGenre(userId);
-        console.log("FAV GENRE =====", favoriteGenre);
         if (typeof favoriteGenre === "number") {
           const favoriteMovies = await discoverMediaByGenre(favoriteGenre);
           setForYou(favoriteMovies);
-          console.log("THIS IS YOUR FAV", favoriteMovies);
         } else {
           const recentlyReleased = await discoverRecentlyReleased();
           setForYou(recentlyReleased);
@@ -51,8 +47,6 @@ export default function Discover() {
     fetchForYou();
   }, []);
   useEffect(() => {
-    console.log("the for your genres are" + forYou);
-    console.log("User ID equals" + userId);
   }, [forYou]);
 
   // Modal Functionality
@@ -78,8 +72,10 @@ export default function Discover() {
 
     setLoading(true);
     try {
-      const results = await keywordSearch(query); // API call to search for movies
-      setSearchResults(results);
+      const results: Media[] = await keywordSearch(query); // API call to search for movies
+      const filteredResults = results.filter(
+      (movie) => movie.cover && typeof movie.cover === "string"); // Ensures that the movie must have artwork to be shown 
+      setSearchResults(filteredResults);
     } catch (error) {
       console.error("Search failed:", error);
     } finally {
