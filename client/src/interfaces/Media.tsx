@@ -24,3 +24,4 @@ interface MediaDetails {
     year: number;
     cover: string;  // This matches the 'cover' field from your data
 }
+
