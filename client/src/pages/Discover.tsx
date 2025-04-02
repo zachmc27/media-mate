@@ -3,7 +3,7 @@ import "../App.css";
 import "../styles/Discover.css";
 
 import DetailsModal from "../components/DetailsModal";
-// import auth from "../utils/auth";
+import auth from "../utils/auth";
 import { discoverMedia, discoverMediaByGenre, keywordSearch,} from "../api/mediaAPI";
 import Media from "../interfaces/Media";
 import { addMediaToWatch } from "../api/toWatchAPI";
@@ -18,7 +18,7 @@ export default function Discover() {
   const [query, setQuery] = useState<string>(""); // State for search query
   const [searchResults, setSearchResults] = useState<Media[]>([]); // State for search results
   const [loading, setLoading] = useState<boolean>(false); // State for loading
-  // const userId: number | null = auth.getUserId();
+  const userId: number | null = auth.getUserId();
 
   useEffect(() => {
     const fetchDiscoverMovies = async () => {
