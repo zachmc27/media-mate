@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 
-// uncomment once implementing friendlist logic
+
 import Friends from "./Friends"
 
 //visual assets
@@ -49,6 +49,7 @@ const Navbar = () => {
         </Link>
       </div>
     </div>
+    
     {friendActive && <Friends />}
     </>
   )

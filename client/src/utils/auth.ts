@@ -28,6 +28,7 @@ class AuthService {
     const userId = localStorage.getItem("user_Id");
     return userId ? parseInt(userId, 10) : null;
   }
+  
 }
 
 export default new AuthService();
