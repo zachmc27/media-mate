@@ -3,8 +3,8 @@ import "../styles/Listtease.css"
 import { useEffect, useState } from "react";
 import { discoverMediaByGenre } from "../api/mediaAPI.tsx";
 import Media from "../interfaces/Media.tsx";
-// import auth from '../utils/auth';
 import DetailsModal from "../components/DetailsModal";
+import { Link } from "react-router-dom";
 
 export default function Listtease() {
     const [mediaList, setMediaList] = useState<Media[]>([]);
@@ -48,9 +48,9 @@ export default function Listtease() {
         <div className="list-title">Brett & Misha</div>   
         <div className="list-1">
             {mediaList.slice(0, 3).map((item) => (
-            <div className="card" key={item.id} onClick={() => openModal(item.id)}>
+            <div className="cover" key={item.id} onClick={() => openModal(item.id)}>
               <img src={`https://image.tmdb.org/t/p/w500${item.cover}`} alt={item.title} />
-              <p className="card-title">{item.title}</p>
+              <p className="cover-title">{item.title}</p>
             </div>
           ))} 
         </div>
@@ -61,16 +61,16 @@ export default function Listtease() {
     <div className="list-section">
         <div className="list-title">Watch Later</div>   
         <div className="list-2">
-        {mediaList.slice(3, 6).map((item) => (
-            <div className="card" key={item.id} onClick={() => openModal(item.id)}>
+        {mediaList.slice(4, 6).map((item) => (
+            <div className="cover" key={item.id} onClick={() => openModal(item.id)}>
               <img src={`https://image.tmdb.org/t/p/w500${item.cover}`} alt={item.title} />
-              <p className="card-title">{item.title}</p>
+              <p className="cover-title">{item.title}</p>
             </div>
           ))}
         </div>
     </div>
     <div className="explore">
-      <h3>Explore more...</h3>
+       <Link to="/profile" className="explore-text">Explore more...</Link>
     </div>
     {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}
   </div>
