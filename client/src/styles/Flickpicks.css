@@ -12,7 +12,9 @@
 .info-blurb {
     position: absolute;
     top: 15%;
-    width: 350px;
+    max-width: 350px;
+    min-width: 80px;
+    padding: 5px;
     height: fit-content;
     margin: 0 auto;
     font-size: 15px;
@@ -21,23 +23,26 @@
 
 .cards-row {
     position: absolute;
-    top: 25%;
-    left: 10%;
+    top: 35%;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 50px;
     height: fit-content;
     width: fit-content;
-
 }
 
 .card {
+    flex: 1 1 calc(25% - 20px); 
+    max-width: 200px; 
+    min-width: 50px;
     border: 1px solid black;
-    height: 200px;
-    width: 200px;
+    overflow: hidden;
     margin-top: 50px;
     text-align: center;
     opacity: 80%;
+    flex: 1 1 100%;
 }
 
 .card:hover {
@@ -49,7 +54,8 @@
 
 .card img {
     width: 100%;
-    height: 100%
+    height: auto;
+    object-fit: cover;
 }
 
 .card-title {
@@ -61,4 +67,17 @@
 .flickpicksCard {
     height: 500px;
     width: 400px;
+}
+
+@media (max-width: 768px) {
+    .card {
+        max-width: 100px;
+        flex: 1 1 calc(50% - 20px); /* Make cards take 50% width on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        flex: 1 1 100%; /* Make cards take full width on very small screens */
+    }
 }

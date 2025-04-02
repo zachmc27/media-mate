@@ -1,11 +1,12 @@
 .discover-container {
     display: flex;
     padding-top: 125px;
-    height: 90vh;
+    height: fit-content;
     font: 1.25em sans-serif;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    border: 1px solid blue;
 }
 
 .list-container {
@@ -14,40 +15,51 @@
     justify-content: flex-start;
     align-items: flex-start;
     padding: 0.5em;
+    border: 1px solid lime;
+    width: 85%;
+    height: fit-content;
+    margin: 10px
   }
 
 .list-container p{
     margin: -0.125em;
+    font-size: 20px;
 }
 
 .movies-container {
     display: flex;
     flex-direction: row;
-    height: 250px;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    border: 1px solid orange;
   }
 
   .movies-container .card {
-    width: 8em; /* Smaller width for MovieCards in movies-container */
-    height: auto; /* Adjust height dynamically */
+    width: 4em; /* Smaller width for MovieCards in movies-container */
+    height: fit-content; /* Adjust height dynamically */
     font-size: 0.75em; /* Scale down text size */
     margin: 0.5em; /* Add spacing between cards */
+    border: 1px solid white
   }
 
   .search-bar-container{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 90%;
+    padding: 10px;
     font: 1em sans-serif;
     gap: 3em;
     margin-bottom: 2em;;
+    border: 1px solid lime
   }
 
   .search-bar{
     width: 65%;
     padding-left: 0.25em;
     padding-right: 0.25em;
-    border: 1px solid #000000;
+    border: 1px solid #0fdfff;
     border-radius: 3.5px;
     height: 1.75rem;
   }
@@ -70,6 +82,7 @@
     position: relative;
     display: inline-block;
     overflow: hidden;
+    border: 1px solid white
   }
 
   .image-container img {
@@ -77,17 +90,22 @@
     width: 100%;
   }
 
-  .image-container button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    background-color: yellowgreen;
-    cursor: pointer;
-    
+  @media (max-width: 425px) {
+    .search-button {
+      font-size: .6em
+    }
+
+    .search-bar-container{
+      gap: 2em
+    }
   }
 
-  .image-container button:hover {
-    background-color: green;
-    visibility: visible;
+  @media (max-width: 375px) {
+    .search-button {
+      font-size: .5em
+    }
+
+    .search-bar-container{
+      gap: 1em
+    }
   }
