@@ -214,6 +214,7 @@ router.get('/collabs/:userId', async (req: Request, res: Response) => {
 
     try {
         const collabList = await matches.getCollabLists(parseInt(userId));
+        
         res.json(collabList);
     } catch (err) {
         res.status(400).json({ error: err });
