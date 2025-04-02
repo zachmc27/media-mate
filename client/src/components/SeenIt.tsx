@@ -10,7 +10,6 @@ export default function SeenItList() {
     const [seenList, setSeenList] = useState<Media[]>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
-
     const userId: number | null = auth.getUserId();    
   
     useEffect(() => {  

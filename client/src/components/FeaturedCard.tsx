@@ -63,7 +63,7 @@ export default function FeaturedCard() {
   return (
     <div className="featured-box">
       <div className="label-box">
-      <h1 className="label">Featured</h1>
+      <h1 className="title-xl-light">FEATURED</h1>
       </div>
       <div className="video">
         <ReactPlayer 
@@ -77,10 +77,10 @@ export default function FeaturedCard() {
          ></ReactPlayer>
       </div>
       <div className="info">
-        <h2>{mediaItem?.title}</h2>
-        <p>{mediaItem?.year}</p>
-        <p>{mediaItem?.overview}</p>
-        <p>{mediaItem?.cast}</p>
+        <h2 className="title-md-light">{mediaItem?.title}</h2>
+        <p className="p-light">{mediaItem?.year}</p>
+        <p className="p-light">{mediaItem?.overview}</p>
+        <p className="p-light">{mediaItem?.cast}</p>
       </div>
     </div>
   )

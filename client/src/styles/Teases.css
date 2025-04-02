@@ -1,6 +1,6 @@
 .teases-box {
     position: relative;
-    border-top: 1px solid black;
+    border-top: 2px solid var(--light);
     height: 350px;
     width: 60%;
     margin-bottom: 300px;
@@ -13,7 +13,8 @@
 }
 
 .tease-title {
-    font-size: 25px;
+    font: var(--title-lg) sans-serif;
+    font-weight: bold;
     opacity: 50%;
 }
 

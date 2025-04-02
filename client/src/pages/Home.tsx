@@ -7,7 +7,7 @@ import useAuthRedirect from "../utils/useAuthRedirect";
 export default function Home() {
   useAuthRedirect();
   return (
-    <div className="section home">
+    <div className="home">
         <FeaturedCard />
         <Teases />
     </div>

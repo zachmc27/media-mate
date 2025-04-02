@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
+//import './index.css';
+import "./App.css";
 
 import App from './App.tsx';
 
@@ -12,6 +13,7 @@ import Match from './pages/Match.tsx';
 import Profile from './pages/Profile.tsx';
 import Discover from './pages/Discover.tsx';
 import Flickpicks from './pages/Flickpicks.tsx';
+import Test from './pages/StyleTestPage.tsx';
 
 
 const router = createBrowserRouter([
@@ -43,7 +45,11 @@ const router = createBrowserRouter([
       {
         path: '/discover',
         element: <Discover />
-      },   
+      },  
+      {
+        path: '/test',
+        element: <Test />
+      }, 
     ]
   }
 ])

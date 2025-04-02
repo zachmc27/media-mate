@@ -7,7 +7,7 @@ export default function Actionmodal({ children, cancel }: { children: React.Reac
       <div className="action-modal">
         {children}
         <div className="modal-buttons">
-                <button onClick={cancel} className="close-button">Okay</button>
+                <button onClick={cancel} className="close-button btn-fill">Okay</button>
             </div>
         
       </div>

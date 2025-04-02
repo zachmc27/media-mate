@@ -14,7 +14,8 @@
 .list-1, .list-2 {
     display: flex;
     flex-direction: row;
-    gap: 30px
+    gap: 30px;
+    align-items: flex-start; /* Ensure consistent vertical alignment */
 }
 
 .list-title {
@@ -23,7 +24,7 @@
 
 .cover {
     height: fit-content;
-    width: fit-content;
+    width: 100px;
     text-align: center;
 }
 
@@ -34,13 +35,15 @@
 
 .card-title {
     margin-top: 10px; 
-    font-size: 16px; 
+    font: var(--subtitle-sm) sans-serif; 
+    color: var(--light);
     font-weight: bold;
+    overflow-wrap: break-word;
 }
 
 .vert-rule {
-    border-left: 1px solid black;
-    height: 70%;
+    border-left: 2px solid var(--light);
+    height: 90%;
 }
 
 .explore {
@@ -51,7 +54,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black
+    border: 1px solid black;
+    font: var(--subtitle-sm) sans-serif;
+    color: var(--light);
 }
 
 .explore-text {

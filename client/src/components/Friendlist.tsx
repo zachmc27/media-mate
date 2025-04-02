@@ -3,7 +3,9 @@ import "../styles/Friendlist.css"
 import { deleteFriend, fetchFriends } from "../api/friendAPI";
 import { useEffect, useState } from "react";
 import { UserData } from "../interfaces/UserData";
+import { MatchList } from "../interfaces/FlickpickInterface";
 import Actionmodal from "./Actionmodal";
+import { initiateFlickPickMatching, getFlickPickListMatchingSessions } from "../api/flickPicksAPI";
 // import { retrieveUser } from "../api/userAPI";
 
 export default function Friendlist() {
@@ -13,7 +15,8 @@ export default function Friendlist() {
  const [selectedFriend, setSelectedFriend] = useState<UserData | null>(null);
  const [userId, setUserId] = useState(0);
  const [isFlickListOpen, setFlickListOpen] = useState(false)
- const [selectedList, setSelectedList] = useState('')
+ const [selectedList, setSelectedList] = useState<number | null>(null)
+ const [matchListsCompleted, setMatchListsCompleted] = useState<MatchList[] | null>(null);
 
  useEffect(() => {
     async function fetchData() {
@@ -25,7 +28,7 @@ export default function Friendlist() {
             try {
               const fetchedList = await fetchFriends(id);
               setFriends(fetchedList); 
-              await setUserId(parseInt(id))
+              setUserId(parseInt(id))
             } catch (error) {
               console.error("Error fetching friends:", error);
             }
@@ -60,22 +63,57 @@ const cancel = () => {
 
 const handleMatchClick = async (friend: UserData) => {
   setSelectedFriend(friend)
+  // console.log("Friend: " + friend.id);
   setFlickListOpen(true)
 }
 
-const matchLists = async () => {
-  alert(`Matching ${selectedList}...`)
-  setFlickListOpen(false)
+useEffect(() => {
+  console.log("triggered getflickpickmatchingsessions, userId is " + userId);
+    const getMatchingLists = async (userId: number) => {
+        try {
+            const response = await getFlickPickListMatchingSessions(userId);
+            setMatchListsCompleted(response);
+        } catch (error) {
+            console.error("Error fetching match lists:", error);
+        }
+    };
+    getMatchingLists(userId)
+}, [userId])
+
+useEffect(() => {
+  console.log("my match lists: " + matchListsCompleted);
+}, [matchListsCompleted])
+
+
+const handleFlickClick = async (selection: number) => {
+  setSelectedList(selection)
 }
 
-const handleFlickClick = async (selection: string) => {
-  setSelectedList(selection)
+const matchLists = async () => {
+  if (!selectedFriend || selectedList === null) {
+    console.error("Error: Friend or list selection is missing.");
+    return;
+  }
+  if (!selectedFriend.id) {
+    console.error("Error: Friend id is missing.");
+    return;
+  }
+  alert(`Matching ${selectedFriend.username!}...`)
+  try {
+    console.log("Friend: " + selectedFriend.id);
+    await initiateFlickPickMatching(userId!, selectedFriend.id, selectedList);
+    console.log("FlickPick match created");
+  } catch (error) {
+    console.error("Error creating match list");
+  }
+  setSelectedFriend(null);
+  setSelectedList(null);
+  setFlickListOpen(false)
 }
 
  if (loading) {
     return <div>Loading...</div>
  }
-
 
   return (
     <div className="friendlist">
@@ -100,9 +138,11 @@ const handleFlickClick = async (selection: string) => {
             <Actionmodal cancel={cancel} confirm={matchLists}>
               <p>Which list would you like to compare?</p>
               <ul className="flicklist">
-                <button className="flicklist-item" onClick={() => {handleFlickClick('Comedy')}}> Comedy</button>
-                <button className="flicklist-item" onClick={() => {handleFlickClick('Horror')}}>Horror</button>
-                <button className="flicklist-item" onClick={() => {handleFlickClick('Drama')}}>Drama</button>
+              {matchListsCompleted ? 
+              matchListsCompleted.map((item: MatchList) => (
+                <button className="flicklist-item" onClick={() => {handleFlickClick(item.flickPickListId)}}>{item.flickPickListName}</button>   
+              )
+              ) : (<li>You don't have any completed flickpicks.</li> )}             
               </ul>
             </Actionmodal>
           )

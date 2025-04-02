@@ -1,15 +1,19 @@
 import { Op } from 'sequelize';
 import { Matches } from '../../models/matches.js';
 import { User } from '../../models/user.js'; // Ensure the file exists and is named 'users.ts' or 'users.js'
+// Ensure the file exists at the correct path or update the path accordingly
+import { getMediaDetails } from './mediaAPI.js';
+
 
 
 export async function findMatches(array: any[], array2: any[]): Promise<any[]> {
-    const matches = array.filter((item, index) => item === array2[index]);
+    const matches = array.filter(item => array2.includes(item));
     return matches;
 }
+// This code is redundant as the logic is already implemented in the findMatches function
 
-//input: [ 'a', 'b', 'c' ,'f','6'], [ 'a', '6', 'c' ]
-//output: [ 'a', 'c' ]
+//input: [ 123,133,4324] [ 123,133]
+//output: [123,133]
 
 
 export async function getCollabLists(userId: number) {
@@ -25,7 +29,7 @@ export async function getCollabLists(userId: number) {
     });
 
     // Consolidate matches into a single object with unique userOneId-userTwoId combinations
-    const collabList: Record<string, { userOneId: number; userTwoId: number; matches: any[]; flickPickListId: any[]; name?: string }> = {};
+    const collabList: Record<string, { userOneId: number; userTwoId: number; matches: any[]; flickPickListId: any[]; name?: string; mediaDetails?: any[] }> = {};
 
     for (const match of matchesList) {
         const key = `${Math.min(match.userOneId, match.userTwoId)}-${Math.max(match.userOneId, match.userTwoId)}`;
@@ -52,6 +56,13 @@ export async function getCollabLists(userId: number) {
     });
 
     console.log(collabList);
+    //Loop through the collabList.matches and get the media details and add it to the collabList object
+    for (const collab of Object.values(collabList)) {
+        const mediaDetails = await Promise.all(
+            collab.matches.map((matchId: number) => getMediaDetails(matchId, 'movie')) // Assuming 'movie' as the type
+        );
+        collab.mediaDetails = mediaDetails;
+    }
     return Object.values(collabList);
 }
 //example input
