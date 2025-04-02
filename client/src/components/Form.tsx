@@ -43,9 +43,9 @@ function LoginForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetState
       const data = await login(loginData);
       // If login is successful, call Auth.login to store the token in localStorage
       Auth.login(data.token, data.userId);
-    } catch (err: any) {
+    } catch (err) {
       console.error('Failed to login', err);  // Log any errors that occur during login
-      alert(err.message || 'Login failed'); // Show an alert with the error message
+      alert( 'Login failed'); // Show an alert with the error message
     }
   };
 
@@ -155,9 +155,9 @@ function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStat
        // Switch to login form after successful registration
 
       setIsModalOpen(true);
-    } catch (err: any) {
+    } catch (err) {
       console.error("Error during registration:", err);
-      alert(err.message || "An error occured during registration"); // Show error message to the user
+      alert("An error occured during registration"); // Show error message to the user
     }
   } else {
     alert(passwordError);
