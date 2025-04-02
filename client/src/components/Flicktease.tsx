@@ -38,7 +38,7 @@ export default function Flicktease() {
     {currentQuiz === null ? (
       <div className="tease-row">
         {flickpickList === null ? (
-          <p className="error">Error, no flickpick lists available</p>
+          <p className="error">Error, no flickpick lists available.</p>
         ) : (
         flickpickList.slice(0, 4).map((flickpick) => (
           <div key={flickpick.id} className="flick-card" onClick={() => setCurrentQuiz(flickpick.id)}>
