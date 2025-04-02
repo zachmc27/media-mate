@@ -3,12 +3,15 @@ import { fetchSeenIt, removeMediaFromSeenIt } from "../api/seenItAPI";
 import Media from "../interfaces/Media.tsx";
 import auth from '../utils/auth';
 import SeenItCard from "./SeenItCard.tsx";
+import DetailsModal from "../components/DetailsModal";
 // import "../styles/SeenIt.css";
 
 export default function SeenItList() {
     const [seenList, setSeenList] = useState<Media[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
 
     const userId: number | null = auth.getUserId();    
     if (userId === null) {
@@ -32,7 +35,6 @@ export default function SeenItList() {
           setLoading(false);
         }
       };
-  
       fetchData();
     }, [userId]);
 
@@ -44,6 +46,16 @@ export default function SeenItList() {
           console.error("Error removing item:", error);
       }
     };
+
+    // Details Modal Functionality
+    const openModal = (mediaId: number) => {
+      setSelectedMediaId(mediaId);
+      setShowModal(true);
+    };
+    const closeModal = () => {
+      setShowModal(false);
+      setSelectedMediaId(null);
+    };
   
     if (loading) return <p>Loading your Seen It list...</p>;
     if (error) return <p className="error">{error}</p>;
@@ -54,6 +66,7 @@ export default function SeenItList() {
               seenList.map((item) => (
                 <SeenItCard
                 key={item.id}
+                detailsModal={openModal}
                 title={item.media.title || item.name || "Unknown"}
                 year={item.media.year}
                 cover={`https://image.tmdb.org/t/p/w500${item.media.cover}`}
@@ -64,6 +77,7 @@ export default function SeenItList() {
             ) : (
               <p>Nothing seen yet.</p>
             )}
+            {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}
       </div>
     );
   }

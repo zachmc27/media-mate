@@ -1,6 +1,60 @@
 import Auth from '../utils/auth';
 import { FlickpickSession } from '../interfaces/FlickpickInterface';
 
+
+
+
+// gets the unique CallabList for a userId
+
+export async function getCollabLists(userId: number){
+
+try {
+    const response = await fetch(`/api/flickpicks/collabs/${userId}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${Auth.getToken()}`
+            }
+        });
+    if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+    const collabList = await response.json();
+    return (collabList);
+}catch (error) {
+    console.error('An error occurred while fetching flickPicks data');
+}
+}
+// expected output: [
+  // [
+  //   {
+  //     "name": "Sunny Scribe & Radiant Comet",
+  //     "userOneId": 1,
+  //     "userTwoId": 2,
+  //     "flickPickListId": [
+  //       1
+  //     ],
+  //     "matches": [
+  //       1125899
+  //     ]
+  //   },
+  //   {
+  //     "name": "Sunny Scribe & Unknown",
+  //     "userOneId": 1,
+  //     "userTwoId": 4,
+  //     "flickPickListId": [
+  //       1
+  //     ],
+  //     "matches": [
+  //       1125899
+  //     ]
+  //   }
+  // ]
+
+
+
+
+
 // sends a get Request to the server to get the list of flickPickList
 export async function getFlickPicksList(){
 try {

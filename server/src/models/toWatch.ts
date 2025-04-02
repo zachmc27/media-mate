@@ -7,7 +7,6 @@ interface ToWatchAttributes {
 
     id?: number;
     mediaId: number;
-    Title: string;
     userId: number;
 
 }
@@ -17,7 +16,6 @@ interface ToWatchCreationAttributes extends Optional<ToWatchAttributes, 'id'> {}
 export class ToWatch extends Model<ToWatchCreationAttributes, ToWatchAttributes> implements ToWatchAttributes {
     public id!: number;
     public mediaId!: number;
-    public Title!: string;
     public userId!: number;
 
     // Method to create a to watch item
@@ -52,7 +50,6 @@ export class ToWatch extends Model<ToWatchCreationAttributes, ToWatchAttributes>
 
             return await ToWatch.create({
                 mediaId: mediaItem.id,
-                Title: data.Title,
                 userId: data.userId,
             });
         } catch (error) {
@@ -104,10 +101,6 @@ export function ToWatchListFactory(sequelize: Sequelize): typeof ToWatch {
             },
             mediaId: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
-            },
-            Title: {
-                type: DataTypes.STRING,
                 allowNull: false,
             },
             userId: {
