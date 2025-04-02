@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import FlickpickQuiz from "../components/FlickpickQuiz";
 import { getFlickPicksList } from "../api/flickPicksAPI";
 import { Flickpick } from "../interfaces/FlickpickInterface";
+import useAuthRedirect from "../utils/useAuthRedirect";
 
 export default function Flickpicks() {
         const [currentQuiz, setCurrentQuiz] = useState<number | null>(null);
         const [flickpickList, setFlickpickList] = useState<Flickpick[] | null>(null);
         const [error, setError] = useState<string | null>(null);
         const [loading, setLoading] = useState<boolean>(true);
+        useAuthRedirect();
 
     useEffect(() => {
         const fetchFlickPickList = async () => {

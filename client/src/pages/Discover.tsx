@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 import "../styles/Discover.css";
-
+import useAuthRedirect from "../utils/useAuthRedirect";
 import DetailsModal from "../components/DetailsModal";
 // import auth from "../utils/auth";
 import { discoverMedia, discoverMediaByGenre, keywordSearch,} from "../api/mediaAPI";
@@ -15,6 +15,7 @@ export default function Discover() {
   const [query, setQuery] = useState<string>(""); // State for search query
   const [searchResults, setSearchResults] = useState<Media[]>([]); // State for search results
   const [loading, setLoading] = useState<boolean>(false); // State for loading
+  useAuthRedirect();
   // const userId: number | null = auth.getUserId();
 
   useEffect(() => {

@@ -8,18 +8,13 @@ import DetailsModal from "../components/DetailsModal";
 
 export default function ToWatchList() {
     const [toWatchList, setToWatchList] = useState<Media[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
-    const userId: number | null = auth.getUserId();
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
-    
+    const userId: number | null = auth.getUserId();
+   
     if (userId === null) {
-        setError("You must be logged in to access this page.");
-        setLoading(false);
-        return;
-      }
-
+      return;
+    }
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -27,12 +22,10 @@ export default function ToWatchList() {
           if (data) {
             setToWatchList(data);
           } else {
-            setError("Failed to fetch data.");
+            console.log("Failed to fetch data.");
           }
         } catch (error) {
-          setError("An error occurred while fetching to watch data.");
-        } finally {
-          setLoading(false);
+          console.log("An error occurred while fetching to watch data.");
         }
       };
   
@@ -72,9 +65,6 @@ export default function ToWatchList() {
       setShowModal(false);
       setSelectedMediaId(null);
     };
-
-    if (loading) return <p>Loading your To Watch list...</p>;
-    if (error) return <p className="error">{error}</p>;
   
     return (
       <div className="movies-container">
