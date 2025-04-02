@@ -105,13 +105,13 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
         }
     };
 
-    // Console logging choices
-    useEffect(() => {
-        console.log("Updated mediaDetails: ", mediaDetails);
-        console.log("Updated Selected list: ", flickpickAnswers)
-        console.log(flickpickMediaList);
-        console.log(flickpickId);
-    }, [mediaDetails]);    
+    // // Console logging choices
+    // useEffect(() => {
+    //     console.log("Updated mediaDetails: ", mediaDetails);
+    //     console.log("Updated Selected list: ", flickpickAnswers)
+    //     console.log(flickpickMediaList);
+    //     console.log(flickpickId);
+    // }, [mediaDetails]);    
 
     // This is the motion functionality on the quiz
     const bind = useDrag(({ movement: [, my], down }) => {

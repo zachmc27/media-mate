@@ -12,10 +12,11 @@ export default function ToWatchList() {
     const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
     const userId: number | null = auth.getUserId();
    
-    if (userId === null) {
-      return;
-    }
+   
     useEffect(() => {
+      if (userId === null) {
+        return;
+      }
       const fetchData = async () => {
         try {
           const data = await fetchToWatch(userId);
@@ -34,7 +35,7 @@ export default function ToWatchList() {
     
     const handleRemove = async (mediaId: number) => {
         try {
-            await removeMediaToWatch(userId, mediaId);
+            await removeMediaToWatch(userId!, mediaId);
             
             // **Update the state after removing an item**
             setToWatchList((prevItems) => prevItems.filter((item) => item.mediaId !== mediaId));

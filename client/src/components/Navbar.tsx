@@ -25,7 +25,7 @@ const Navbar = () => {
   return (
     <>
     <div className="navbar">
-      <div className="logo">Cinematch</div>
+      <div className="logo title-lg-dark">CINEMATCH</div>
       <div className="tabs-box">
         <Link to="/" className={location.pathname === '/' ? "tab selected" : "tab"}>
           <img src={house} alt="home icon" />

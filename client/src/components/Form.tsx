@@ -43,15 +43,15 @@ function LoginForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetState
       const data = await login(loginData);
       // If login is successful, call Auth.login to store the token in localStorage
       Auth.login(data.token, data.userId);
-    } catch (err: any) {
+    } catch (err) {
       console.error('Failed to login', err);  // Log any errors that occur during login
-      alert(err.message || 'Login failed'); // Show an alert with the error message
+      alert( 'Login failed'); // Show an alert with the error message
     }
   };
 
   return(
     <form className='form login-form' onSubmit={handleSubmit}>
-        <h1>Log In</h1>
+        <h1 className="title-xl-light">Log In</h1>
         {/* Username input field */}
         <div className="form-group">
           {/* <label>Username</label> */}
@@ -78,10 +78,10 @@ function LoginForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetState
         </div>
   
         <div className="form-group">
-          <button className="form-button " type='submit'>Log In</button>
+          <button className="btn-lined" type='submit'>Log In</button>
         </div>
         <div >
-        <p>Don't have an account? <a href="#" onClick={(e) => {
+        <p className="p-light">Don't have an account? <a href="#" onClick={(e) => {
                         e.preventDefault(); // Prevent default link behavior
                         setShowForm('signup'); // Switch to the signup form
                     }}>
@@ -155,9 +155,9 @@ function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStat
        // Switch to login form after successful registration
 
       setIsModalOpen(true);
-    } catch (err: any) {
+    } catch (err) {
       console.error("Error during registration:", err);
-      alert(err.message || "An error occured during registration"); // Show error message to the user
+      alert("An error occured during registration"); // Show error message to the user
     }
   } else {
     alert(passwordError);
@@ -166,7 +166,7 @@ function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStat
 
   return (
             <form className='form signup-form' onSubmit={handleSubmit}>
-                <h1>Sign Up</h1>
+                <h1 className="title-xl-light">Sign Up</h1>
                 <div className="form-group">
                     <input 
                         className="form-input"
@@ -215,17 +215,17 @@ function SignupForm({ setShowForm }: { setShowForm: React.Dispatch<React.SetStat
 
                 { isModalOpen && (
                   <NotifyModal cancel={closeModal}>
-                      <p>{`${signUpData.username}'s account has been made!`}</p>
+                      <p className="p-light">{`${signUpData.username}'s account has been made!`}</p>
                   </NotifyModal>
                   )
                             
                 }
 
                 <div className="form-group">
-                    <button className="form-button" type='submit'>Sign Up</button>
+                    <button className="btn-lined" type='submit'>Sign Up</button>
                 </div>
                 <div>
-                    <p>
+                    <p className="p-light">
                         Already have an account?{' '}
                         <a href="#" onClick={(e) => {
                             e.preventDefault(); // Prevent default link behavior

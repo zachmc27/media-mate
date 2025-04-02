@@ -14,7 +14,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000; 
-    background-color: white;
+    background-color: var(--medium);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -28,8 +28,6 @@
   
   .close-button, .yes-button {
     margin-top: 10px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
     padding: 5px 10px;
     cursor: pointer;
   }

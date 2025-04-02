@@ -11,11 +11,12 @@ export default function SeenItList() {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
     const userId: number | null = auth.getUserId();    
-    if (userId === null) {
-      return;
-    }
-
+  
     useEffect(() => {  
+      if (userId === null) {
+        return;
+      }
+  
       const fetchData = async () => {
         try {
           const data = await fetchSeenIt(userId);
@@ -31,7 +32,7 @@ export default function SeenItList() {
 
     const handleRemove = async (mediaId: number) => {
       try {
-          await removeMediaFromSeenIt(userId, mediaId);
+          await removeMediaFromSeenIt(userId!, mediaId);
           setSeenList((prevItems) => prevItems.filter((item) => item.mediaId !== mediaId));
       } catch (error) {
           console.error("Error removing item:", error);

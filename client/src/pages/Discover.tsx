@@ -45,7 +45,7 @@ export default function Discover() {
       }
     };
     fetchForYou();
-  }, []);
+  }, [userId]);
   useEffect(() => {
   }, [forYou]);
 

@@ -37,7 +37,7 @@
 }
 
 .vert-rule {
-    border-left: 1px solid black;
+    border-left: 2px solid var(--light);
     height: 70%;
 }
 
