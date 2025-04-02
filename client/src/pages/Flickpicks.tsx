@@ -37,8 +37,9 @@ export default function Flickpicks() {
     <div>
         {/* Conditionally render based on currentList state */}
         {currentQuiz === null ? (
-            <div className="flickpicks">
-                <p className="info-blurb">Flickpicks are short surveys that give you a list of movies and shows
+            <div className="flickpicks padding-root">
+                <p className="title-xl-light">WELCOME TO FLICKPICKS</p>
+                <p className="info-blurb ">Flickpicks are short surveys that give you a list of movies and shows
                     that you decide whether or not you want to watch. Swipe up for yes and down for no. 
                     After completing a flickpick, compare it with a friends flickpick to get a matched list of 
                     shared answers! 
