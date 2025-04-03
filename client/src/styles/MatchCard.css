@@ -30,7 +30,7 @@
   }
 
   .card-year{
-    font: var(--subtitle-sm) sans-serif; /* Adjust font size if needed */
+    font-size: var(--subtitle-sm); /* Adjust font size if needed */
     color: var(--light);
     line-height: 1.25;
   }

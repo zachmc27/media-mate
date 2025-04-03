@@ -9,7 +9,7 @@
 }
 
 .info-blurb {
-    font: var(--subtitle-lg) sans-serif;
+    font-size: var(--subtitle-lg);
     color: var(--medium);
     width: 30em;
     height: fit-content;
@@ -54,7 +54,6 @@
 .card-title {
     
     font-size: var(--subtitle-lg); 
-    font-weight: bold;
     /* text-transform: uppercase; */
   }
 
@@ -77,7 +76,7 @@
 
 .card-description{
     padding: 0px;
-    font: var(--subtitle-sm) sans-serif;
+    font-size: var(--subtitle-sm);
     color: var(--medium);
 }
 

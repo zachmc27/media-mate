@@ -41,15 +41,15 @@ export default function Flicktease() {
           <p className="error">Error, no flickpick lists available.</p>
         ) : (
         flickpickList.slice(0, 4).map((flickpick) => (
-          <div key={flickpick.id} className="flick-card" onClick={() => setCurrentQuiz(flickpick.id)}>
+          <div key={flickpick.id} className="flick-card " onClick={() => setCurrentQuiz(flickpick.id)}>
               <img src={chicken} alt={flickpick.name} />
-              <h4 className="card-title">{flickpick.name}</h4>
+              <h4 className="card-title work-sans">{flickpick.name}</h4>
           </div>
           
         ))
         )}  
         <div className="explore">
-          <Link to="/flickpicks" className="explore-text">Explore more...</Link>
+          <Link to="/flickpicks" className="explore-text poppins">Explore more...</Link>
         </div>
         </div>
 ) : (

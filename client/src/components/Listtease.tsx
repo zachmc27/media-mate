@@ -45,12 +45,12 @@ export default function Listtease() {
   return (
     <div className="cover-row">
     <div className="list-section">
-        <div className="list-title p-light">Brett & Misha</div>   
+        <div className="list-title p-light poppins">Brett & Misha</div>   
         <div className="list-1">
             {mediaList.slice(0, 3).map((item) => (
             <div className="cover" key={item.id} onClick={() => openModal(item.id)}>
               <img src={`https://image.tmdb.org/t/p/w500${item.cover}`} alt={item.title} />
-              <p className="card-title">{item.title}</p>
+              <p className="card-title work-sans">{item.title}</p>
             </div>
           ))} 
         </div>
@@ -59,18 +59,18 @@ export default function Listtease() {
     <div className="vert-rule"></div>
 
     <div className="list-section">
-        <div className="list-title p-light">Watch Later</div>   
+        <div className="list-title p-light poppins">Watch Later</div>   
         <div className="list-2">
         {mediaList.slice(4, 6).map((item) => (
             <div className="cover" key={item.id} onClick={() => openModal(item.id)}>
               <img src={`https://image.tmdb.org/t/p/w500${item.cover}`} alt={item.title} />
-              <p className="card-title">{item.title}</p>
+              <p className="card-title work-sans">{item.title}</p>
             </div>
           ))}
         </div>
     </div>
     <div className="explore">
-       <Link to="/profile" className="explore-text links">Explore more...</Link>
+       <Link to="/profile" className="explore-text links poppins">Explore more...</Link>
     </div>
     {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}
   </div>

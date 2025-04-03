@@ -85,22 +85,22 @@ export default function Discover() {
 
   return (
     <div className="discover-container">
-      <div className="search-bar-container">
+      <div className="search-bar-container poppins">
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)} // Update query as user types
-          className="search-bar"
+          className="search-bar poppins"
           placeholder="Search for movies..."
         />
-        <button className="search-button btn-lined" onClick={handleSearch}>
+        <button className="search-button btn-lined poppins" onClick={handleSearch}>
           Search
         </button>
       </div>
       {/* Search Results Section */}
       {query && !loading && searchResults.length > 0 && (
         <div className="list-container">
-          <p className="title-md-light">Search Results</p>
+          <p className="title-md-light work-sans">Search Results</p>
           <div className="movies-container">
             {searchResults.slice(0, 9).map((item) => (
               <div className="card" key={item.id} onClick={() => openModal(item.id)}>
@@ -108,14 +108,14 @@ export default function Discover() {
                   src={`https://image.tmdb.org/t/p/w500${item.cover}`}
                   alt={item.title}
                 />
-                <p className="card-title">{item.title}</p>
+                <p className="card-title work-sans">{item.title}</p>
               </div>
             ))}
           </div>
         </div>
       )}
       <div className="list-container">
-        <p className="p-light">Popular Now</p>
+        <p className="p-light poppins">Popular Now</p>
         <div className="movies-container">
           {popularMovies.slice(0, 9).map((item) => (
             <div className="card" key={item.id}  onClick={() => openModal(item.id)}>
@@ -125,13 +125,13 @@ export default function Discover() {
                 alt={item.title}
               />
               </div>
-              <p className="card-title">{item.title}</p>
+              <p className="card-title work-sans">{item.title}</p>
             </div>
           ))}
         </div>
       </div>
       <div className="list-container">
-        <p className="p-light">For You</p>
+        <p className="p-light poppins">For You</p>
         <div className="movies-container">
           {forYou.slice(0, 9).map((item) => (
             <div className="card" key={item.id} onClick={() => openModal(item.id)}>
@@ -141,7 +141,7 @@ export default function Discover() {
                   alt={item.title}
                 ></img>
               </div>
-              <p className="card-title">{item.title}</p>
+              <p className="card-title work-sans">{item.title}</p>
             </div>
           ))}
         </div>

@@ -38,21 +38,21 @@ export default function Flickpicks() {
         {/* Conditionally render based on currentList state */}
         {currentQuiz === null ? (
             <div className="flickpicks">
-                <p className="title-xl-light">WELCOME TO FLICKPICKS</p>
-                <p className="info-blurb ">Flickpicks are short surveys that give you a list of movies and shows
+                <p className="title-xl-light work-sans">WELCOME TO FLICKPICKS</p>
+                <p className="info-blurb poppins">Flickpicks are short surveys that give you a list of movies and shows
                     that you decide whether or not you want to watch. Swipe up for yes and down for no. 
                     After completing a flickpick, compare it with a friends flickpick to get a matched list of 
                     shared answers! 
                 </p>
                 <div className="cards-row">
                         {flickpickList === null ? (
-                            <p className="error">Error, no flickpick lists available</p>
+                            <p className="error poppins">Error, no flickpick lists available</p>
                         ) : (
                             flickpickList.map((flickpick) => (
                                 <div key={flickpick.id} className="card" onClick={() => setCurrentQuiz(flickpick.id)}>
                                     <img src={chicken} alt={flickpick.name} />
-                                    <h4 className="card-title">{flickpick.name}</h4>
-                                    <p className="card-description">{flickpick.description}</p>
+                                    <h4 className="card-title work-sans">{flickpick.name}</h4>
+                                    <p className="card-description poppins">{flickpick.description}</p>
                                 </div>
                             ))
                         )}  
