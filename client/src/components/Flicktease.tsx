@@ -1,5 +1,4 @@
 import "../styles/Flicktease.css"
-import chicken from "../assets/chicken.jpg"
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getFlickPicksList } from "../api/flickPicksAPI";
