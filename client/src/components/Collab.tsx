@@ -69,7 +69,9 @@ export default function CollabsList() {
                           />
                       ))
                   ) : (
+
                       <p className="error poppins p-md-light">No items in this collab list.</p>
+                     
                   )}
               </div>
           ))

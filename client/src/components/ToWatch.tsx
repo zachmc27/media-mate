@@ -59,7 +59,9 @@ export default function ToWatchList() {
                 />
               ))
             ) : (
+
               <p className="p-md-light poppins">Nothing to watch yet.</p>
+
             )}
           {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}
       </div>

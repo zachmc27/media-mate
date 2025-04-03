@@ -23,6 +23,7 @@ a{
   align-items: center;
   justify-content: center;
   gap: 1em;
+  z-index: 50;
 }
 
 .form-container > * {

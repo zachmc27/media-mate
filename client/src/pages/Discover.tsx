@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 import "../styles/Discover.css";
-
 import DetailsModal from "../components/DetailsModal";
 import auth from "../utils/auth";
 import { discoverMedia, discoverMediaByGenre, keywordSearch, discoverRecentlyReleased} from "../api/mediaAPI";
 import Media from "../interfaces/Media";
 import { getUserGenrePreferences } from "../api/seenItAPI";
+import { easeOut, motion } from "framer-motion";
 
 export default function Discover() {
   const [popularMovies, setPopularMovies] = useState<Media[]>([]);
@@ -84,7 +84,19 @@ export default function Discover() {
   };
 
   return (
-    <div className="discover-container">
+    <motion.div className="discover-container"
+    initial= {{
+      y: "10%",
+      opacity: 0
+    }}
+    animate={{
+      y: "0%",
+      opacity: 1
+    }}
+    transition={{
+      duration: .5,
+      type: "spring"
+    }}>
       <div className="search-bar-container poppins">
         <input
           type="text"
@@ -156,6 +168,6 @@ export default function Discover() {
 
       {/* Loading Indicator */}
       {loading && <p>Loading...</p>}
-    </div>
+    </motion.div>
   );
 }

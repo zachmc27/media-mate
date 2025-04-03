@@ -118,7 +118,7 @@ export default function Listtease() {
       <div className="list-section">
         {/* Check if collabsList is empty or null */}
         {collabsList.length === 0 ? (
-          <p className="error">No matching collabs available. Check your friends list to make some.</p>
+          <p className="error work-sans">No matching collabs available. Check your friends list to make some.</p>
         ) : (
           collabsList.slice(0, 1).map((collabInstance) => (
             <div key={collabInstance.name}>
@@ -136,7 +136,7 @@ export default function Listtease() {
                     />
                   ))
           ) : (
-              <p className="error">No items in this collab list.</p>
+              <p className="error work-sans">No items in this collab list.</p>
           )}
       </div>
       ))
@@ -160,7 +160,7 @@ export default function Listtease() {
                 />
               ))
             ) : (
-              <p>Nothing to watch yet.</p>
+              <p className="work-sans error">Nothing to watch yet.</p>
             )}
 
         </div>

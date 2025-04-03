@@ -48,6 +48,10 @@
    font-size: var(--subtitle-md);
 }
 
+.f {
+    opacity: 40%;
+}
+
 .tab:hover {
     opacity: 100%;
     scale: 1.03;

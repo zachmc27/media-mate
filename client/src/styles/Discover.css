@@ -34,6 +34,12 @@
     height: fit-content; /* Adjust height dynamically */
     font-size: 0.75em; /* Scale down text size */
     margin: 0.5em; /* Add spacing between cards */
+    cursor: pointer;
+  }
+
+  .discover-card:hover {
+    scale: 1.03;
+    transition: scale .3 ease-out;
   }
 
   .discover-card-title {

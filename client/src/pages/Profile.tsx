@@ -9,6 +9,7 @@ import CollabsList from "../components/Collab";
 import Actionmodal from "../components/Actionmodal";
 import { useState, useEffect } from "react";
 import useAuthRedirect from "../utils/useAuthRedirect";
+import { motion } from "framer-motion";
 
 export default function Profile() {
     const [currentList, setCurrentList] = useState<string>('watchLater');
@@ -63,13 +64,27 @@ export default function Profile() {
       }, []);
  
   return (
-    <div className="profile-container">
+    <motion.div className="profile-container"
+    initial= {{
+      y: "10%",
+      opacity: 0
+    }}
+    animate={{
+      y: "0%",
+      opacity: 1
+    }}
+    transition={{
+      duration: .5,
+      type: "spring"
+    }}>
         <div className="profile-user">
             <img src={userData?.icon || chicken} alt="avatar" />
             {/* <h1>Profile</h1> */}
+
             <b className="title-md-acc work-sans">{userData?.name || 'First Last'}</b> 
             <p className="p-dark poppins">{userData?.username || 'username'}</p>
             <p className="p-dark poppins">ID: {userData?.id || 'id'}</p>
+
             <ul>
                 <li><a className="poppins" href="#" onClick={handleCollabClick}>Collab List</a></li>
                 <li><a className="poppins" href="#" onClick={handleWatchLaterClick}>Watch Later</a></li>
@@ -84,7 +99,9 @@ export default function Profile() {
                     )
             
             }
-            <button className="btn-lined-drk poppins" onClick={openLogOutModal}>Log Out</button>
+
+            <button className="btn-lined-drk poppins log-out-btn" onClick={openLogOutModal}>Log Out</button>
+
         </div>
         <div className="profile-list-container">
             {/* Conditionally render based on currentList state */}
@@ -104,6 +121,6 @@ export default function Profile() {
                 </div>
             )}
         </div>
-    </div>
+    </motion.div>
   );
 }

@@ -21,6 +21,15 @@
 
 }
 
+.modal-video {
+    aspect-ratio: 16 / 9;
+    width: 30vw;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: 5px solid var(--accent);
+    border-radius: 5px;
+}
+
 .details img {
     display: flex;
     justify-self: center;
@@ -31,33 +40,42 @@
 }
 
 .exit {
-    color: white;
-    border: 1px solid white;
+    color: var(--light);
+    border: 1px solid var(--light);
     position: absolute;
     border-radius: 3px;
     font-size: 20px;
-    top: 41px;
-    right: 41px;
+    top: 1%;
+    right: 4%;
     padding: 6px 17px;
     cursor: pointer;
 }
 
 .details h1 {
-    color: white;
-    margin: 0px 47px;
-    font-family: 'roboto';
+    color: var(--light);
     font-weight: 400;
+    margin: 0 auto;
+    margin: 10px 0px 10px 0px
+}
+
+.details h2 {
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    font-size: 20px;
 }
 
 .description {
-    color: white;
+    color: var(--light);
     margin: 0px 47px ;
     font-family: 'roboto';
     font-weight: 400;
 }
 
-.addButton {
-    color: black;
+.addButton, .removeButton {
+    color: var(--dark);
+    background-color: var(--light);
+    border: 1px solid var(--dark);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,8 +88,10 @@
 
 .footer {
     display: flex;
-    justify-content: space-between;
-    padding: 0px 47px 25px 47px;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 60%;
+    margin-top: 30px;
     width: 100%;
 }
 
@@ -91,4 +111,38 @@
 
 .directorAndActors p {
     margin: 0;
+}
+
+@media (max-width: 425px) {
+    .details {
+        width: 90%;
+    }
+
+    .modal-video {
+        width: 80vw
+    }
+    .exit {
+        font-size: 10px;
+       padding: 3px 7px
+    }
+    .details h1 {
+        font-size: 15px;
+    }
+    
+    .details h2 {
+        
+        font-size: 14px;
+    }
+    
+    .description {
+        font-size: 12px;
+    }
+
+    .addButton, .removeButton {
+        font-size: 8px;
+        border-radius: 10px;
+        height: 50px;
+        padding: 0px 5px;
+        
+    }
 }

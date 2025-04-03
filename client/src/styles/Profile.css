@@ -19,16 +19,19 @@ ul {
   font: 1.25em sans-serif;
   gap: 1em;
   background-color: var(--dark);
-  display: flex;
+
+
 }
 
 .profile-user {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   background-color: var(--light);
   margin-top: 5px;
   border: 1px solid var(--dark);
+
   flex: 0.65;
   height: 100%;
   gap: 0.5em;
@@ -102,6 +105,10 @@ ul {
     margin: 0.5em; /* Add spacing between cards */
   }
 
+  .log-out-btn {
+    color: var(--accent)
+  }
+
   @media (max-width: 768px) {
     .profile-container {
       flex-direction: column;
@@ -111,7 +118,7 @@ ul {
     }
 
     .profile-user {
-      border: 1px solid white;
+      border-right: 0px;
       height: 40vh;
       padding-top: .5em;
       gap: .1em;

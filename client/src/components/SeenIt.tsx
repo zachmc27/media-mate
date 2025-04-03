@@ -58,6 +58,7 @@ export default function SeenItList() {
               />
               ))
             ) : (
+
               <p className="p-md-light poppins">Nothing seen yet.</p>
             )}
             {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}
