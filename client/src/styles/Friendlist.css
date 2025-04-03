@@ -1,7 +1,7 @@
 .friendlist {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0px;
     margin-top: 30px;
     width: 100%;
     box-sizing: border-box;
@@ -10,7 +10,10 @@
 }
 
 .friend {
-    /* border: 1px solid black; */
+    border: 1px solid rgb(236, 219, 186, .1);
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -19,6 +22,7 @@
     width: 100%;
     height: fit-content;
     background-color: var(--medium);
+    padding: 10px 0px 10px 0px;
 }
 
 .friend img {
@@ -56,3 +60,53 @@
 .flicklist-item:hover, .flicklist-item:focus {
     border: 1px solid blue;
 }
+
+@media (max-width: 768px) {
+    .friend {
+        padding: 20px 0px 20px 0px;
+    }
+
+    .friend img {
+        width: 30px; /* Further reduce image size */
+        height: 30px;
+    }
+
+    .friend p {
+        font-size: 14px; /* Further reduce font size */
+    }
+
+    .buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 5px; /* Reduce gap between buttons */
+    }
+
+    .btn-fill, .btn-lined {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .friend {
+        padding: 20px 0px 20px 0px;
+    }
+
+    .friend img {
+        width: 20px; /* Further reduce image size */
+        height: 20px;
+    }
+
+    .friend p {
+        font-size: 10px; /* Further reduce font size */
+    }
+
+    .buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 5px; /* Reduce gap between buttons */
+    }
+
+    .btn-fill, .btn-lined {
+        font-size: 8px;
+        height: fit-content
+    }
+}
+
