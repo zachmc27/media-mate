@@ -2,8 +2,8 @@ import "../styles/DetailsModal.css";
 import { useEffect, useState } from "react";
 import Media from "../interfaces/Media.tsx";
 import { mediaInfo } from "../api/mediaAPI.tsx";
-import { addMediaToWatch } from "../api/toWatchAPI";
-import { addMediaToSeenIt } from "../api/seenItAPI";
+import { addMediaToWatch, fetchToWatch, removeMediaToWatch, seenToWatch } from "../api/toWatchAPI";
+import { addMediaToSeenIt, fetchSeenIt, removeMediaFromSeenIt } from "../api/seenItAPI";
 import auth from '../utils/auth';
 import ReactPlayer from "react-player"
 
@@ -15,7 +15,11 @@ interface DetailsModalProps {
 const DetailsModal = ({ mediaId, onClose }: DetailsModalProps) => {
   const [mediaItem, setMediaItem] = useState<Media>();
   const [userId, setUserId] = useState<number | null>(null);
-  
+  const [seenIt, setSeenIt] = useState<boolean>(false);
+  const [toWatch, setToWatch] = useState<boolean>(false);
+  const [toWatchList, setToWatchList] = useState<Media[]>([]);
+  const [seenList, setSeenList] = useState<Media[]>([]);
+  const [updateTrigger, setUpdateTrigger] = useState(0);
 
   useEffect(() => {
     const id = auth.getUserId();
@@ -31,33 +35,96 @@ const DetailsModal = ({ mediaId, onClose }: DetailsModalProps) => {
       fetchOneMedia(mediaId);
     }, [mediaId]);
 
+    useEffect(() => {
+      const fetchSeenData = async () => {
+        try {
+          if (userId === null) return;
+          const data = await fetchSeenIt(userId);
+            if (data) {
+              setSeenList(data);
+              const isSeen = data.some((media: Media) => media.mediaId === mediaId)
+              setSeenIt(isSeen);
+            } 
+          } catch (error) {
+            console.log("An error occurred while fetching seen it data.");
+          }
+        };
+        const fetchToWatchData = async () => {
+          try {
+            if (userId === null) return;
+            const data = await fetchToWatch(userId);
+            if (data) {
+              setToWatchList(data);
+              const isWatched = data.some((media: Media) => media.mediaId === mediaId)
+              setToWatch(isWatched);
+            }
+          } catch (error) {
+            console.log("An error occurred while fetching to watch data.");
+          }
+        };
+        fetchSeenData();
+        fetchToWatchData();
+    }, [userId, mediaId, updateTrigger])
+
+  const triggerUpdate = () => setUpdateTrigger((prev) => prev + 1);
+
   useEffect(() => {
     if (mediaItem) {
-        console.log("Fetched media item: ", mediaItem);
-    }
-    if (mediaItem) {
         console.log("An error occurred retrieving the mediaItem data")
+        console.log(toWatchList);
+        console.log(seenList);
     }
   }, [mediaItem]);
 
-
-
-  const handleAddToWatchList = () => {
+  const handleAddToWatchList = async () => {
     if (!userId || !mediaItem) {
       console.error("User ID or Media Item is missing");
       return;
     }
     console.log(`Added ${userId}, ${mediaId} to watch list`)
-    addMediaToWatch(userId, mediaId);
+    await addMediaToWatch(userId, mediaId);
+    triggerUpdate();
   };
-  const handleAddToSeenList = () => {
+  const handleAddToSeenList = async () => {
     if (!userId || !mediaItem) {
       console.error("User ID or Media Item is missing");
       return;
     }
     console.log(`Added ${userId}, ${mediaId} to seen list`)
-    addMediaToSeenIt(userId, mediaId);
+    await addMediaToSeenIt(userId, mediaId);
+    triggerUpdate();
   };
+  const handleRemoveToWatch = async (mediaId: number) => {
+    try {
+          await removeMediaToWatch(userId!, mediaId);
+          // **Update the state after removing an item**
+          setToWatchList((prevItems) => prevItems.filter((item) => item.mediaId !== mediaId));
+          triggerUpdate();
+    } catch (error) {
+      console.error("Error removing item:", error);
+    }
+  };
+  const handleRemoveSeenIt = async (mediaId: number) => {
+      try {
+          await removeMediaFromSeenIt(userId!, mediaId);
+          setSeenList((prevItems) => prevItems.filter((item) => item.mediaId !== mediaId));
+          triggerUpdate();
+      } catch (error) {
+          console.error("Error removing item:", error);
+      }
+  };
+  const handleMoveToSeenIt = async (mediaId: number) => {
+      try {
+        await seenToWatch(userId!, mediaId);
+      
+        // Remove item from To Watch list after moving it
+        setToWatchList((prevItems) => prevItems.filter((item) => item.mediaId !== mediaId));
+        triggerUpdate();
+        console.log(`Media item ${mediaId} moved to Seen It list`);
+        } catch (error) {
+          console.error("Error moving item to Seen It list:", error);
+        }
+  };  
 
   return (
     <div className="backdrop">
@@ -85,8 +152,21 @@ const DetailsModal = ({ mediaId, onClose }: DetailsModalProps) => {
           {/* <div className="directorAndActors">
               <p>Director, Actor, Actor</p>
               </div> */}
-            <button className="addButton" onClick={handleAddToWatchList}>Add to Watch List</button>
-            <button className="addButton" onClick={handleAddToSeenList}>Add to Seen List</button>
+
+            {/* Buttons for if movie is not in Seen or Watch list */}
+            {(!seenIt && !toWatch) ? (
+              <>
+                <button className="addButton" onClick={handleAddToWatchList}>Add to Watch List</button>
+                <button className="addButton" onClick={handleAddToSeenList}>Add to Seen List</button>
+              </>          
+            ) : (!seenIt && toWatch) ? (
+              <>
+                <button className="removeButton" onClick={() => handleRemoveToWatch(mediaId)}>Remove from to Watch List</button>
+                <button className="addButton" onClick={() => handleMoveToSeenIt(mediaId)}>Add to Seen List</button>
+              </>
+            ) : (
+              <button className="removeButton" onClick={() => handleRemoveSeenIt(mediaId)}>Remove from Seen List</button>
+            )}
           </div>
         </div>
       ) : (
