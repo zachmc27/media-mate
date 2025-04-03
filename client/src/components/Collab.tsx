@@ -68,6 +68,8 @@ export default function CollabsList() {
                               cover={`https://image.tmdb.org/t/p/w500${mediaItems.poster_path}`}
                               mediaId={mediaItems.id}
                           />
+
+        
                       ))
                   ) : (
 

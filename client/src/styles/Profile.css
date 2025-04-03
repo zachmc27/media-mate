@@ -93,7 +93,9 @@ ul {
 .movies-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     height: 250px;
+    
   }
 
   .movies-container .card {
@@ -102,6 +104,11 @@ ul {
     font-size: 0.75em; /* Scale down text size */
     margin: 0.5em; /* Add spacing between cards */
   }
+
+  .collab-card {
+    flex: 0 1 calc(25% - 1rem); /* Make each card take up 25% of the row, minus the gap */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
 
   .log-out-btn {
     color: var(--accent)
