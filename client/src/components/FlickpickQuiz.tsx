@@ -116,7 +116,7 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
     // This is the motion functionality on the quiz
     const bind = useDrag(({ movement: [, my], down }) => {
         const dragThreshold = 200;  // How far you need to drag the image
-
+        
         if (!down) {
             if (my < -dragThreshold && !decisionMadeRef.current) {
                 console.log("True");

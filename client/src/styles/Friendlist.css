@@ -81,7 +81,7 @@
         gap: 5px; /* Reduce gap between buttons */
     }
 
-    .btn-fill, .btn-lined {
+    .btn-fill-drk, .btn-lined-drk {
         font-size: 8px;
     }
 }
@@ -105,7 +105,7 @@
         gap: 5px; /* Reduce gap between buttons */
     }
 
-    .btn-fill, .btn-lined {
+    .btn-fill-drk, .btn-lined-drk {
         font-size: 8px;
         height: fit-content
     }
