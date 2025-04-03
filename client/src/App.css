@@ -5,7 +5,7 @@
 :root {
     --dark: #0b111c;
     --medium: #2d4263;
-    --light: #ecdbba;
+    --light: #fff6e4;
     --accent: #c84b31;
 
     --title-xl: 64px;
@@ -63,6 +63,12 @@ a, .links{
     font-family: "Work Sans" sans-serif;
     font-size: var(--title-xl);
     color: var(--dark);
+}
+
+.title-xl-acc{
+    font-family: "Work Sans" sans-serif;
+    font-size: var(--title-xl);
+    color: var(--accent);
 }
 
 .title-lg-light{

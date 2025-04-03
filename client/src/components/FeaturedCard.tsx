@@ -63,7 +63,7 @@ export default function FeaturedCard() {
   return (
     <div className="featured-box">
       <div className="label-box">
-      <h1 className="title-xl-light work-sans">FEATURED</h1>
+      <h1 className="title-xl-acc work-sans">FEATURED</h1>
       </div>
       <div className="video">
         <ReactPlayer 
