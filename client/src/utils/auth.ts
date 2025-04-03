@@ -1,6 +1,5 @@
 class AuthService {
   
-
   loggedIn() {
     const token = this.getToken();
     return token;
@@ -10,7 +9,6 @@ class AuthService {
     const loggedUser = localStorage.getItem('id_token') || '';
     return loggedUser;
   }
-
 
   login(idToken: string, userId: number) {
     localStorage.setItem('id_token', idToken);
