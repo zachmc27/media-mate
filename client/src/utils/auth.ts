@@ -10,7 +10,6 @@ class AuthService {
     return loggedUser;
   }
 
-
   login(idToken: string, userId: number) {
     localStorage.setItem('id_token', idToken);
     localStorage.setItem('user_Id', userId.toString());

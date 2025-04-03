@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchToWatch, removeMediaToWatch, seenToWatch } from "../api/toWatchAPI";
+import { fetchToWatch } from "../api/toWatchAPI";
 import Media from "../interfaces/Media.tsx";
 import auth from '../utils/auth';
 import ToWatchCard from "./ToWatchCard.tsx";
@@ -9,6 +9,7 @@ export default function ToWatchList() {
     const [toWatchList, setToWatchList] = useState<Media[]>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
+    const [updateTrigger, setUpdateTrigger] = useState(0);
     const userId: number | null = auth.getUserId();
    
     useEffect(() => {
@@ -29,31 +30,9 @@ export default function ToWatchList() {
       };
   
       fetchData();
-    }, [userId]);
-    
-    const handleRemove = async (mediaId: number) => {
-        try {
-            await removeMediaToWatch(userId!, mediaId);
-            
-            // **Update the state after removing an item**
-            setToWatchList((prevItems) => prevItems.filter((item) => item.mediaId !== mediaId));
-        } catch (error) {
-            console.error("Error removing item:", error);
-        }
-    };
+    }, [userId, updateTrigger]);
 
-    const handleMoveToSeenIt = async (mediaId: number) => {
-        try {
-          await seenToWatch(userId!, mediaId);
-      
-          // Remove item from To Watch list after moving it
-          setToWatchList((prevItems) => prevItems.filter((item) => item.mediaId !== mediaId));
-      
-          console.log(`Media item ${mediaId} moved to Seen It list`);
-        } catch (error) {
-          console.error("Error moving item to Seen It list:", error);
-        }
-    };
+    const triggerUpdate = () => setUpdateTrigger((prev) => prev + 1);
 
     // Details Modal Functionality
     const openModal = (mediaId: number) => {
@@ -63,6 +42,7 @@ export default function ToWatchList() {
     const closeModal = () => {
       setShowModal(false);
       setSelectedMediaId(null);
+      triggerUpdate();
     };
   
     return (
@@ -76,8 +56,6 @@ export default function ToWatchList() {
                   year={item.media.year}
                   cover={`https://image.tmdb.org/t/p/w500${item.media.cover}`}
                   mediaId={item.mediaId}
-                  seenIt={handleMoveToSeenIt}
-                  onRemove={handleRemove}
                 />
               ))
             ) : (
