@@ -5,7 +5,6 @@
     height: 75%;
     bottom: 0px;
     gap: 30px;
-
 }
 
 .flick-card {
@@ -27,22 +26,23 @@
     font-weight: bold;
   }
 
-.explore {
+.flick-explore {
    
     height: 150px;
     width: 150px;
     margin-top: 50px;
+    position: relative;
     text-align: center;
     display: flex;
     align-items: center;
 }
 
-.explore-text {
+.flick-explore-text {
     opacity: 50%;
     font-weight: 100;
 }
 
-.explore-text:hover {
+.flick-explore-text:hover {
     opacity: 100%;
     transition: opacity .2s ease-in;
 }

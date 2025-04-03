@@ -11,7 +11,17 @@ export default function Flickpicks() {
         const [flickpickList, setFlickpickList] = useState<Flickpick[] | null>(null);
         const [error, setError] = useState<string | null>(null);
         const [loading, setLoading] = useState<boolean>(true);
+        const [width, setWidth] = useState(window.innerWidth);
         useAuthRedirect();
+
+
+        useEffect(() => {
+            const handleResize = () => setWidth(window.innerWidth);
+        
+            window.addEventListener("resize", handleResize);
+            
+            return () => window.removeEventListener("resize", handleResize);
+          }, []);
 
     useEffect(() => {
         const fetchFlickPickList = async () => {
@@ -38,7 +48,7 @@ export default function Flickpicks() {
         {/* Conditionally render based on currentList state */}
         {currentQuiz === null ? (
             <div className="flickpicks">
-                <p className="title-xl-light">WELCOME TO FLICKPICKS</p>
+                <p className={ width > 768 ? "title-xl-light welc-txt" : "title-lg-light welc-txt"}>WELCOME TO FLICKPICKS</p>
                 <p className="info-blurb ">Flickpicks are short surveys that give you a list of movies and shows
                     that you decide whether or not you want to watch. Swipe up for yes and down for no. 
                     After completing a flickpick, compare it with a friends flickpick to get a matched list of 
@@ -49,7 +59,7 @@ export default function Flickpicks() {
                             <p className="error">Error, no flickpick lists available</p>
                         ) : (
                             flickpickList.map((flickpick) => (
-                                <div key={flickpick.id} className="card" onClick={() => setCurrentQuiz(flickpick.id)}>
+                                <div key={flickpick.id} className="flick-card" onClick={() => setCurrentQuiz(flickpick.id)}>
                                     <img src={chicken} alt={flickpick.name} />
                                     <h4 className="card-title">{flickpick.name}</h4>
                                     <p className="card-description">{flickpick.description}</p>

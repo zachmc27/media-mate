@@ -128,7 +128,7 @@ const DetailsModal = ({ mediaId, onClose }: DetailsModalProps) => {
   };  
 
   return (
-    <div className="backdrop">
+    <div className="backdrop" onClick={onClose}>
       {mediaItem ? ( 
         <div className="details">
           {/* If there is a trailer, return a trailer. If there is no trailer, return the cover */}

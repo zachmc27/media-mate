@@ -9,6 +9,11 @@ import { Link } from "react-router-dom";
 import CollabListCard from "./CollabListCard";
 
 export default function Listtease() {
+
+    const [mediaList, setMediaList] = useState<Media[]>([]);
+     const [width, setWidth] = useState(window.innerWidth);
+    // const userId: number | null = auth.getUserId();  
+
     // Details Model UseStates
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
@@ -32,6 +37,16 @@ export default function Listtease() {
       }
       fetchData();
     }, []);
+
+
+    useEffect(() => {
+      const handleResize = () => setWidth(window.innerWidth);
+  
+      window.addEventListener("resize", handleResize);
+      
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
 
     useEffect(() => {
         if (userId === null) {
@@ -83,6 +98,23 @@ export default function Listtease() {
 
   return (
     <div className="cover-row">
+
+    <div className="list-section">
+        <div className="list-title p-light">Brett & Misha</div>   
+        <div className="list-1">
+            {mediaList.slice(0, 3).map((item) => (
+            <div className="cover" key={item.id} onClick={() => openModal(item.id)}>
+              <img src={`https://image.tmdb.org/t/p/w500${item.cover}`} alt={item.title} />
+              <p className="card-title">{item.title}</p>
+            </div>
+          ))} 
+        </div>
+    </div>
+    {
+      width > 1175 && <div className="vert-rule"></div>
+    }
+    
+
       <div className="list-section">
         {/* Check if collabsList is empty or null */}
         {collabsList.length === 0 ? (

@@ -1,8 +1,6 @@
 import { useState } from "react"
 import "../styles/Teases.css"
 
-
-//uncomment when implementing tab logic
 import Flicktease from "./Flicktease"
 import Discovertease from "./Discovertease"
 import Listtease from "./Listtease"

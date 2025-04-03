@@ -2,12 +2,10 @@ import "../styles/Flicktease.css"
 import chicken from "../assets/chicken.jpg"
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import FlickpickQuiz from "../components/FlickpickQuiz";
 import { getFlickPicksList } from "../api/flickPicksAPI";
 import { Flickpick } from "../interfaces/FlickpickInterface";
 
 export default function Flicktease() {
-    const [currentQuiz, setCurrentQuiz] = useState<number | null>(null);
     const [flickpickList, setFlickpickList] = useState<Flickpick[] | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -35,27 +33,22 @@ export default function Flicktease() {
       
   return (
       <>
-    {currentQuiz === null ? (
       <div className="tease-row">
         {flickpickList === null ? (
           <p className="error">Error, no flickpick lists available.</p>
         ) : (
         flickpickList.slice(0, 4).map((flickpick) => (
-          <div key={flickpick.id} className="flick-card" onClick={() => setCurrentQuiz(flickpick.id)}>
+          <div key={flickpick.id} className="flick-card">
               <img src={chicken} alt={flickpick.name} />
               <h4 className="card-title">{flickpick.name}</h4>
           </div>
           
         ))
         )}  
-        <div className="explore">
+        <div className="flick-explore">
           <Link to="/flickpicks" className="explore-text">Explore more...</Link>
         </div>
         </div>
-) : (
-    <FlickpickQuiz quizId={currentQuiz} onBack={() => setCurrentQuiz(null)} />
-  )}
-      
       </>
   );
 }
