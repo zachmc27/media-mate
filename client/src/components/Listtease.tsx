@@ -99,20 +99,8 @@ export default function Listtease() {
   return (
     <div className="cover-row">
 
-    <div className="list-section">
-        <div className="list-title p-light poppins">Brett & Misha</div>   
-        <div className="list-1">
-            {mediaList.slice(0, 3).map((item) => (
-            <div className="cover" key={item.id} onClick={() => openModal(item.id)}>
-              <img src={`https://image.tmdb.org/t/p/w500${item.cover}`} alt={item.title} />
-              <p className="card-title work-sans">{item.title}</p>
-            </div>
-          ))} 
-        </div>
-    </div>
-    {
-      width > 1175 && <div className="vert-rule"></div>
-    }
+    
+
     
 
       <div className="list-section">
@@ -121,8 +109,9 @@ export default function Listtease() {
           <p className="error work-sans">No matching collabs available. Check your friends list to make some.</p>
         ) : (
           collabsList.slice(0, 1).map((collabInstance) => (
-            <div key={collabInstance.name}>
-              <h4 className="collabName">{collabInstance.name}</h4>
+            <>
+            <div key={collabInstance.name} className="list-title p-light poppins">{collabInstance.name}</div>
+            <div className="list-1">
               {/* Check if mediaDetails exists and has items */}
                 {collabInstance.mediaDetails?.length > 0 ? (
                   collabInstance.mediaDetails.slice(0, 3).map((mediaItems) => (
@@ -139,17 +128,20 @@ export default function Listtease() {
               <p className="error work-sans">No items in this collab list.</p>
           )}
       </div>
+      </>
       ))
     )}
   </div>
 
-  <div className="vert-rule"></div>
+  {
+      width > 1175 && <div className="vert-rule"></div>
+    }
 
   <div className="list-section">
         <div className="list-title p-light poppins">Watch Later</div>   
         <div className="list-2">
         {toWatchList.length > 0 ? (
-              toWatchList.slice(0, 2).map((item) => (
+              toWatchList.slice(0, 3).map((item) => (
                 <CollabListCard
                   key={item.id}
                   detailsModal={openModal}

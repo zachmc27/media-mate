@@ -17,7 +17,7 @@ const CollabListCard: React.FC<CollabListCardProps> = ({
     detailsModal,
 }) => {
     return (
-      <div className="card">
+      <div className="cover">
         <img src={cover} alt={title} onClick={() => detailsModal(mediaId)}/>
         <div className="card-container">
           <b className="card-title">{title}</b>

@@ -175,6 +175,7 @@ a, .links{
 
 .cover {
     height: fit-content;
+    max-width: 30%;
     width: fit-content;
     text-align: center;
     inline-size: 200px;
@@ -196,6 +197,7 @@ a, .links{
     font-size: var(--subtitle-sm); 
     color: var(--light);
     text-wrap: wrap;
+    padding: 0px
 }
 
 .text {
@@ -235,3 +237,4 @@ a, .links{
     flex-direction: row;
     
 }
+
