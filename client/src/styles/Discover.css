@@ -1,7 +1,7 @@
 .discover-container {
     display: flex;
-    padding-top: 20px;
-    height: 90vh;
+    padding-top: 125px;
+    height: fit-content;
     font: 1.25em sans-serif;
     flex-direction: column;
     justify-content: flex-start;
@@ -14,30 +14,38 @@
     justify-content: flex-start;
     align-items: flex-start;
     padding: 0.5em;
+    width: 85%;
+    height: fit-content;
+    margin: 10px;
+    gap: 10px
   }
 
-.list-container p{
-    margin: -0.125em;
-}
 
 .movies-container {
     display: flex;
     flex-direction: row;
-    height: 250px;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
   }
 
-  .movies-container .card {
+  .discover-card {
     width: 8em; /* Smaller width for MovieCards in movies-container */
-    height: auto; /* Adjust height dynamically */
+    height: fit-content; /* Adjust height dynamically */
     font-size: 0.75em; /* Scale down text size */
     margin: 0.5em; /* Add spacing between cards */
+  }
+
+  .discover-card-title {
+    color: beige
   }
 
   .search-bar-container{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 90%;
+    padding: 10px;
     font: 1em sans-serif;
     gap: 3em;
     margin-bottom: 2em;;
@@ -75,6 +83,7 @@
     position: relative;
     display: inline-block;
     overflow: hidden;
+    border: 1px solid white
   }
 
   .image-container img {
@@ -82,19 +91,32 @@
     width: 100%;
   }
 
-  .image-container button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    background-color: yellowgreen;
-    cursor: pointer;
-    
+  @media (max-width: 425px) {
+    .search-button {
+      font-size: .6em
+    }
+
+    .search-bar-container{
+      gap: 2em
+    }
+
+    .movies-container {
+      justify-content: center;
+    }
+
+    .list-container {
+      align-items: center;
+    }
   }
 
-  .image-container button:hover {
-    background-color: green;
-    visibility: visible;
+  @media (max-width: 375px) {
+    .search-button {
+      font-size: .5em
+    }
+
+    .search-bar-container{
+      gap: 1em
+    }
   }
 
   .form-input::placeholder {

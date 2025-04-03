@@ -65,7 +65,7 @@ export default function Profile() {
   return (
     <div className="profile-container">
         <div className="profile-user">
-            <img src={userData?.icon || chicken} alt="Chicken" />
+            <img src={userData?.icon || chicken} alt="avatar" />
             {/* <h1>Profile</h1> */}
             <b>{userData?.name || 'First Last'}</b> 
             <p>{userData?.username || 'username'}</p>
