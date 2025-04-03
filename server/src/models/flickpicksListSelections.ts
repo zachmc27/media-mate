@@ -6,6 +6,7 @@ interface FlickListSelectionsAttributes {
     name: string;
     listOfChoices:number[];
     description: string;
+    icon?: string;
 }
 
 interface FlickListSelectionsCreationAttributes extends Optional<FlickListSelectionsAttributes, 'id'> {}
@@ -16,6 +17,7 @@ export class FlickListSelections extends Model<FlickListSelectionsCreationAttrib
     public name!: string;
     public listOfChoices!: number[];
     public description!: string;
+    public icon?: string;
 
 
 }
@@ -48,6 +50,11 @@ export function FlicklistSelectionsFactory(sequelize: Sequelize): typeof FlickLi
                 validate: {
                     notEmpty: true, // Ensures the description is not empty
                 },
+            },
+            icon: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                
             },
         },
         {

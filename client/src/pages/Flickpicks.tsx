@@ -1,10 +1,18 @@
-import "../styles/Flickpicks.css"
-import chicken from "../assets/chicken.jpg"
+import "../styles/Flickpicks.css";
 import { useEffect, useState } from "react";
 import FlickpickQuiz from "../components/FlickpickQuiz";
 import { getFlickPicksList } from "../api/flickPicksAPI";
 import { Flickpick } from "../interfaces/FlickpickInterface";
 import useAuthRedirect from "../utils/useAuthRedirect";
+import drama from "../assets/DramaListIcon.png";
+import horror from "../assets/HORROR.png";
+import comedy from "../assets/COMEDY.png";
+import action from "../assets/ACTION.png";
+import romance from "../assets/ROMANCE.png";
+import thriller from "../assets/THRILLER.png";
+import fantasy from "../assets/FANTASY.png";
+import scifi from "../assets/SCIFI.png";
+
 
 export default function Flickpicks() {
         const [currentQuiz, setCurrentQuiz] = useState<number | null>(null);
@@ -59,8 +67,17 @@ export default function Flickpicks() {
                             <p className="error">Error, no flickpick lists available</p>
                         ) : (
                             flickpickList.map((flickpick) => (
-                                <div key={flickpick.id} className="flick-card" onClick={() => setCurrentQuiz(flickpick.id)}>
-                                    <img src={chicken} alt={flickpick.name} />
+
+                                <div key={flickpick.id} className="card" onClick={() => setCurrentQuiz(flickpick.id)}>
+                                    <img src={
+                                        flickpick.name === "Drama Movies" ? drama :
+                                        flickpick.name === "Horror Movies" ? horror :
+                                        flickpick.name === "Comedy Movies" ? comedy :
+                                        flickpick.name === "Action Movies" ? action :
+                                        flickpick.name === "Romance Movies" ? romance :
+                                        flickpick.name === "Thriller Movies" ? thriller :
+                                        flickpick.name === "Sci-Fi Movies" ? scifi :
+                                        flickpick.name === "Fantasy Movies" ? fantasy :""} alt={flickpick.name} />
                                     <h4 className="card-title">{flickpick.name}</h4>
                                     <p className="card-description">{flickpick.description}</p>
                                 </div>
