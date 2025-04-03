@@ -97,3 +97,30 @@ export async function createFlickPickList() {
     }
 
 
+    export async function setFlickPickIcons() {
+       
+        const genreIcons = [
+            { name: 'Action', icon: '🔥' },
+            { name: 'Comedy', icon: '😂' },
+            { name: 'Drama', icon: '😢' },
+            { name: 'Horror', icon: '😱' },
+            { name: 'Romance', icon: '❤️' },
+            { name: 'Sci-Fi',  icon: '👽' },
+            { name: 'Fantasy', icon: '🧙' },
+            { name: 'Thriller', icon: '' },]
+
+
+        for (const icons of genreIcons) {
+
+            await FlickListSelections.update({
+                // INSERTS THE ICON FOR EACH NAME IN THE FLICKPICKLIST
+                icon: icons.icon,
+            }, {
+                where: {
+                    name: icons.name + ' Movies',
+                },
+            });
+        }
+        }
+    
+
