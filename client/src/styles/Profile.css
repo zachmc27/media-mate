@@ -48,7 +48,7 @@ ul {
 
 .profile-user button {
     margin-top: auto;
-    margin-bottom: 2em;
+    margin-bottom: 4em;
 
     height: 2.5rem;
     border-radius: 5px;
@@ -59,7 +59,7 @@ ul {
 
 .profile-user button:hover {
   margin-top: auto;
-  margin-bottom: 2em;
+  margin-bottom: 4em;
 
   height: 2.5rem;
   border-radius: 5px;

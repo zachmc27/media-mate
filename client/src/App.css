@@ -83,6 +83,12 @@ a, .links{
     color: var(--dark);
 }
 
+.title-lg-dark{
+    font-family: "Work Sans" sans-serif;
+    font-size: var(--title-lg);
+    color: var(--accent);
+}
+
 .title-md-light{
     font-family: "Work Sans" sans-serif;
     font-size: var(--title-md);
