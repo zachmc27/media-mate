@@ -58,7 +58,7 @@ export default function SeenItList() {
               />
               ))
             ) : (
-              <p>Nothing seen yet.</p>
+              <p className="work-sans error">Nothing seen yet.</p>
             )}
             {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}
       </div>

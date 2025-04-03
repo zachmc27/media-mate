@@ -1,5 +1,5 @@
 .list-box {
-
+    border-left: 3px solid rgb(62, 91, 138);
     position: absolute;
     width: 25%;
     min-height:100vh;
@@ -14,10 +14,12 @@
 }
 
 .add-friend {
-    margin: 30px 10px 0px 10px;
+    margin: 60px 10px 0px 10px;
     width: fit-content;
     display: flex;
+    align-items: center;
     gap: 5px;
+
 }
 
 .add-friend button {
@@ -26,9 +28,38 @@
     align-items: center;
 }
 
+.submit {
+    height: 20px
+}
 .send-icon {
     width: 15px;
     height: 15px;
+}
+
+
+@media (max-width: 768px) {
+    .list-box {
+        width: 40%
+    }
+}
+
+@media (max-width: 425px) {
+    .add-input {
+        font-size: 9px;
+        padding: 1px
+    }
+
+    .send-icon {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    .list-box {
+        width: 50%;
+        right: -25px
+    }
 }
 
 .friends-form-input {
@@ -65,3 +96,4 @@
   }
 
   
+

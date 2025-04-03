@@ -69,7 +69,7 @@ export default function CollabsList() {
                           />
                       ))
                   ) : (
-                      <p className="error">No items in this collab list.</p>
+                      <p className="error work-sans">No items in this collab list.</p>
                   )}
               </div>
           ))

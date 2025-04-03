@@ -18,7 +18,6 @@ ul {
   height: 90vh;
   font: 1.25em sans-serif;
   gap: 1em;
-  border: 1px solid blue;
   display: flex;
 }
 
@@ -26,7 +25,7 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 5px solid rgb(0, 0, 0);
+  border-right: 5px solid rgb(0, 0, 0);
   flex: 0.65;
   padding-top: 1em;
   gap: 0.5em;
@@ -92,6 +91,10 @@ ul {
     margin: 0.5em; /* Add spacing between cards */
   }
 
+  .log-out-btn {
+    color: var(--accent)
+  }
+
   @media (max-width: 768px) {
     .profile-container {
       flex-direction: column;
@@ -101,7 +104,7 @@ ul {
     }
 
     .profile-user {
-      border: 1px solid white;
+      border-right: 0px;
       height: 40vh;
       padding-top: .5em;
       gap: .1em;

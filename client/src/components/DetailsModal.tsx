@@ -6,6 +6,8 @@ import { addMediaToWatch, fetchToWatch, removeMediaToWatch, seenToWatch } from "
 import { addMediaToSeenIt, fetchSeenIt, removeMediaFromSeenIt } from "../api/seenItAPI";
 import auth from '../utils/auth';
 import ReactPlayer from "react-player"
+import { motion } from "framer-motion";
+
 
 interface DetailsModalProps {
   mediaId: number;
@@ -130,10 +132,23 @@ const DetailsModal = ({ mediaId, onClose }: DetailsModalProps) => {
   return (
     <div className="backdrop" onClick={onClose}>
       {mediaItem ? ( 
-        <div className="details">
+        <motion.div className="details"
+        initial= {{
+          opacity: 0,
+          filter: "blur(3px)"
+        }}
+        animate= {{
+          opacity: 1,
+          filter: "blur(0px)"
+          
+        }}
+        transition={{
+          duration: .5,
+      
+        }}>
           {/* If there is a trailer, return a trailer. If there is no trailer, return the cover */}
           {mediaItem.trailerKey === '' ? ( <img src={`https://image.tmdb.org/t/p/w500${mediaItem.poster_path}`} alt={mediaItem.title} /> ) : (
-                <div className="video">
+                <div className="modal-video">
                   <ReactPlayer 
                    url={`https://www.youtube.com/watch?v=${mediaItem.trailerKey}`}
                    playing
@@ -170,7 +185,7 @@ const DetailsModal = ({ mediaId, onClose }: DetailsModalProps) => {
               <button className="removeButton" onClick={() => handleRemoveSeenIt(mediaId)}>Remove from Seen List</button>
             )}
           </div>
-        </div>
+        </motion.div>
       ) : (
         <p>Loading...</p>
       )}

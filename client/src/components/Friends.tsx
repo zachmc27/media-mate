@@ -5,6 +5,7 @@ import { sendFriendRequest } from "../api/friendAPI";
 import { useEffect, useState } from "react";
 import sendIcon from "../assets/send-horizontal.svg"
 import { retrieveOneUser } from "../api/userAPI";
+import {  motion } from "framer-motion";
 
 export default function Friends() {
 const [userId, setUserId] = useState<number>(0)
@@ -65,20 +66,42 @@ const [friendCode, setFriendCode] = useState<number>(0);
  }
  
   return (
-    <div className="list-box">
+    <motion.div className="list-box"
+    initial= {{
+      opacity: "0%",
+      x: "100%"
+    }}
+    animate= {{
+      opacity: "100%",
+      x: 0
+    }}
+    exit= {{
+      opacity: 0,
+      x: "100%"
+    }}
+    transition={{
+      duration: .5,
+      ease: "easeIn"
+    }}>
         <div className="add-friend">
           <input 
+
+<!--           className="poppins add-input" -->
+
           className="poppins friends-form-input"
+
           type="text" 
           placeholder="Friend code ..."
           value={friendCode > 0 ? friendCode : ''}
           onChange={(e) => setFriendCode(parseInt(e.target.value))}/>
-          <button className="btn-lined-drk btn-flex " type="submit" onClick={handleSendRequest}>
-            <img src={sendIcon} alt="" className='send-icon'/>
+
+          <button className="btn-fill submit" type="submit" onClick={handleSendRequest}>
+            <img src={sendIcon} alt="send message icon" className='send-icon'/>
+
           </button>
         </div>
         <PendingFriends />
         <Friendlist />
-    </div>
+    </motion.div>
   )
 }

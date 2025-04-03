@@ -16,7 +16,9 @@
     font: var(--title-lg) sans-serif;
     font-weight: bold;
     opacity: 50%;
+    cursor: pointer;
 }
+
 
 .selected {
     opacity: 100%;
