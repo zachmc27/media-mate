@@ -12,6 +12,8 @@ import romance from "../assets/ROMANCE.png";
 import thriller from "../assets/THRILLER.png";
 import fantasy from "../assets/FANTASY.png";
 import scifi from "../assets/SCIFI.png";
+import { motion } from "framer-motion";
+
 
 
 export default function Flickpicks() {
@@ -55,7 +57,19 @@ export default function Flickpicks() {
     <div>
         {/* Conditionally render based on currentList state */}
         {currentQuiz === null ? (
-            <div className="flickpicks">
+            <motion.div className="flickpicks"
+            initial= {{
+                y: "10%",
+                opacity: 0
+              }}
+              animate={{
+                y: "0%",
+                opacity: 1
+              }}
+              transition={{
+                duration: .5,
+                type: "spring"
+              }}>
 
                 <p className={ width > 768 ? "title-xl-light welc-txt work-sans" : "title-lg-light welc-txt work-sans"}>WELCOME TO FLICKPICKS</p>
                 <p className="info-blurb poppins">Flickpicks are short surveys that give you a list of movies and shows
@@ -87,7 +101,7 @@ export default function Flickpicks() {
                             ))
                         )}  
                 </div>
-            </div>
+            </motion.div>
         ) : (
             <FlickpickQuiz quizId={currentQuiz} onBack={() => setCurrentQuiz(null)} />
         )}

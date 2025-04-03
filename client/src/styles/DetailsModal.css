@@ -26,7 +26,7 @@
     width: 30vw;
     margin: 0 auto;
     margin-top: 20px;
-    border: 5px solid var(--light);
+    border: 5px solid var(--accent);
     border-radius: 5px;
 }
 

@@ -9,6 +9,7 @@ import CollabsList from "../components/Collab";
 import Actionmodal from "../components/Actionmodal";
 import { useState, useEffect } from "react";
 import useAuthRedirect from "../utils/useAuthRedirect";
+import { motion } from "framer-motion";
 
 export default function Profile() {
     const [currentList, setCurrentList] = useState<string>('watchLater');
@@ -63,7 +64,19 @@ export default function Profile() {
       }, []);
  
   return (
-    <div className="profile-container">
+    <motion.div className="profile-container"
+    initial= {{
+      y: "10%",
+      opacity: 0
+    }}
+    animate={{
+      y: "0%",
+      opacity: 1
+    }}
+    transition={{
+      duration: .5,
+      type: "spring"
+    }}>
         <div className="profile-user">
             <img src={userData?.icon || chicken} alt="avatar" />
             {/* <h1>Profile</h1> */}
@@ -104,6 +117,6 @@ export default function Profile() {
                 </div>
             )}
         </div>
-    </div>
+    </motion.div>
   );
 }
