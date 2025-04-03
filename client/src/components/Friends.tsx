@@ -86,9 +86,7 @@ const [friendCode, setFriendCode] = useState<number>(0);
         <div className="add-friend">
           <input 
 
-<!--           className="poppins add-input" -->
-
-          className="poppins friends-form-input"
+          className="poppins friends-form-input add-input"
 
           type="text" 
           placeholder="Friend code ..."
