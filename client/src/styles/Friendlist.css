@@ -29,7 +29,7 @@
 .friend p {
     margin: 0;
     margin-left: 5px;
-    font-size: 18px;
+    /* font-size: 18px;  */
 }
 
 .buttons {
@@ -56,3 +56,15 @@
 .flicklist-item:hover, .flicklist-item:focus {
     border: 1px solid blue;
 }
+
+.btn-friend-fill, .btn-friend-lined:hover{
+    display: flex;
+    height: 2em;
+    color: var(--medium)
+  }
+
+  .btn-friend-lined, .btn-friend-fill:hover{
+    display: flex;
+    height: 2em;
+    color: var(--dark)
+  }

@@ -2,7 +2,7 @@
 
     position: absolute;
     width: 25%;
-    height: 100vh;
+    min-height:100vh;
     top: 80px;
     right: 0px;
     z-index: 2;
@@ -30,3 +30,38 @@
     width: 15px;
     height: 15px;
 }
+
+.friends-form-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--dark);
+    border-radius: 3.5px;
+    height: 2.5rem;
+    width: 100%;
+    font-size: var(--subtitle-md);
+    padding-left: 0.5rem;
+    flex:4;
+    color: var(--medium);
+    background-color: var(--dark);
+  }
+
+  input[type=text]{
+    background-color: var(--dark);
+    color: var(--medium);
+    
+  }
+
+  .btn-flex {
+    display: flex;
+    height: 2.5em;
+    flex: 1;
+  }
+
+  .btn-flex:hover {
+    display: flex;
+    height: 2.5em;
+    flex: 1;
+  }
+
+  
