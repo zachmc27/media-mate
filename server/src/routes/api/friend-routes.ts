@@ -93,7 +93,7 @@ router.post('/accept', async (req, res) => {
     const requester = await User.findByPk(requesterId)
     if (!requester) return res.status(404).json({ error: 'Requester not found'})
 
-    user.friends = [...user.friends, requesterId];
+    user.friends = [...(user.friends || []), requesterId];
 
     await user.save();
     
@@ -129,7 +129,7 @@ router.delete('/:userId/:friendId', async (req, res) => {
       if (!user) {
         return res.status(404).json({ message: 'User not found'});
       }
-
+      if (user.friends === undefined) return;
       user.friends = user.friends.filter((id) => id.toString() !== friendId)
 
       await user.save();

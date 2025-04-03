@@ -4,14 +4,12 @@ import Media from "../interfaces/Media.tsx";
 import auth from '../utils/auth';
 import ToWatchCard from "./ToWatchCard.tsx";
 import DetailsModal from "../components/DetailsModal";
-// import "../styles/ToWatch.css";
 
 export default function ToWatchList() {
     const [toWatchList, setToWatchList] = useState<Media[]>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
     const userId: number | null = auth.getUserId();
-   
    
     useEffect(() => {
       if (userId === null) {

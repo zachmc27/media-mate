@@ -17,7 +17,7 @@ interface UserAttributes {
   name: string | null;
   email: string;
   password: string;
-  friends: number[];
+  friends?: number[];
   icon: string | null;
 }
 
@@ -30,7 +30,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public username!: string;
   public email!: string;
   public password!: string;
-  public friends!: number[];
+  public friends?: number[];
   public name!: string | null;
   public icon!: string | null;
 
@@ -44,7 +44,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   }
 
   public async setRandomIcon(){
-    const icon = imageIconArray[getRandomNumber(0,1)];
+    const icon = imageIconArray[getRandomNumber(0,2)];
     this.icon = icon;
     return this.icon;
   }
@@ -87,11 +87,11 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
       // Add each other as friends
       const requester = await User.findByPk(requesterId);
       if (requester) {
-        requester.friends.push(this.id);
+        requester.friends!.push(this.id);
         await requester.save();
       }
   
-      this.friends.push(requesterId);
+      this.friends!.push(requesterId);
       await this.save();
     }
   
@@ -164,7 +164,7 @@ export function UserFactory(sequelize: Sequelize): typeof User {
             await user.setPassword(user.password);
           }
         },
-      }
+            },
     }
   );
 

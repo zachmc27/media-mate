@@ -1,6 +1,5 @@
 class AuthService {
   
-
   loggedIn() {
     const token = this.getToken();
     return token;
