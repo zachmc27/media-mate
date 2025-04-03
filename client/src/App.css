@@ -16,6 +16,10 @@
 
 }
 
+h1, p, h2 {
+    color: var(--light)
+}
+
 body{
     margin: 0;
     margin-top: -0.05em;

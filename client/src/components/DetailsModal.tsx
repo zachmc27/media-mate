@@ -133,7 +133,7 @@ const DetailsModal = ({ mediaId, onClose }: DetailsModalProps) => {
         <div className="details">
           {/* If there is a trailer, return a trailer. If there is no trailer, return the cover */}
           {mediaItem.trailerKey === '' ? ( <img src={`https://image.tmdb.org/t/p/w500${mediaItem.poster_path}`} alt={mediaItem.title} /> ) : (
-                <div className="video">
+                <div className="modal-video">
                   <ReactPlayer 
                    url={`https://www.youtube.com/watch?v=${mediaItem.trailerKey}`}
                    playing
