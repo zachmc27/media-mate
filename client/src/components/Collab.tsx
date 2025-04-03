@@ -53,9 +53,9 @@ export default function CollabsList() {
           <p className="error poppins p-md-light">No matching collabs available. Check your friends list to make some.</p>
       ) : (
           collabsList.map((collabInstance) => (
-              <div key={collabInstance.name}>
-                  <h4 className="collabName">{collabInstance.name}</h4>
-                  
+              <div key={collabInstance.name} className="collab-card">
+             {/* <h4 className="collabName">{collabInstance.name}</h4> */}
+          
                   {/* Check if mediaDetails exists and has items */}
                   {collabInstance.mediaDetails?.length > 0 ? (
                       collabInstance.mediaDetails.map((mediaItems) => (
@@ -67,6 +67,8 @@ export default function CollabsList() {
                               cover={`https://image.tmdb.org/t/p/w500${mediaItems.poster_path}`}
                               mediaId={mediaItems.id}
                           />
+
+        
                       ))
                   ) : (
 
