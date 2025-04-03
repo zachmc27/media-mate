@@ -74,14 +74,14 @@ export async function getFlickPickListItems(genreId: number) {
 
 export async function createFlickPickList() {
     const genres = [
-        { id: 28, name: '' },
-        { id: 35, name: '' },
-        { id: 18, name: '' },
-        { id: 27, name: '' },
-        { id: 10749, name: '' },
-        { id: 878, name: '' },
-        { id: 14, name: '' },
-        { id: 53, name: '' },
+        { id: 28, name: 'Action' },
+        { id: 35, name: 'Comedy' },
+        { id: 18, name: 'Drama' },
+        { id: 27, name: 'Horror' },
+        { id: 10749, name: 'Romance' },
+        { id: 878, name: 'Sci-Fi' },
+        { id: 14, name: 'Fantasy' },
+        { id: 53, name: 'Thriller' },
     ];
 
     for (const genre of genres) {
