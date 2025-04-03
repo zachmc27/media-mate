@@ -108,7 +108,9 @@ export default function Discover() {
                   src={`https://image.tmdb.org/t/p/w500${item.cover}`}
                   alt={item.title}
                 />
-                <p className="card-title work-sans">{item.title}</p>
+
+                <p className="discover-card-title work-sans">{item.title}</p>
+
               </div>
             ))}
           </div>
@@ -118,14 +120,16 @@ export default function Discover() {
         <p className="p-light poppins">Popular Now</p>
         <div className="movies-container">
           {popularMovies.slice(0, 9).map((item) => (
-            <div className="card" key={item.id}  onClick={() => openModal(item.id)}>
+            <div className="discover-card" key={item.id}  onClick={() => openModal(item.id)}>
               <div className="image-container">
               <img
                 src={`https://image.tmdb.org/t/p/w500${item.cover}`}
                 alt={item.title}
               />
               </div>
-              <p className="card-title work-sans">{item.title}</p>
+
+              <p className="discover-card-title work-sans">{item.title}</p>
+
             </div>
           ))}
         </div>
@@ -134,14 +138,16 @@ export default function Discover() {
         <p className="p-light poppins">For You</p>
         <div className="movies-container">
           {forYou.slice(0, 9).map((item) => (
-            <div className="card" key={item.id} onClick={() => openModal(item.id)}>
+            <div className="discover-card" key={item.id} onClick={() => openModal(item.id)}>
               <div className="image-container">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${item.cover}`}
                   alt={item.title}
                 ></img>
               </div>
-              <p className="card-title work-sans">{item.title}</p>
+
+              <p className="discover-card-title work-sans">{item.title}</p>
+
             </div>
           ))}
         </div>

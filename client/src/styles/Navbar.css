@@ -10,10 +10,6 @@
     z-index: 100;
 }
 
-.navbar img{
-    padding-left: 2%;
-    
-}
 
 .image-container{
     height: 100;
@@ -23,8 +19,8 @@
 .logo {
     position: absolute;
     left: 1vw;
-    font-size: 40px;
-    font-weight: bold;
+ 
+    height: fit-content
 }
 
 .tabs-box {
@@ -47,7 +43,7 @@
     font: var(--subtitle-md) sans-serif;
 }
 
-.tab p{
+.tab-title{
    margin: 0;
    font-size: var(--subtitle-md);
 }
@@ -67,4 +63,98 @@
 }
 .selected {
     opacity: 100%
+}
+
+@media (max-width: 1400px) {
+    .tab {
+        width: 30px;
+        height: 30px
+    }
+}
+
+@media (max-width: 967px) {
+    .tab {
+        width: 20px;
+        height: 20px
+    }
+
+    .tab-title{
+        font-size: var(--subtitle-sm)
+    }
+
+    .logo {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 740px) {
+    .tab {
+        width: 20px;
+        height: 20px
+    }
+
+    .tab-title{
+        font-size: var(--subtitle-sm)
+    }
+
+    .logo {
+        font-size: 25px;
+    }
+
+    .tabs-box {
+        gap: 45px
+    }
+}
+
+@media (max-width: 607px) {
+    .tab {
+        width: 15px;
+        height: 15px
+    }
+
+    .tab-title{
+        font-size: 12px
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .tabs-box {
+        gap: 45px
+    }
+}
+
+@media (max-width: 500px) {
+    .navbar {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .tabs-box {
+        margin-top: 5px;
+        position: static;
+     
+    }
+
+    .logo {
+        position: static;
+    }
+}
+
+@media (max-width: 375px) {
+    .tab {
+        width: 12px;
+        height: 12px
+    }
+
+    .tab-title{
+        font-size: 10px
+    }
+
+    .tabs-box {
+        gap: 40px
+    }
 }

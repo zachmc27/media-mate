@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { UserData } from "../interfaces/UserData";
 import { MatchList } from "../interfaces/FlickpickInterface";
 import Actionmodal from "./Actionmodal";
-import { initiateFlickPickMatching, getFlickPickListMatchingSessions } from "../api/flickPicksAPI";
+import { initiateFlickPickMatching, getFlickPickListResponses } from "../api/flickPicksAPI";
 // import { retrieveUser } from "../api/userAPI";
 
 export default function Friendlist() {
@@ -70,7 +70,7 @@ const handleMatchClick = async (friend: UserData) => {
 useEffect(() => {
     const getMatchingLists = async (userId: number) => {
         try {
-            const response = await getFlickPickListMatchingSessions(userId);
+            const response = await getFlickPickListResponses(userId);
             setMatchListsCompleted(response);
         } catch (error) {
             console.error("Error fetching match lists:", error);

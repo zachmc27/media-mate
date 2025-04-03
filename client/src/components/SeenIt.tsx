@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchSeenIt, removeMediaFromSeenIt } from "../api/seenItAPI";
+import { fetchSeenIt } from "../api/seenItAPI";
 import Media from "../interfaces/Media.tsx";
 import auth from '../utils/auth';
 import SeenItCard from "./SeenItCard.tsx";
@@ -10,6 +10,7 @@ export default function SeenItList() {
     const [seenList, setSeenList] = useState<Media[]>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
+    const [updateTrigger, setUpdateTrigger] = useState(0);
     const userId: number | null = auth.getUserId();    
   
     useEffect(() => {  
@@ -28,16 +29,9 @@ export default function SeenItList() {
         }
       };
       fetchData();
-    }, [userId]);
+    }, [userId, updateTrigger]);
 
-    const handleRemove = async (mediaId: number) => {
-      try {
-          await removeMediaFromSeenIt(userId!, mediaId);
-          setSeenList((prevItems) => prevItems.filter((item) => item.mediaId !== mediaId));
-      } catch (error) {
-          console.error("Error removing item:", error);
-      }
-    };
+    const triggerUpdate = () => setUpdateTrigger((prev) => prev + 1);
 
     // Details Modal Functionality
     const openModal = (mediaId: number) => {
@@ -47,6 +41,7 @@ export default function SeenItList() {
     const closeModal = () => {
       setShowModal(false);
       setSelectedMediaId(null);
+      triggerUpdate();
     };
   
     return (
@@ -60,7 +55,6 @@ export default function SeenItList() {
                 year={item.media.year}
                 cover={`https://image.tmdb.org/t/p/w500${item.media.cover}`}
                 mediaId={item.mediaId}
-                onRemove={handleRemove}
               />
               ))
             ) : (

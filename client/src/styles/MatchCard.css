@@ -9,7 +9,6 @@
   
   /* Add some padding inside the card container */
   .card-container {
-  font: 1.25em sans-serif; /* Adjust font size if needed */
   padding: 0.5em; /* Reduce padding inside the container */
   height: 5.5em;
   display: flex;
@@ -24,8 +23,8 @@
     height: auto;
   }
 
-  .card-title{
-    
+  .profile-card-title{
+    font-size: 15px;
     text-wrap: balance;
   }
 

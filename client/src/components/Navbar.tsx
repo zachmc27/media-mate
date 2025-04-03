@@ -10,7 +10,7 @@ import heart from "../assets/heart.svg"
 import film from "../assets/film.svg"
 import user from "../assets/user.svg"
 import users from "../assets/users.svg"
-import logo from "../assets/cinematch_logo.svg";
+import logo from "../assets/cinlogo.png";
 import { useState } from "react";
 
 
@@ -26,30 +26,30 @@ const Navbar = () => {
   return (
     <>
     <div className="navbar">
-      <div className="image-container">
+      <Link to="/" className="logo">
       <img src={logo}></img>
-      </div>
+      </Link>
       {/* <div className="logo title-lg-dark">CINEMATCH</div> */}
       <div className="tabs-box">
         <Link to="/" className={location.pathname === '/' ? "tab selected" : "tab"}>
           <img src={house} alt="home icon" />
-          <div>Home</div>
+          <div className="tab-title">Home</div>
         </Link>
         <Link to="/flickpicks" className={location.pathname === '/flickpicks' ? "tab selected" : "tab"}>
           <img src={heart} alt="heart icon" />
-          <div>Flickpicks</div>
+          <div className="tab-title">Flickpicks</div>
         </Link>
         <Link to="/discover" className={location.pathname === '/discover' ? "tab selected" : "tab"}>
           <img src={film} alt="reel icon" />
-          <div>Discover</div>
+          <div className="tab-title">Discover</div>
         </Link>
         <button className={friendActive ? "tab selected remove-btn-styling" : "tab remove-btn-styling"} onClick={handleFriendsActive}>
           <img src={users} alt="people icon" />
-          <div onClick={handleFriendsActive}>Friends</div>
+          <div onClick={handleFriendsActive} className="tab-title">Friends</div>
         </button>
         <Link to="/profile" className={location.pathname === '/profile' ? "tab selected" : "tab"}>
           <img src={user} alt="person icon" />
-          <div>Profile</div>
+          <div className="tab-title">Profile</div>
         </Link>
       </div>
     </div>

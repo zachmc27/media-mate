@@ -1,4 +1,4 @@
-import "../styles/Discovertease.css"
+
 
 import DetailsModal from "../components/DetailsModal";
 import { useEffect, useState } from "react";
@@ -45,7 +45,7 @@ export default function Discovertease() {
 
   return (
     <div className="cover-row">
-   {mediaList.slice(0, 8).map((item) => (
+   {mediaList.slice(0, 6).map((item) => (
             <div className="cover" key={item.id} onClick={() => openModal(item.id)}>
               <img src={`https://image.tmdb.org/t/p/w500${item.cover}`} alt={item.title} />
               <p className="card-title work-sans">{item.title}</p>

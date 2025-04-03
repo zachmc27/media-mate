@@ -8,7 +8,6 @@ interface SeenItCardProps {
     cover: string;
     mediaId: number;
     detailsModal: (mediaId: number) => void;
-    onRemove: (mediaId: number) => void;
 }
 
 const SeenItCard: React.FC<SeenItCardProps> = ({
@@ -17,15 +16,13 @@ const SeenItCard: React.FC<SeenItCardProps> = ({
     cover,
     mediaId,
     detailsModal,
-    onRemove,
 }) => {
     return (
       <div className="card">
         <img src={cover} alt={title} onClick={() => detailsModal(mediaId)}></img>
         <div className="card-container">
-          <b className="card-title">{title}</b>
+          <b className="profile-card-title">{title}</b>
           <i className="card-year">{year}</i>
-          <button onClick={() => onRemove(mediaId)}>Remove</button>
         </div>
       </div>
     );

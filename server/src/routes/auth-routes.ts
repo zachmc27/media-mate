@@ -45,21 +45,44 @@ router.post('/login', login);  // Define the login route
 
 // POST /users - Create a new user
 router.post('/register', async (req: Request, res: Response) => {
-
   try {
     const { username, email, password, name } = req.body;
-    // user.getRandomIcon()
-    const existingUser = await User.findOne({ where: { username }});
-    if (existingUser) {
-      return res.status(400).json({ message: "Username already taken"});
+
+    // Check if all required fields are provided
+    if (!username || !email || !password || !name) {
+      return res.status(400).json({ message: "All fields are required" });
     }
 
-    //const defaultIconUrl = '../assets/profileIcon_01.png';
+    // Check if the username already exists
+    const existingUser = await User.findOne({ where: { username } });
+    if (existingUser) {
+      return res.status(400).json({ message: "Username already taken" });
+    }
 
-    const newUser = await User.create({ username, email, password: password, name: name, friends: []});
-   
+    // Check if the email already exists
+    const existingEmail = await User.findOne({ where: { email } });
+    if (existingEmail) {
+      return res.status(400).json({ message: "Email already in use" });
+    }
 
-    return res.status(201).json({ message: "User created successfully",
+    // Validate password strength (example: minimum 6 characters)
+    if (password.length < 6) {
+      return res.status(400).json({ message: "Password must be at least 6 characters long" });
+    }
+
+    // Hash the password before saving
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create the new user
+    const newUser = await User.create({
+      username,
+      email,
+      password: hashedPassword,
+      name,
+    });
+
+    return res.status(201).json({
+      message: "User created successfully",
       user: {
         id: newUser.id,
         username: newUser.username,
@@ -68,8 +91,8 @@ router.post('/register', async (req: Request, res: Response) => {
       },
     });
   } catch (error: any) {
-    return res.status(400).json({ message: error.message });
-    
+    console.error("Error creating user:", error);
+    return res.status(500).json({ message: "An error occurred while creating the user" });
   }
 });
 

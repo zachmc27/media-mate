@@ -1,7 +1,7 @@
 import { seedUsers } from './user-seeds.js';
 import { seedGenres } from './genre-seeds.js';
 import sequelize from '../config/connection.js';
-import { createFlickPickList } from '../routes/api/flickPickListAPI.js';
+import { createFlickPickList} from '../routes/api/flickPickListAPI.js';
 import { seedMedia } from './media-seeds.js';
 
 

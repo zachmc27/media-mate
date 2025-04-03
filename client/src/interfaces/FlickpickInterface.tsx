@@ -3,6 +3,7 @@ export interface Flickpick {
     name: string;
     description: string;
     listOfChoices: number[];
+    icon: string;
 }
 
 export interface FlickpickSession {
