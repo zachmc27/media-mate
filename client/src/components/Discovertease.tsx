@@ -48,11 +48,11 @@ export default function Discovertease() {
    {mediaList.slice(0, 6).map((item) => (
             <div className="cover" key={item.id} onClick={() => openModal(item.id)}>
               <img src={`https://image.tmdb.org/t/p/w500${item.cover}`} alt={item.title} />
-              <p className="card-title p-light">{item.title}</p>
+              <p className="card-title work-sans">{item.title}</p>
             </div>
           ))} 
     <div className="explore">
-       <Link to="/discover" className="explore-text">Explore more...</Link>
+       <Link to="/discover" className="explore-text poppins">Explore more...</Link>
     </div>
     {showModal && <DetailsModal mediaId={selectedMediaId!} onClose={closeModal} />}
   </div>

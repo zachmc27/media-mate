@@ -172,8 +172,8 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
                         <div className="flickpicksCard">
                             <img src={`https://image.tmdb.org/t/p/w500${mediaDetails.poster_path}`} alt={mediaDetails.title} draggable={false}/>
                             <div className="card-info-container">
-                                <b className="title-md-light card-title">{mediaDetails.title}</b>
-                                <i className="card-year">{mediaDetails.year}</i>
+                                <b className="title-md-light card-title work-sans">{mediaDetails.title}</b>
+                                <i className="card-year poppins">{mediaDetails.year}</i>
                             </div>
 
                             <div className="marks">
@@ -182,8 +182,8 @@ export default function FlickpickQuiz({ quizId, onBack }: FlickpickQuizProps) {
                 </div>
 
                 <div className="btn-container">
-                    <button className="detailsButton btn-fill" onClick={() => openModal(mediaDetails!.id)}>Details</button>
-                    <button className="backButton btn-lined" onClick={onBack}>Back</button>
+                    <button className="detailsButton btn-fill poppins" onClick={() => openModal(mediaDetails!.id)}>Details</button>
+                    <button className="backButton btn-lined poppins" onClick={onBack}>Back</button>
                 </div>
                         </div>
                     ) : (

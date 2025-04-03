@@ -1,5 +1,4 @@
 .friendlist {
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -7,17 +6,19 @@
     width: 100%;
     box-sizing: border-box;
     overflow: hidden;
+    background-color: var(--medium);
 }
 
 .friend {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 5px;
     position: relative;
     width: 100%;
-    height: fit-content
+    height: fit-content;
+    background-color: var(--medium);
 }
 
 .friend img {

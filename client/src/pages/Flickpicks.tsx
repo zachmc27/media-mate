@@ -56,19 +56,21 @@ export default function Flickpicks() {
         {/* Conditionally render based on currentList state */}
         {currentQuiz === null ? (
             <div className="flickpicks">
-                <p className={ width > 768 ? "title-xl-light welc-txt" : "title-lg-light welc-txt"}>WELCOME TO FLICKPICKS</p>
-                <p className="info-blurb ">Flickpicks are short surveys that give you a list of movies and shows
+
+                <p className={ width > 768 ? "title-xl-light welc-txt work-sans" : "title-lg-light welc-txt work-sans"}>WELCOME TO FLICKPICKS</p>
+                <p className="info-blurb poppins">Flickpicks are short surveys that give you a list of movies and shows
                     that you decide whether or not you want to watch. Swipe up for yes and down for no. 
                     After completing a flickpick, compare it with a friends flickpick to get a matched list of 
                     shared answers! 
                 </p>
                 <div className="cards-row">
                         {flickpickList === null ? (
-                            <p className="error">Error, no flickpick lists available</p>
+                            <p className="error poppins">Error, no flickpick lists available</p>
                         ) : (
                             flickpickList.map((flickpick) => (
 
                                 <div key={flickpick.id} className="card" onClick={() => setCurrentQuiz(flickpick.id)}>
+
                                     <img src={
                                         flickpick.name === "Drama Movies" ? drama :
                                         flickpick.name === "Horror Movies" ? horror :
@@ -78,8 +80,9 @@ export default function Flickpicks() {
                                         flickpick.name === "Thriller Movies" ? thriller :
                                         flickpick.name === "Sci-Fi Movies" ? scifi :
                                         flickpick.name === "Fantasy Movies" ? fantasy :""} alt={flickpick.name} />
-                                    <h4 className="card-title">{flickpick.name}</h4>
-                                    <p className="card-description">{flickpick.description}</p>
+                                    <h4 className="card-title work-sans">{flickpick.name}</h4>
+                                    <p className="card-description poppins">{flickpick.description}</p>
+
                                 </div>
                             ))
                         )}  

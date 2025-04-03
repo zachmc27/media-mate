@@ -9,8 +9,14 @@
 }
 
 .info-blurb {
+
+    font-size: var(--subtitle-lg);
+    color: var(--medium);
+/*     width: 30em; */
+
     position: absolute;
     width: 350px;
+
     height: fit-content;
     margin: 0 auto;
     opacity: 100%;
@@ -58,7 +64,6 @@
 .card-title {
     
     font-size: var(--subtitle-lg); 
-    font-weight: bold;
     /* text-transform: uppercase; */
   }
 
@@ -81,7 +86,7 @@
 
 .card-description{
     padding: 0px;
-    font: var(--subtitle-sm) sans-serif;
+    font-size: var(--subtitle-sm);
     color: var(--medium);
 }
 
