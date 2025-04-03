@@ -7,8 +7,6 @@ interface ToWatchCardProps {
     cover: string;
     mediaId: number;
     detailsModal: (mediaId: number) => void;
-    seenIt: (mediaId: number) => void;
-    onRemove: (mediaId: number) => void;
 }
 
 const ToWatchCard: React.FC<ToWatchCardProps> = ({
@@ -17,8 +15,6 @@ const ToWatchCard: React.FC<ToWatchCardProps> = ({
     cover,
     mediaId,
     detailsModal,
-    seenIt,
-    onRemove,
 }) => {
     return (
       <div className="card">
@@ -26,8 +22,6 @@ const ToWatchCard: React.FC<ToWatchCardProps> = ({
         <div className="card-container">
           <b className="card-title">{title}</b>
           <i className="card-year">{year}</i>
-          <button onClick={() => seenIt(mediaId)}>Seen</button>
-          <button onClick={() => onRemove(mediaId)}>Remove</button>
         </div>
       </div>
     );
