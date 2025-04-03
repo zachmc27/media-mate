@@ -10,12 +10,12 @@ import CollabListCard from "./CollabListCard";
 
 export default function Listtease() {
 
-    const [mediaList, _setMediaList] = useState<Media[]>([]);
+    //const [mediaList, _setMediaList] = useState<Media[]>([]);
      const [width, setWidth] = useState(window.innerWidth);
     // const userId: number | null = auth.getUserId();  
 
     // Details Model UseStates
-    //const [showModal, setShowModal] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedMediaId, setSelectedMediaId] = useState<number | null>(null); 
     const [userId, setUserId] = useState<number | null>(null);
     const [toWatchList, setToWatchList] = useState<Media[]>([]);
