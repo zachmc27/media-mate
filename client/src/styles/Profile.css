@@ -19,8 +19,6 @@ ul {
   font: 1.25em sans-serif;
   gap: 1em;
   background-color: var(--dark);
-
-
 }
 
 .profile-user {
@@ -142,7 +140,7 @@ ul {
       font: 1em sans-serif;
       margin-top: auto;
       margin-bottom: 2em;
-      border: 2px solid #000000;
+      border: 2px solid var(--dark);
       background-color: transparent;
       height: 2.5rem;
       border-radius: 5px;

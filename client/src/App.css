@@ -177,7 +177,8 @@ a, .links{
     height: fit-content;
     width: fit-content;
     text-align: center;
-    cursor: pointer
+    inline-size: 200px;
+    cursor: pointer;
 }
 
 .cover:hover {
@@ -194,6 +195,7 @@ a, .links{
     margin-top: 10px; 
     font-size: var(--subtitle-sm); 
     color: var(--light);
+    text-wrap: wrap;
 }
 
 .text {
