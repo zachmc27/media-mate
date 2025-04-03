@@ -6,7 +6,7 @@ import auth from "../utils/auth";
 import { discoverMedia, discoverMediaByGenre, keywordSearch, discoverRecentlyReleased} from "../api/mediaAPI";
 import Media from "../interfaces/Media";
 import { getUserGenrePreferences } from "../api/seenItAPI";
-import { easeOut, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function Discover() {
   const [popularMovies, setPopularMovies] = useState<Media[]>([]);
