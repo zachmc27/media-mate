@@ -39,7 +39,18 @@ CineMatch is a web application that helps users find the perfect movie to watch 
 - **Get movie recommendations** based on the movies you and your friend selected in the Flick Picks process.
 
 ## 🛠️ Future Improvements
-- 
+- Enable users to create 
+custom list
+- Add more avatar 
+customization 
+- Implement server hosting so 
+that friends can do Flick 
+Picks at the same time and 
+get results instantly
+- Refine movie matches 
+between friends by filtering 
+based on shared streaming 
+subscriptions.
 
 
 ## 🤝 Contributing
