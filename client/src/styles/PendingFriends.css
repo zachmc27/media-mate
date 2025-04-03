@@ -11,7 +11,7 @@
 
 .pending-dropdown {
     border: none;
-    background-color: rgb(182, 182, 182);
+    background-color: var(--medium);
     border-radius: 5px;
     padding: 5px 10px; 
     cursor: pointer;
@@ -29,7 +29,7 @@
 }
 
 .pending-friend {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     flex-direction: row;
     align-items: center;

@@ -68,11 +68,12 @@ const [friendCode, setFriendCode] = useState<number>(0);
     <div className="list-box">
         <div className="add-friend">
           <input 
+          className="poppins"
           type="text" 
           placeholder="Friend code ..."
           value={friendCode > 0 ? friendCode : ''}
           onChange={(e) => setFriendCode(parseInt(e.target.value))}/>
-          <button type="submit" onClick={handleSendRequest}>
+          <button className="btn-fill" type="submit" onClick={handleSendRequest}>
             <img src={sendIcon} alt="" className='send-icon'/>
           </button>
         </div>

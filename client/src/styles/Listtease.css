@@ -33,9 +33,8 @@
 
 .card-title {
     margin-top: 10px; 
-    font: var(--subtitle-sm) sans-serif; 
+    font-size: var(--subtitle-sm); 
     color: var(--light);
-    font-weight: bold;
 }
 
 .vert-rule {
@@ -51,8 +50,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
-    font: var(--subtitle-sm) sans-serif;
+
+    font-size: var(--subtitle-sm);
+
+/*     border: 1px solid black;
+    font: var(--subtitle-sm) sans-serif; */
+
     color: var(--light);
 }
 
