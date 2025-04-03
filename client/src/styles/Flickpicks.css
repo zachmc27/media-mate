@@ -10,17 +10,16 @@
 
 .info-blurb {
     position: absolute;
-    top: 15%;
     width: 350px;
     height: fit-content;
     margin: 0 auto;
     opacity: 100%;
+    color: beige;
+    margin-top: 200px;
 }
 
 .cards-row {
     position: absolute;
-    top: 25%;
-    left: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -29,18 +28,18 @@
     align-items: center;
     gap: 50px;
     height: fit-content;
-    width: fit-content;
-
+    width: 70%;
+    margin-top: 330px;
+    margin-bottom: 100px;
 }
 
-.card {
-    border: 1px solid black;
+.flick-card {
     height: 200px;
     width: 200px;
     margin-top: 50px;
     text-align: center;
     opacity: 80%;
-    flex: 1 1 100%;
+    margin-bottom: 30px;
 }
 
 .card:hover {
@@ -109,6 +108,13 @@
         max-width: 100px;
         flex: 1 1 calc(50% - 20px); /* Make cards take 50% width on smaller screens */
     }
+
+    .welc-txt {
+        border: 1px solid white;
+        position: relative;
+        top: 15%
+    }
+   
 }
 
 @media (max-width: 480px) {

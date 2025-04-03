@@ -102,7 +102,11 @@ ul {
 
     .profile-user {
       border: 1px solid white;
-      height: 40vh
+      height: 40vh;
+      padding-top: .5em;
+      gap: .1em;
+      position: relative;
+      top: -76px
     }
 
     .profile-user p {

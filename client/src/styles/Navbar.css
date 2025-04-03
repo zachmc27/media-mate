@@ -10,10 +10,6 @@
     z-index: 100;
 }
 
-.navbar img{
-    padding-left: 2%;
-    background-color: blue;
-}
 
 .image-container{
     height: 100;
@@ -23,8 +19,8 @@
 .logo {
     position: absolute;
     left: 1vw;
-    font-size: 40px;
-    font-weight: bold;
+ 
+    height: fit-content
 }
 
 .tabs-box {
@@ -134,11 +130,13 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 20px
+
     }
 
     .tabs-box {
+        margin-top: 5px;
         position: static;
+     
     }
 
     .logo {

@@ -6,7 +6,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    border: 1px solid blue;
 }
 
 .list-container {
@@ -15,16 +14,12 @@
     justify-content: flex-start;
     align-items: flex-start;
     padding: 0.5em;
-    border: 1px solid lime;
     width: 85%;
     height: fit-content;
-    margin: 10px
+    margin: 10px;
+    gap: 10px
   }
 
-.list-container p{
-    margin: -0.125em;
-    font-size: 20px;
-}
 
 .movies-container {
     display: flex;
@@ -32,15 +27,17 @@
     flex-wrap: wrap;
     width: 100%;
     height: fit-content;
-    border: 1px solid orange;
   }
 
-  .movies-container .card {
-    width: 4em; /* Smaller width for MovieCards in movies-container */
+  .discover-card {
+    width: 8em; /* Smaller width for MovieCards in movies-container */
     height: fit-content; /* Adjust height dynamically */
     font-size: 0.75em; /* Scale down text size */
     margin: 0.5em; /* Add spacing between cards */
-    border: 1px solid white
+  }
+
+  .discover-card-title {
+    color: beige
   }
 
   .search-bar-container{
@@ -52,7 +49,6 @@
     font: 1em sans-serif;
     gap: 3em;
     margin-bottom: 2em;;
-    border: 1px solid lime
   }
 
   .search-bar{
@@ -102,6 +98,14 @@
 
     .search-bar-container{
       gap: 2em
+    }
+
+    .movies-container {
+      justify-content: center;
+    }
+
+    .list-container {
+      align-items: center;
     }
   }
 

@@ -10,7 +10,7 @@ import heart from "../assets/heart.svg"
 import film from "../assets/film.svg"
 import user from "../assets/user.svg"
 import users from "../assets/users.svg"
-import logo from "../assets/cinematch_logo.svg";
+import logo from "../assets/cinlogo.png";
 import { useState } from "react";
 
 
@@ -26,9 +26,9 @@ const Navbar = () => {
   return (
     <>
     <div className="navbar">
-      <div className="image-container">
+      <Link to="/" className="logo">
       <img src={logo}></img>
-      </div>
+      </Link>
       {/* <div className="logo title-lg-dark">CINEMATCH</div> */}
       <div className="tabs-box">
         <Link to="/" className={location.pathname === '/' ? "tab selected" : "tab"}>
