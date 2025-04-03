@@ -53,8 +53,9 @@ export default function CollabsList() {
           <p className="error poppins p-md-light">No matching collabs available. Check your friends list to make some.</p>
       ) : (
           collabsList.map((collabInstance) => (
-              <div key={collabInstance.name}>
-                  <h4 className="collabName">{collabInstance.name}</h4>
+            <>
+            <h4 className="collabName">{collabInstance.name}</h4>
+              <div key={collabInstance.name} className="card-render">
                   
                   {/* Check if mediaDetails exists and has items */}
                   {collabInstance.mediaDetails?.length > 0 ? (
@@ -74,6 +75,7 @@ export default function CollabsList() {
                      
                   )}
               </div>
+              </>
           ))
       )}
 

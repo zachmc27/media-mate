@@ -229,3 +229,9 @@ a, .links{
     width: 100%;
 }
 
+.card-render {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    
+}
