@@ -117,10 +117,10 @@ const matchLists = async () => {
         {friends.map((friend, index) => (
             <div className="friend" key={index}>
             <img src={user} alt="users-avatar" />
-            <p className="poppins">{friend.username}</p>
+            <p className="work-sans title-md-dark">{friend.username}</p>
             <div className="buttons">
-            <button className="btn-fill" onClick={() => handleMatchClick(friend)}>Match</button>
-            <button className="btn-lined" onClick={() => handleDeleteClick(friend)}>Delete</button>
+            <button className="btn-fill-drk btn-friend-fill" onClick={() => handleMatchClick(friend)}>Match</button>
+            <button className="btn-lined-drk btn-friend-lined" onClick={() => handleDeleteClick(friend)}>Delete</button>
             </div>
         </div>
         ))}

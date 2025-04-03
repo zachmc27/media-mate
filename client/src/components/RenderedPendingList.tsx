@@ -79,7 +79,7 @@ export default function RenderedPendingList() {
     }
 
     if (pendingFriends.length <= 0) {
-        return <div>No pending friend requests...</div>
+        return <div className="poppins p-dark">No pending friend requests...</div>
     }
 
   return (
@@ -88,10 +88,10 @@ export default function RenderedPendingList() {
             pendingFriends.map((p, i) => (
             <li className="pending-friend" key={i}>
             <img src={user} alt="users-avatar" />
-            <p>{p.username}</p>
+            <p className="poppins p-light">{p.username}</p>
             <div className="action-buttons">
-            <button onClick={() => handleAccept(p.id)}>&#x2713;</button>
-            <button onClick={() => handleReject(p.id)}>X</button>
+            <button className="btn-fill-drk" onClick={() => handleAccept(p.id)}>&#x2713;</button>
+            <button className="btn-lined-drk" onClick={() => handleReject(p.id)}>X</button>
             </div>
             </li>
             ))

@@ -12,7 +12,7 @@ export default function PendingFriends() {
   
   return (
     <div className="pending-container">
-    <button className="pending-dropdown" onClick={handleIsOpen}>Pending Friends</button>
+    <button className="pending-dropdown poppins p-dark" onClick={handleIsOpen}>Pending Friends</button>
     {
       isOpen && <RenderedPendingList />
     }

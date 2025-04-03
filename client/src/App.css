@@ -132,6 +132,7 @@ a, .links{
     width: 100%;
 }
 
+
 .cover {
     height: fit-content;
     width: fit-content;
@@ -157,5 +158,32 @@ a, .links{
 
 .text {
     color: var(--light)
+}
+
+
+.btn-fill-drk, .btn-lined-drk:hover{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--dark);
+    background-color: var(--dark);
+    height: 2.75em;
+    border-radius: 5px;
+    color: var(--medium);
+    font-size: var(--subtitle-md);
+    width: 100%;
+}
+
+.btn-lined-drk, .btn-fill-drk:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--dark);
+    background-color: transparent;
+    height: 2.75em;
+    border-radius: 5px;
+    color: var(--dark);
+    font-size: var(--subtitle-md);
+    width: 100%;
 }
 

@@ -85,13 +85,19 @@ const [friendCode, setFriendCode] = useState<number>(0);
     }}>
         <div className="add-friend">
           <input 
-          className="poppins add-input"
+
+<!--           className="poppins add-input" -->
+
+          className="poppins friends-form-input"
+
           type="text" 
           placeholder="Friend code ..."
           value={friendCode > 0 ? friendCode : ''}
           onChange={(e) => setFriendCode(parseInt(e.target.value))}/>
+
           <button className="btn-fill submit" type="submit" onClick={handleSendRequest}>
             <img src={sendIcon} alt="send message icon" className='send-icon'/>
+
           </button>
         </div>
         <PendingFriends />
