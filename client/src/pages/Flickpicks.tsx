@@ -71,7 +71,7 @@ export default function Flickpicks() {
                 type: "spring"
               }}>
 
-                <p className={ width > 768 ? "title-xl-light welc-txt work-sans" : "title-lg-light welc-txt work-sans"}>WELCOME TO FLICKPICKS</p>
+                <p className={ width > 768 ? "title-xl-acc welc-txt work-sans" : "title-lg-acc welc-txt work-sans"}>WELCOME TO FLICKPICKS</p>
                 <p className="info-blurb poppins">Flickpicks are short surveys that give you a list of movies and shows
                     that you decide whether or not you want to watch. Swipe up for yes and down for no. 
                     After completing a flickpick, compare it with a friends flickpick to get a matched list of 

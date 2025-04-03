@@ -15,13 +15,13 @@
 /*     width: 30em; */
 
     position: absolute;
-    width: 350px;
+    width: 500px;
 
     height: fit-content;
     margin: 0 auto;
     opacity: 100%;
-    color: beige;
-    margin-top: 200px;
+    color: var(--light);
+    margin-top: 150px;
 }
 
 .cards-row {
@@ -35,7 +35,7 @@
     gap: 50px;
     height: fit-content;
     width: 70%;
-    margin-top: 330px;
+    margin-top: 400px;
     margin-bottom: 100px;
 }
 

@@ -1,11 +1,12 @@
 ul {
     list-style-type: none;
     padding: 1em;
-    font: 0.65em sans-serif;
+    font-size: 0.65em;
     display:flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: var(--medium);
   }
 
   li {
@@ -14,25 +15,30 @@ ul {
 
 .profile-container {
   display: flex;
-  padding-top: 80px;
   height: 90vh;
   font: 1.25em sans-serif;
   gap: 1em;
-  display: flex;
+  background-color: var(--dark);
+
+
 }
 
 .profile-user {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-right: 5px solid rgb(0, 0, 0);
+
+  background-color: var(--light);
+  margin-top: 5px;
+  border: 1px solid var(--dark);
+
   flex: 0.65;
-  padding-top: 1em;
+  height: 100%;
   gap: 0.5em;
 }
 
 .profile-user p {
-    font: 0.65em sans-serif;
+    font-size: 0.65em;
     margin: -0.125em;
   }
 
@@ -40,21 +46,29 @@ ul {
     width: 45%;
     height: auto;
     border-radius: 50%;
-    padding: 0.25em;
+    padding-top: 0.25em;
   }
 
 .profile-user button {
-    font: 1em sans-serif;
     margin-top: auto;
-    margin-bottom: 2em;
+    margin-bottom: 4em;
 
-    border: 2px solid #000000;
-    background-color: transparent;
     height: 2.5rem;
     border-radius: 5px;
     font-size: 0.75em;
     width: 70%;
     
+}
+
+.profile-user button:hover {
+  margin-top: auto;
+  margin-bottom: 4em;
+
+  height: 2.5rem;
+  border-radius: 5px;
+  font-size: 0.75em;
+  width: 70%;
+  
 }
 
 .profile-list-container {

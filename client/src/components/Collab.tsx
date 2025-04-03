@@ -50,7 +50,7 @@ export default function CollabsList() {
       <div className="movies-container">
       {/* Check if collabsList is empty or null */}
       {collabsList.length === 0 ? (
-          <p className="error">No matching collabs available. Check your friends list to make some.</p>
+          <p className="error poppins p-md-light">No matching collabs available. Check your friends list to make some.</p>
       ) : (
           collabsList.map((collabInstance) => (
               <div key={collabInstance.name}>
@@ -69,7 +69,9 @@ export default function CollabsList() {
                           />
                       ))
                   ) : (
-                      <p className="error work-sans">No items in this collab list.</p>
+
+                      <p className="error poppins p-md-light">No items in this collab list.</p>
+                     
                   )}
               </div>
           ))

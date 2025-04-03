@@ -80,13 +80,15 @@ export default function Profile() {
         <div className="profile-user">
             <img src={userData?.icon || chicken} alt="avatar" />
             {/* <h1>Profile</h1> */}
-            <b className="work-sans text">{userData?.name || 'First Last'}</b> 
-            <p className="work-sans text">{userData?.username || 'username'}</p>
-            <p className="work-sans text">ID: {userData?.id || 'id'}</p>
+
+            <b className="title-md-acc work-sans">{userData?.name || 'First Last'}</b> 
+            <p className="p-dark poppins">{userData?.username || 'username'}</p>
+            <p className="p-dark poppins">ID: {userData?.id || 'id'}</p>
+
             <ul>
-                <li><a href="#" onClick={handleCollabClick}>Collab List</a></li>
-                <li><a href="#" onClick={handleWatchLaterClick}>Watch Later</a></li>
-                <li><a href="#" onClick={handleSeenItClick}>Seen It</a></li>
+                <li><a className="poppins" href="#" onClick={handleCollabClick}>Collab List</a></li>
+                <li><a className="poppins" href="#" onClick={handleWatchLaterClick}>Watch Later</a></li>
+                <li><a className="poppins" href="#" onClick={handleSeenItClick}>Seen It</a></li>
             </ul>
             
             {/* Log out modal */}
@@ -97,7 +99,9 @@ export default function Profile() {
                     )
             
             }
-            <button onClick={openLogOutModal} className="work-sans log-out-btn">Log Out</button>
+
+            <button className="btn-lined-drk poppins log-out-btn" onClick={openLogOutModal}>Log Out</button>
+
         </div>
         <div className="profile-list-container">
             {/* Conditionally render based on currentList state */}

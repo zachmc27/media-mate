@@ -5,7 +5,7 @@
 :root {
     --dark: #0b111c;
     --medium: #2d4263;
-    --light: #ecdbba;
+    --light: #fff6e4;
     --accent: #c84b31;
 
     --title-xl: 64px;
@@ -19,24 +19,7 @@
     color: var(--light);
 
 }
-
-
-.work-sans {
-    font-family: "Work Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
-}
-
- .poppins {
-    font-family: "Poppins", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
-    
-} 
  
-
 body{
     margin: 0;
     margin-top: -0.05em;
@@ -53,6 +36,23 @@ a, .links{
     height: 100%;
 }
 
+
+/************************************** FONTS AND COLORS **************************************************/
+.work-sans {
+    font-family: "Work Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+ .poppins {
+    font-family: "Poppins", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    
+} 
+
 .title-xl-light{
     font-family: "Work Sans" sans-serif;
     font-size: var(--title-xl);
@@ -63,6 +63,12 @@ a, .links{
     font-family: "Work Sans" sans-serif;
     font-size: var(--title-xl);
     color: var(--dark);
+}
+
+.title-xl-acc{
+    font-family: "Work Sans" sans-serif;
+    font-size: var(--title-xl);
+    color: var(--accent);
 }
 
 .title-lg-light{
@@ -77,6 +83,12 @@ a, .links{
     color: var(--dark);
 }
 
+.title-lg-dark{
+    font-family: "Work Sans" sans-serif;
+    font-size: var(--title-lg);
+    color: var(--accent);
+}
+
 .title-md-light{
     font-family: "Work Sans" sans-serif;
     font-size: var(--title-md);
@@ -89,6 +101,12 @@ a, .links{
     color: var(--dark);
 }
 
+.title-md-acc{
+    font-family: "Work Sans" sans-serif;
+    font-size: var(--title-md);
+    color: var(--accent);
+}
+
 .p-light{
     font-size: var(--subtitle-lg);
     color: var(--light);
@@ -99,12 +117,34 @@ a, .links{
     color: var(--dark);
 }
 
+.p-md-light{
+    font-size: var(--subtitle-md);
+    color: var(--light);
+}
+
+.p-md-dark{
+    font-size: var(--subtitle-md);
+    color: var(--dark);
+}
+
+.p-sm-light{
+    font-size: var(--subtitle-sm);
+    color: var(--light);
+}
+
+.p-sm-dark{
+    font-size: var(--subtitle-sm);
+    color: var(--dark);
+}
+
 
 .padding-root {
     padding: 0em 2em;
     
 }
 
+
+/*********************************** BUTTONS *********************************************/
 
 .btn-fill, .btn-lined:hover{
     display: flex;
