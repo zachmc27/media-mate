@@ -76,6 +76,7 @@ const DetailsModal = ({ mediaId, onClose }: DetailsModalProps) => {
     }
   }, [mediaItem]);
 
+
   const handleAddToWatchList = async () => {
     if (!userId || !mediaItem) {
       console.error("User ID or Media Item is missing");
@@ -143,9 +144,10 @@ const DetailsModal = ({ mediaId, onClose }: DetailsModalProps) => {
            
                    ></ReactPlayer>
                 </div>)}
-          <p className="exit" onClick={onClose}>X</p>  {/* need something to close model */}
+          <p className="exit" onClick={onClose}>X</p>
           <div>
             <h1>{mediaItem.title}</h1>
+            <h2>{mediaItem.year}</h2>
             <p className="description">{mediaItem.overview}</p>
           </div>
           <div className="footer">
