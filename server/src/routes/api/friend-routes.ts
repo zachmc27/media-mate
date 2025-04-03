@@ -100,7 +100,7 @@ router.post('/accept', async (req, res) => {
     if (!requester) return res.status(404).json({ error: 'Requester not found' });
 
     // Add the requester to the user's friends list
-    user.friends = [...user.friends, requesterId];
+    user.friends = [...(user.friends || []), requesterId];
 
     // Save the updated user data
     await user.save();
@@ -143,7 +143,7 @@ router.delete('/:userId/:friendId', async (req, res) => {
     }
 
     // Remove the friendId from the user's friends list
-    user.friends = user.friends.filter((id) => id.toString() !== friendId);
+    user.friends = (user.friends ?? []).filter((id) => id.toString() !== friendId);
 
     // Save the updated user data
     await user.save();
