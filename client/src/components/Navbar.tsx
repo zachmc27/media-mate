@@ -45,7 +45,7 @@ const Navbar = () => {
         </Link>
         <button className={friendActive ? "tab selected remove-btn-styling" : "tab remove-btn-styling"} onClick={handleFriendsActive}>
           <img src={users} alt="people icon" />
-          <div onClick={handleFriendsActive} className="tab-title">Friends</div>
+          <div onClick={handleFriendsActive} className="tab-title f">Friends</div>
         </button>
         <Link to="/profile" className={location.pathname === '/profile' ? "tab selected" : "tab"}>
           <img src={user} alt="person icon" />

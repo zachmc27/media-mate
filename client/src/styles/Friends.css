@@ -1,5 +1,5 @@
 .list-box {
-
+    border-left: 3px solid rgb(62, 91, 138);
     position: absolute;
     width: 25%;
     height: 100vh;

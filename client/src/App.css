@@ -112,7 +112,7 @@ a, .links{
     justify-content: center;
     border: 2px solid var(--light);
     background-color: var(--light);
-    height: 2.75em;
+    height: fit-content;
     border-radius: 5px;
     color: var(--dark);
     font-size: var(--subtitle-md);
@@ -125,9 +125,37 @@ a, .links{
     justify-content: center;
     border: 2px solid var(--light);
     background-color: transparent;
-    height: 2.75em;
+    height: fit-content;
     border-radius: 5px;
     color: var(--light);
     font-size: var(--subtitle-md);
     width: 100%;
 }
+
+.cover {
+    height: fit-content;
+    width: fit-content;
+    text-align: center;
+    cursor: pointer
+}
+
+.cover:hover {
+    scale: 1.03;
+    transition: scale .3 ease-out;
+}
+
+.cover img {
+    width: 100px;
+    height: 100%
+}
+
+.card-title {
+    margin-top: 10px; 
+    font-size: var(--subtitle-sm); 
+    color: var(--light);
+}
+
+.text {
+    color: var(--light)
+}
+

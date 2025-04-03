@@ -20,22 +20,6 @@
     margin-bottom: 5px;
 }
 
-.cover {
-    height: fit-content;
-    width: fit-content;
-    text-align: center;
-}
-
-.cover img {
-    width: 100px;
-    height: 100%
-}
-
-.card-title {
-    margin-top: 10px; 
-    font-size: var(--subtitle-sm); 
-    color: var(--light);
-}
 
 .vert-rule {
     border-left: 2px solid var(--light);
@@ -62,11 +46,16 @@
 .explore-text {
     opacity: 50%;
     font-weight: 100;
+    color: var(--light)
 }
 
 .explore-text:hover {
     opacity: 100%;
     transition: opacity .2s ease-in;
+}
+
+.error {
+    color: var(--light)
 }
 
 @media (max-width: 1550px) {

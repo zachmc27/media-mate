@@ -67,9 +67,9 @@ export default function Profile() {
         <div className="profile-user">
             <img src={userData?.icon || chicken} alt="avatar" />
             {/* <h1>Profile</h1> */}
-            <b>{userData?.name || 'First Last'}</b> 
-            <p>{userData?.username || 'username'}</p>
-            <p>ID: {userData?.id || 'id'}</p>
+            <b className="work-sans text">{userData?.name || 'First Last'}</b> 
+            <p className="work-sans text">{userData?.username || 'username'}</p>
+            <p className="work-sans text">ID: {userData?.id || 'id'}</p>
             <ul>
                 <li><a href="#" onClick={handleCollabClick}>Collab List</a></li>
                 <li><a href="#" onClick={handleWatchLaterClick}>Watch Later</a></li>
@@ -84,7 +84,7 @@ export default function Profile() {
                     )
             
             }
-            <button onClick={openLogOutModal}>Log Out</button>
+            <button onClick={openLogOutModal} className="work-sans log-out-btn">Log Out</button>
         </div>
         <div className="profile-list-container">
             {/* Conditionally render based on currentList state */}

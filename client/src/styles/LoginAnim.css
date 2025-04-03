@@ -1,0 +1,273 @@
+.anim-box {
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+
+.bxr1 {
+   width: 45%;
+   height: 10%;
+   bottom: 0%;
+   right: 0%;
+
+   background-color: var(--accent);
+   position: absolute;
+   display:inline;
+   z-index: -20;
+}
+
+.bxr2 {
+    width: 50%;
+    height: 10%;
+    bottom: 10%;
+    right: 0px;
+ 
+    background-color: var(--accent);
+    position: absolute;
+    display:inline;
+    z-index: -20; 
+ }
+ 
+ .bxr3 {
+    width: 35%;
+    height: 10%;
+    bottom: 20%;
+    right: 0px;
+ 
+    background-color: var(--accent);
+    position: absolute;
+    display:inline;
+    z-index: -20;
+  
+ }
+ 
+ .bxr4 {
+    width: 15%;
+    height: 10%;
+    bottom: 30%;
+    right: 0px;
+ 
+    background-color: var(--accent);
+    position: absolute;
+    display:inline;
+    z-index: -20; 
+
+ }
+ 
+ .bxr5 {
+    width: 5%;
+    height: 10%;
+    bottom: 40%;
+    right: 0px;
+ 
+    background-color: var(--accent);
+    position: absolute;
+    display:inline;
+    z-index: -20; 
+
+ }
+ 
+ .bxr6 {
+    width: 10%;
+    height: 10%;
+    bottom: 50%;
+    right: 0px;
+ 
+    background-color: var(--accent);
+    position: absolute;
+    display:inline;
+    z-index: -20; 
+
+ }
+
+ .bxr7 {
+    width: 20%;
+    height: 10%;
+    bottom: 60%;
+    right: 0px;
+ 
+    background-color: var(--accent);
+    position: absolute;
+    display:inline;
+    z-index: -20; 
+  
+ }
+
+ .bxr8 {
+    width: 30%;
+    height: 10%;
+    bottom: 70%;
+    right: 0px;
+ 
+    background-color: var(--accent);
+    position: absolute;
+    display:inline;
+    z-index: -20; 
+
+ }
+
+ .bxr9 {
+    width: 50%;
+    height: 10%;
+    bottom: 80%;
+    right: 0px;
+ 
+    background-color: var(--accent);
+    position: absolute;
+    display:inline;
+    z-index: -20; 
+
+ }
+
+ .bxr10 {
+    width: 40%;
+    height: 10%;
+    bottom: 90%;
+    right: 0px;
+ 
+    background-color: var(--accent);
+    position: absolute;
+    display:inline;
+    z-index: -20; 
+
+ }
+
+
+ .bxl1 {
+    width: 15%;
+    height: 10%;
+    bottom: 0%;
+    left: 0%;
+ 
+    background-color: var(--accent);
+    position: absolute;
+    display:inline;
+    z-index: -20; 
+ }
+ 
+ .bxl2 {
+     width: 20%;
+     height: 10%;
+     bottom: 10%;
+     left: 0px;
+  
+     background-color: var(--accent);
+     position: absolute;
+     display:inline;
+     z-index: -20; 
+ 
+  }
+  
+  .bxl3 {
+     width: 25%;
+     height: 10%;
+     bottom: 20%;
+     left: 0px;
+  
+     background-color: var(--accent);
+     position: absolute;
+     display:inline;
+     z-index: -20;
+   
+  }
+  
+  .bxl4 {
+     width: 15%;
+     height: 10%;
+     bottom: 30%;
+     left: 0px;
+  
+     background-color: var(--accent);
+     position: absolute;
+     display:inline;
+     z-index: -20; 
+
+  }
+  
+  .bxl5 {
+     width: 10%;
+     height: 10%;
+     bottom: 40%;
+     left: 0px;
+  
+     background-color: var(--accent);
+     position: absolute;
+     display:inline;
+     z-index: -20; 
+  
+  }
+  
+  .bxl6 {
+     width: 15%;
+     height: 10%;
+     bottom: 50%;
+     left: 0px;
+  
+     background-color: var(--accent);
+     position: absolute;
+     display:inline;
+     z-index: -20; 
+
+  }
+ 
+  .bxl7 {
+     width: 30%;
+     height: 10%;
+     bottom: 60%;
+     left: 0px;
+  
+     background-color: var(--accent);
+     position: absolute;
+     display:inline;
+     z-index: -20; 
+
+  }
+ 
+  .bxl8 {
+     width: 25%;
+     height: 10%;
+     bottom: 70%;
+     left: 0px;
+  
+     background-color: var(--accent);
+     position: absolute;
+     display:inline;
+     z-index: -20; 
+
+  }
+ 
+  .bxl9 {
+     width: 15%;
+     height: 10%;
+     bottom: 80%;
+     left: 0px;
+  
+     background-color: var(--accent);
+     position: absolute;
+     display:inline;
+     z-index: -20; 
+
+  }
+ 
+  .bxl10 {
+     width: 25%;
+     height: 10%;
+     bottom: 90%;
+     left: 0px;
+  
+     background-color: var(--accent);
+     position: absolute;
+     display:inline;
+     z-index: -20; 
+    
+  }
+

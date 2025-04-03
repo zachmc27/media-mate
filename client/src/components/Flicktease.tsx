@@ -35,7 +35,7 @@ export default function Flicktease() {
       <>
       <div className="tease-row">
         {flickpickList === null ? (
-          <p className="error">Error, no flickpick lists available.</p>
+          <p className="error work-sans">Error, no flickpick lists available.</p>
         ) : (
         flickpickList.slice(0, 4).map((flickpick) => (
 
