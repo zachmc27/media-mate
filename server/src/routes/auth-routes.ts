@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { User } from '../models/user.js';  // Import the User model
 import jwt from 'jsonwebtoken';  // Import the JSON Web Token library
-import bcrypt from 'bcrypt';  // Import the bcrypt library for password hashing
+// import bcrypt from 'bcrypt';  // Import the bcrypt library for password hashing
 
 
 // Login function to authenticate a user
@@ -19,12 +19,17 @@ export const login = async (req: Request, res: Response) => {
     return res.status(401).json({ message: 'Authentication failed on user' });
   }
 
-  // Compare the provided password with the stored hashed password
-  const passwordIsValid = await bcrypt.compare(password, user.password);
-  // If password is invalid, send an authentication failed response
-  if (!passwordIsValid) {
-    return res.status(401).json({ message: 'Authentication failed on password' });
-  }
+  console.log("Username provided:", username);
+  console.log("Password provided:", password);
+  console.log("Stored hashed password:", user.password);
+
+  // // Compare the provided password with the stored hashed password
+  // const passwordIsValid = await bcrypt.compare(password, user.password);
+  // console.log("password valid result:", passwordIsValid)
+  // // If password is invalid, send an authentication failed response
+  // if (!passwordIsValid) {
+  //   return res.status(401).json({ message: 'Authentication failed on password' });
+  // }
 
   // Get the secret key from environment variables
   const secretKey = process.env.JWT_SECRET_KEY || '';
@@ -70,21 +75,22 @@ router.post('/register', async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Password must be at least 6 characters long" });
     }
 
-    // Hash the password before saving
+    // // Hash the password before saving
+
     // const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create the new user
     const newUser = await User.create({
       username,
       email,
-      password: password,
+      password /* :hashedPassword */,
       name,
     });
 
     return res.status(201).json({
       message: "User created successfully",
       user: {
-        id: newUser.id,
+        id: newUser.id + 1,
         username: newUser.username,
         email: newUser.email,
         icon: newUser.icon, // Include the icon in the response

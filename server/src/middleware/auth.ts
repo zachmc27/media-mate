@@ -18,7 +18,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
 
     // Get the secret key from the environment variables
     const secretKey = process.env.JWT_SECRET_KEY || '';
-
+  
     // Verify the JWT token
     jwt.verify(token, secretKey, (err, user) => {
       if (err) {
